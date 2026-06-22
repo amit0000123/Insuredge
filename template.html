@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>WealthPath — Grow, Protect & Secure Your Future</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg:        #080B14;
+  --surface:   #0F1525;
+  --surface2:  #141C2E;
+  --border:    rgba(255,255,255,0.08);
+  --border2:   rgba(255,255,255,0.14);
+  --text:      #EEF2FF;
+  --muted:     rgba(238,242,255,0.5);
+  --muted2:    rgba(238,242,255,0.28);
+  --teal:      #00D4AA;
+  --teal-dim:  rgba(0,212,170,0.15);
+  --gold:      #F5A623;
+  --gold-dim:  rgba(245,166,35,0.15);
+  --violet:    #7C6FF7;
+  --violet-dim:rgba(124,111,247,0.15);
+  --rose:      #FF5E7D;
+  --rose-dim:  rgba(255,94,125,0.15);
+  --green:     #22C55E;
+  --display:   'Bricolage Grotesque', sans-serif;
+  --body:      'Plus Jakarta Sans', system-ui, sans-serif;
+}
+
+/* Product theme overrides applied via JS */
+body.theme-mf   { --accent:#00D4AA; --accent-dim:rgba(0,212,170,0.12); --accent-glow:rgba(0,212,170,0.3); }
+body.theme-term { --accent:#7C6FF7; --accent-dim:rgba(124,111,247,0.12); --accent-glow:rgba(124,111,247,0.3); }
+body.theme-save { --accent:#F5A623; --accent-dim:rgba(245,166,35,0.12); --accent-glow:rgba(245,166,35,0.3); }
+body.theme-hlth { --accent:#FF5E7D; --accent-dim:rgba(255,94,125,0.12); --accent-glow:rgba(255,94,125,0.3); }
+
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--body);
+  background:var(--bg);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+  --accent:#00D4AA;
+  --accent-dim:rgba(0,212,170,0.12);
+  --accent-glow:rgba(0,212,170,0.3);
+}
+
+/* ── AMBIENT BACKGROUND ── */
+.ambient{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  transition:background 0.8s ease;
+}
+body.theme-mf   .ambient{background:radial-gradient(ellipse 70% 55% at 60% 30%,rgba(0,212,170,0.10) 0%,transparent 65%),radial-gradient(ellipse 50% 40% at 15% 70%,rgba(0,212,170,0.05) 0%,transparent 60%);}
+body.theme-term .ambient{background:radial-gradient(ellipse 70% 55% at 60% 30%,rgba(124,111,247,0.10) 0%,transparent 65%),radial-gradient(ellipse 50% 40% at 15% 70%,rgba(124,111,247,0.05) 0%,transparent 60%);}
+body.theme-save .ambient{background:radial-gradient(ellipse 70% 55% at 60% 30%,rgba(245,166,35,0.10) 0%,transparent 65%),radial-gradient(ellipse 50% 40% at 15% 70%,rgba(245,166,35,0.05) 0%,transparent 60%);}
+body.theme-hlth .ambient{background:radial-gradient(ellipse 70% 55% at 60% 30%,rgba(255,94,125,0.10) 0%,transparent 65%),radial-gradient(ellipse 50% 40% at 15% 70%,rgba(255,94,125,0.05) 0%,transparent 60%);}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:300;
+  height:64px;display:flex;align-items:center;justify-content:space-between;
+  padding:0 5vw;
+  background:rgba(8,11,20,0.75);
+  backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--border);
+}
+.logo{
+  font-family:var(--display);font-size:1.4rem;font-weight:800;
+  color:var(--text);text-decoration:none;letter-spacing:-0.04em;
+  display:flex;align-items:center;gap:0.35rem;
+}
+.logo-mark{
+  width:28px;height:28px;border-radius:8px;
+  background:linear-gradient(135deg,var(--accent),var(--violet));
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.9rem;transition:background 0.6s;
+}
+.nav-center{display:flex;gap:2rem;list-style:none;}
+.nav-center a{
+  text-decoration:none;color:var(--muted);font-size:0.875rem;font-weight:500;
+  transition:color 0.2s;
+}
+.nav-center a:hover{color:var(--text);}
+.nav-right{display:flex;gap:0.75rem;align-items:center;}
+.nav-link{
+  color:var(--muted);font-size:0.85rem;font-weight:500;
+  text-decoration:none;transition:color 0.2s;
+}
+.nav-link:hover{color:var(--text);}
+.btn-nav{
+  background:var(--accent);color:#040608;
+  border:none;cursor:pointer;padding:0.45rem 1.1rem;
+  border-radius:100px;font-family:var(--body);
+  font-size:0.825rem;font-weight:700;
+  transition:all 0.3s;letter-spacing:0.01em;
+}
+.btn-nav:hover{opacity:0.88;transform:translateY(-1px);}
+
+/* ── HERO ── */
+.hero{
+  position:relative;z-index:1;
+  min-height:100vh;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:100px 5vw 60px;
+  text-align:center;
+}
+
+/* product tab switcher */
+.product-tabs{
+  display:inline-flex;
+  background:rgba(255,255,255,0.05);
+  border:1px solid var(--border2);
+  border-radius:100px;
+  padding:5px;
+  gap:4px;
+  margin-bottom:3rem;
+  backdrop-filter:blur(12px);
+}
+.ptab{
+  display:flex;align-items:center;gap:0.45rem;
+  padding:0.5rem 1.25rem;border-radius:100px;
+  font-size:0.82rem;font-weight:600;
+  cursor:pointer;border:none;background:transparent;
+  color:var(--muted);font-family:var(--body);
+  transition:all 0.3s;white-space:nowrap;
+}
+.ptab .ti{font-size:0.95rem;}
+.ptab.active{
+  background:var(--accent);
+  color:#040608;
+  box-shadow:0 4px 20px var(--accent-glow);
+}
+
+/* hero headline */
+.hero-kicker{
+  font-family:var(--display);
+  font-size:0.75rem;font-weight:600;
+  letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:1.25rem;
+  transition:color 0.5s;
+}
+.hero-h1{
+  font-family:var(--display);
+  font-size:clamp(2.8rem,5vw,5.5rem);
+  font-weight:800;letter-spacing:-0.045em;
+  line-height:1.0;color:var(--text);
+  margin-bottom:1.25rem;max-width:820px;
+  transition:all 0.4s;
+}
+.hero-h1 .hl{
+  color:var(--accent);
+  transition:color 0.5s;
+}
+.hero-sub{
+  font-size:1.05rem;color:var(--muted);
+  max-width:500px;line-height:1.7;margin:0 auto 2.75rem;
+  transition:all 0.4s;
+}
+
+/* ── LEAD FORM CARD ── */
+.form-card{
+  width:100%;max-width:580px;
+  background:rgba(15,21,37,0.85);
+  border:1px solid var(--border2);
+  border-radius:24px;
+  padding:2.25rem 2.5rem;
+  backdrop-filter:blur(24px);
+  box-shadow:0 40px 80px rgba(0,0,0,0.5);
+  position:relative;overflow:hidden;
+  transition:box-shadow 0.5s;
+}
+.form-card::before{
+  content:'';position:absolute;
+  top:-60px;right:-60px;
+  width:220px;height:220px;
+  background:radial-gradient(circle,var(--accent-glow),transparent 65%);
+  transition:background 0.6s;
+  pointer-events:none;opacity:0.6;
+}
+.form-card-title{
+  font-family:var(--display);
+  font-size:1.25rem;font-weight:700;
+  color:var(--text);margin-bottom:0.35rem;
+  letter-spacing:-0.03em;
+}
+.form-card-sub{font-size:0.825rem;color:var(--muted);margin-bottom:1.75rem;}
+
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:0.85rem;margin-bottom:0.85rem;}
+.form-row.single{grid-template-columns:1fr;}
+.form-group{display:flex;flex-direction:column;gap:0.4rem;}
+.form-label{font-size:0.75rem;font-weight:600;color:var(--muted);letter-spacing:0.04em;text-transform:uppercase;}
+.form-input,.form-select{
+  background:rgba(255,255,255,0.05);
+  border:1px solid var(--border2);
+  border-radius:10px;padding:0.7rem 0.95rem;
+  font-family:var(--body);font-size:0.9rem;color:var(--text);
+  outline:none;transition:all 0.2s;
+  -webkit-appearance:none;
+}
+.form-input::placeholder{color:var(--muted2);}
+.form-input:focus,.form-select:focus{
+  border-color:var(--accent);
+  background:rgba(255,255,255,0.07);
+  box-shadow:0 0 0 3px var(--accent-dim);
+}
+.form-select option{background:#0F1525;color:var(--text);}
+
+/* dynamic field panel */
+.dynamic-fields{
+  display:none;margin-bottom:0.85rem;
+}
+.dynamic-fields.visible{display:block;}
+
+.range-wrap{display:flex;flex-direction:column;gap:0.5rem;}
+.range-input{
+  -webkit-appearance:none;width:100%;height:4px;
+  border-radius:100px;outline:none;
+  background:rgba(255,255,255,0.1);
+  cursor:pointer;
+}
+.range-input::-webkit-slider-thumb{
+  -webkit-appearance:none;width:18px;height:18px;border-radius:50%;
+  background:var(--accent);cursor:pointer;
+  box-shadow:0 0 12px var(--accent-glow);
+  transition:background 0.3s,box-shadow 0.3s;
+}
+.range-display{
+  display:flex;justify-content:space-between;align-items:center;
+}
+.range-val{
+  font-family:var(--display);font-size:1.3rem;font-weight:700;
+  color:var(--accent);transition:color 0.3s;
+}
+.range-unit{font-size:0.75rem;color:var(--muted);font-weight:500;}
+
+.btn-submit{
+  width:100%;padding:0.95rem;
+  background:var(--accent);
+  color:#040608;border:none;cursor:pointer;
+  border-radius:12px;font-family:var(--display);
+  font-size:1rem;font-weight:800;
+  letter-spacing:-0.01em;
+  transition:all 0.3s;
+  box-shadow:0 8px 32px var(--accent-glow);
+  display:flex;align-items:center;justify-content:center;gap:0.5rem;
+}
+.btn-submit:hover{opacity:0.9;transform:translateY(-2px);box-shadow:0 14px 40px var(--accent-glow);}
+.btn-submit .arrow{transition:transform 0.2s;}
+.btn-submit:hover .arrow{transform:translateX(4px);}
+
+.form-disclaimer{
+  font-size:0.7rem;color:var(--muted2);
+  text-align:center;margin-top:1rem;line-height:1.5;
+}
+.form-disclaimer a{color:var(--muted);text-decoration:underline;}
+
+/* social proof row */
+.proof-row{
+  display:flex;align-items:center;justify-content:center;gap:1.5rem;
+  margin-top:2rem;flex-wrap:wrap;
+}
+.proof-item{
+  display:flex;align-items:center;gap:0.45rem;
+  font-size:0.78rem;color:var(--muted);
+}
+.proof-dot{
+  width:16px;height:16px;border-radius:50%;
+  background:rgba(34,197,94,0.15);border:1px solid rgba(34,197,94,0.3);
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.55rem;color:var(--green);flex-shrink:0;
+}
+
+/* ── MARQUEE ── */
+.marquee-wrap{
+  position:relative;z-index:1;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  padding:0.9rem 0;overflow:hidden;
+  background:rgba(255,255,255,0.02);
+}
+.marquee-inner{
+  display:flex;gap:3.5rem;
+  animation:scroll 28s linear infinite;
+  width:max-content;
+}
+@keyframes scroll{to{transform:translateX(-50%)}}
+.m-item{
+  display:flex;align-items:center;gap:0.5rem;
+  font-size:0.78rem;font-weight:600;
+  color:var(--muted);white-space:nowrap;letter-spacing:0.02em;
+}
+.m-dot{width:4px;height:4px;border-radius:50%;background:var(--accent);opacity:0.6;flex-shrink:0;transition:background 0.5s;}
+
+/* ── PRODUCTS DEEP-DIVE ── */
+.products-section{
+  position:relative;z-index:1;
+  padding:6rem 5vw;
+}
+.products-section .inner{max-width:1200px;margin:0 auto;}
+.section-label{
+  font-size:0.72rem;font-weight:700;
+  letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:0.75rem;
+  transition:color 0.5s;
+}
+.section-h2{
+  font-family:var(--display);
+  font-size:clamp(2rem,3vw,3rem);
+  font-weight:800;letter-spacing:-0.04em;
+  line-height:1.1;color:var(--text);
+  max-width:520px;margin-bottom:3.5rem;
+}
+
+.products-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:1.25rem;
+}
+.prod-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:20px;padding:2.25rem;
+  position:relative;overflow:hidden;
+  cursor:pointer;
+  transition:all 0.3s;
+}
+.prod-card:hover{transform:translateY(-4px);border-color:var(--border2);box-shadow:0 24px 60px rgba(0,0,0,0.3);}
+
+/* individual card accents */
+.prod-card.mf{--card-accent:#00D4AA;--card-glow:rgba(0,212,170,0.08);}
+.prod-card.term{--card-accent:#7C6FF7;--card-glow:rgba(124,111,247,0.08);}
+.prod-card.save{--card-accent:#F5A623;--card-glow:rgba(245,166,35,0.08);}
+.prod-card.hlth{--card-accent:#FF5E7D;--card-glow:rgba(255,94,125,0.08);}
+
+.prod-card::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 80% 60% at 100% 0%,var(--card-glow),transparent 60%);
+  pointer-events:none;
+}
+.prod-icon{
+  width:56px;height:56px;border-radius:16px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.6rem;margin-bottom:1.5rem;
+  background:var(--card-glow);
+  border:1px solid rgba(255,255,255,0.06);
+}
+.prod-name{
+  font-family:var(--display);font-size:1.35rem;font-weight:700;
+  letter-spacing:-0.03em;color:var(--text);margin-bottom:0.5rem;
+}
+.prod-desc{font-size:0.875rem;color:var(--muted);line-height:1.65;margin-bottom:1.5rem;}
+.prod-tags{display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1.75rem;}
+.ptag{
+  font-size:0.7rem;font-weight:600;
+  padding:0.25rem 0.65rem;border-radius:100px;
+  background:var(--card-glow);
+  color:var(--card-accent);
+  border:1px solid rgba(255,255,255,0.06);
+  letter-spacing:0.04em;
+}
+.prod-cta{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  background:var(--card-accent);
+  color:#040608;
+  padding:0.6rem 1.4rem;border-radius:100px;
+  font-size:0.82rem;font-weight:700;
+  text-decoration:none;border:none;cursor:pointer;
+  font-family:var(--body);
+  transition:all 0.2s;
+}
+.prod-cta:hover{opacity:0.88;gap:0.7rem;}
+.prod-highlight{
+  position:absolute;top:2rem;right:2rem;
+  font-family:var(--display);
+  font-size:0.68rem;font-weight:700;
+  letter-spacing:0.1em;text-transform:uppercase;
+  background:var(--card-glow);
+  color:var(--card-accent);
+  padding:0.25rem 0.65rem;border-radius:100px;
+  border:1px solid rgba(255,255,255,0.08);
+}
+
+/* ── TRUST / STATS ── */
+.trust-section{
+  position:relative;z-index:1;
+  background:var(--surface);
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  padding:5rem 5vw;
+}
+.trust-inner{max-width:1200px;margin:0 auto;}
+.trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--border);border-radius:20px;overflow:hidden;}
+.trust-box{
+  padding:2.75rem 2rem;text-align:center;
+  border-right:1px solid var(--border);
+  position:relative;
+}
+.trust-box:last-child{border-right:none;}
+.trust-num{
+  font-family:var(--display);
+  font-size:clamp(2.2rem,3vw,3rem);
+  font-weight:800;letter-spacing:-0.04em;
+  margin-bottom:0.4rem;
+}
+.trust-num.c1{color:var(--teal);}
+.trust-num.c2{color:var(--violet);}
+.trust-num.c3{color:var(--gold);}
+.trust-num.c4{color:var(--rose);}
+.trust-lbl{font-size:0.85rem;color:var(--muted);font-weight:500;}
+
+/* ── HOW IT WORKS ── */
+.how-section{
+  position:relative;z-index:1;
+  padding:6rem 5vw;
+}
+.how-inner{max-width:1200px;margin:0 auto;}
+.how-steps{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1.5rem;margin-top:3.5rem;
+  position:relative;
+}
+.how-steps::before{
+  content:'';
+  position:absolute;
+  top:28px;left:calc(12.5% + 28px);right:calc(12.5% + 28px);
+  height:1px;background:linear-gradient(to right,var(--teal),var(--violet),var(--gold),var(--rose));
+  opacity:0.25;
+}
+.how-step{text-align:center;position:relative;}
+.step-num-circle{
+  width:56px;height:56px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--display);font-size:1rem;font-weight:800;
+  margin:0 auto 1.25rem;
+  position:relative;z-index:1;
+  border:1px solid var(--border2);
+  background:var(--surface);
+}
+.step-num-circle.s1{color:var(--teal);box-shadow:0 0 20px rgba(0,212,170,0.2);}
+.step-num-circle.s2{color:var(--violet);box-shadow:0 0 20px rgba(124,111,247,0.2);}
+.step-num-circle.s3{color:var(--gold);box-shadow:0 0 20px rgba(245,166,35,0.2);}
+.step-num-circle.s4{color:var(--rose);box-shadow:0 0 20px rgba(255,94,125,0.2);}
+.step-title{font-family:var(--display);font-size:1rem;font-weight:700;color:var(--text);margin-bottom:0.5rem;}
+.step-desc{font-size:0.825rem;color:var(--muted);line-height:1.6;}
+
+/* ── TESTIMONIALS ── */
+.testi-section{
+  position:relative;z-index:1;
+  padding:6rem 5vw;
+  background:var(--surface);
+  border-top:1px solid var(--border);
+}
+.testi-inner{max-width:1200px;margin:0 auto;}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:3.5rem;}
+.testi-card{
+  background:rgba(255,255,255,0.03);
+  border:1px solid var(--border);
+  border-radius:20px;padding:2rem;
+  transition:all 0.25s;
+}
+.testi-card:hover{background:rgba(255,255,255,0.05);border-color:var(--border2);transform:translateY(-3px);}
+.stars{color:var(--gold);font-size:0.9rem;margin-bottom:1rem;letter-spacing:2px;}
+.testi-text{font-size:0.9rem;color:var(--text);line-height:1.65;margin-bottom:1.5rem;font-style:italic;}
+.testi-author{display:flex;align-items:center;gap:0.75rem;}
+.author-av{
+  width:38px;height:38px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.75rem;font-weight:700;color:#fff;flex-shrink:0;
+}
+.av1{background:linear-gradient(135deg,var(--teal),#00A080);}
+.av2{background:linear-gradient(135deg,var(--violet),#5A4FD4);}
+.av3{background:linear-gradient(135deg,var(--rose),#C0365A);}
+.author-name{font-size:0.875rem;font-weight:700;color:var(--text);}
+.author-sub{font-size:0.72rem;color:var(--muted);}
+.product-tag-mini{
+  margin-left:auto;font-size:0.65rem;font-weight:700;
+  padding:0.15rem 0.5rem;border-radius:100px;
+  letter-spacing:0.06em;text-transform:uppercase;
+}
+.ptm-mf{background:rgba(0,212,170,0.1);color:var(--teal);}
+.ptm-term{background:rgba(124,111,247,0.1);color:var(--violet);}
+.ptm-hlth{background:rgba(255,94,125,0.1);color:var(--rose);}
+
+/* ── SECOND LEAD CTA ── */
+.cta2-section{
+  position:relative;z-index:1;
+  padding:6rem 5vw;
+  text-align:center;
+}
+.cta2-inner{max-width:1200px;margin:0 auto;}
+.cta2-card{
+  background:var(--surface);
+  border:1px solid var(--border2);
+  border-radius:28px;
+  padding:5rem 3rem;
+  position:relative;overflow:hidden;
+}
+.cta2-card::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 70% at 50% 50%,rgba(0,212,170,0.06),transparent 65%);
+  pointer-events:none;
+}
+.cta2-h{
+  font-family:var(--display);
+  font-size:clamp(2.4rem,4vw,4rem);
+  font-weight:800;letter-spacing:-0.045em;
+  line-height:1.05;color:var(--text);
+  margin-bottom:1.25rem;
+  position:relative;
+}
+.cta2-sub{font-size:1.05rem;color:var(--muted);margin-bottom:2.5rem;line-height:1.7;position:relative;}
+
+/* mini inline form */
+.mini-form{
+  display:flex;max-width:520px;margin:0 auto;
+  gap:0.75rem;position:relative;
+}
+.mini-input{
+  flex:1;background:rgba(255,255,255,0.06);
+  border:1px solid var(--border2);border-radius:100px;
+  padding:0.8rem 1.5rem;
+  font-family:var(--body);font-size:0.9rem;color:var(--text);
+  outline:none;transition:all 0.2s;
+}
+.mini-input::placeholder{color:var(--muted2);}
+.mini-input:focus{border-color:var(--teal);background:rgba(255,255,255,0.08);}
+.btn-mini{
+  background:var(--teal);color:#040608;
+  border:none;cursor:pointer;padding:0.8rem 1.75rem;
+  border-radius:100px;font-family:var(--display);
+  font-size:0.875rem;font-weight:800;
+  white-space:nowrap;
+  transition:all 0.2s;
+  box-shadow:0 8px 28px rgba(0,212,170,0.35);
+}
+.btn-mini:hover{opacity:0.88;transform:translateY(-1px);}
+.cta2-badges{
+  display:flex;align-items:center;justify-content:center;
+  gap:1.5rem;flex-wrap:wrap;margin-top:2rem;
+}
+.cta-badge{
+  display:flex;align-items:center;gap:0.5rem;
+  font-size:0.78rem;color:var(--muted);
+}
+.cta-badge-ico{font-size:0.9rem;}
+
+/* ── PARTNERS ── */
+.partners-section{
+  position:relative;z-index:1;
+  padding:4rem 5vw;
+  border-top:1px solid var(--border);
+}
+.partners-inner{max-width:1200px;margin:0 auto;text-align:center;}
+.partners-label{
+  font-size:0.7rem;font-weight:700;
+  letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--muted2);margin-bottom:2.5rem;
+}
+.partners-row{
+  display:flex;align-items:center;justify-content:center;
+  gap:3rem;flex-wrap:wrap;
+}
+.partner-logo{
+  font-family:var(--display);font-size:1rem;font-weight:800;
+  color:rgba(255,255,255,0.18);letter-spacing:-0.03em;
+  transition:color 0.2s;cursor:default;
+  white-space:nowrap;
+}
+.partner-logo:hover{color:rgba(255,255,255,0.4);}
+
+/* ── FOOTER ── */
+footer{
+  position:relative;z-index:1;
+  background:var(--surface);
+  border-top:1px solid var(--border);
+  padding:4.5rem 5vw 2rem;
+}
+.footer-grid{
+  max-width:1200px;margin:0 auto;
+  display:grid;grid-template-columns:2.2fr 1fr 1fr 1fr;
+  gap:3rem;margin-bottom:3rem;
+}
+.footer-brand{
+  font-family:var(--display);font-size:1.5rem;font-weight:800;
+  letter-spacing:-0.04em;color:var(--text);margin-bottom:0.75rem;
+  display:flex;align-items:center;gap:0.4rem;
+}
+.footer-brand-mark{
+  width:26px;height:26px;border-radius:7px;
+  background:linear-gradient(135deg,var(--teal),var(--violet));
+  display:inline-flex;align-items:center;justify-content:center;
+  font-size:0.8rem;
+}
+.footer-about{font-size:0.875rem;color:var(--muted);line-height:1.65;max-width:250px;margin-bottom:1.5rem;}
+.footer-reg{
+  font-size:0.7rem;color:var(--muted2);
+  line-height:1.55;
+  border:1px solid var(--border);
+  border-radius:10px;padding:0.75rem;
+  background:rgba(255,255,255,0.02);
+}
+.f-col-title{
+  font-size:0.68rem;font-weight:700;
+  letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--muted2);margin-bottom:1.25rem;
+}
+.f-links{list-style:none;display:flex;flex-direction:column;gap:0.7rem;}
+.f-links a{
+  text-decoration:none;color:var(--muted);font-size:0.875rem;
+  transition:color 0.2s;
+}
+.f-links a:hover{color:var(--text);}
+.footer-bottom{
+  max-width:1200px;margin:0 auto;
+  border-top:1px solid var(--border);
+  padding-top:1.5rem;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:1.5rem;flex-wrap:wrap;
+}
+.footer-copy{font-size:0.78rem;color:var(--muted2);}
+.footer-sebi{
+  font-size:0.68rem;color:var(--muted2);
+  max-width:400px;text-align:right;line-height:1.5;
+}
+
+/* ── SUCCESS STATE ── */
+.success-msg{
+  display:none;text-align:center;
+  padding:2rem 1rem;
+}
+.success-msg.show{display:block;}
+.success-icon{font-size:3rem;margin-bottom:1rem;}
+.success-title{font-family:var(--display);font-size:1.5rem;font-weight:700;color:var(--text);margin-bottom:0.5rem;}
+.success-sub{font-size:0.9rem;color:var(--muted);}
+
+/* ── RESPONSIVE ── */
+@media(max-width:960px){
+  .nav-center,.nav-link{display:none;}
+  .products-grid{grid-template-columns:1fr;}
+  .trust-grid{grid-template-columns:1fr 1fr;}
+  .trust-box:nth-child(2){border-right:none;}
+  .how-steps{grid-template-columns:1fr 1fr;}
+  .how-steps::before{display:none;}
+  .testi-grid{grid-template-columns:1fr;}
+  .footer-grid{grid-template-columns:1fr 1fr;}
+  .mini-form{flex-direction:column;}
+  .btn-mini{border-radius:12px;}
+}
+@media(max-width:600px){
+  .product-tabs{flex-wrap:wrap;border-radius:16px;}
+  .ptab{flex:1;justify-content:center;}
+  .form-row{grid-template-columns:1fr;}
+  .trust-grid{grid-template-columns:1fr;}
+  .trust-box{border-right:none;border-bottom:1px solid var(--border);}
+  .how-steps{grid-template-columns:1fr;}
+  .products-grid{grid-template-columns:1fr;}
+  .footer-grid{grid-template-columns:1fr;}
+  .cta2-card{padding:3rem 1.5rem;}
+  .partners-row{gap:2rem;}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
+</style>
+</head>
+<body class="theme-mf">
+
+<div class="ambient"></div>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="#" class="logo">
+    <span class="logo-mark" id="logoMark">💰</span>
+    WealthPath
+  </a>
+  <ul class="nav-center">
+    <li><a href="#products">Products</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Blog</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="#" class="nav-link">Sign In</a>
+    <button class="btn-nav" onclick="scrollToForm()">Get Free Advice →</button>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+
+  <!-- product tab switcher (THE SIGNATURE ELEMENT) -->
+  <div class="product-tabs" role="tablist">
+    <button class="ptab active" onclick="switchProduct('mf')" role="tab">
+      <span class="ti">📈</span> Mutual Funds
+    </button>
+    <button class="ptab" onclick="switchProduct('term')" role="tab">
+      <span class="ti">🛡️</span> Term Insurance
+    </button>
+    <button class="ptab" onclick="switchProduct('save')" role="tab">
+      <span class="ti">🏦</span> Savings Plans
+    </button>
+    <button class="ptab" onclick="switchProduct('hlth')" role="tab">
+      <span class="ti">❤️‍🩹</span> Health Insurance
+    </button>
+  </div>
+
+  <p class="hero-kicker" id="heroKicker">Find the Right Mutual Fund Today</p>
+  <h1 class="hero-h1" id="heroH1">Connect with experts &amp; start <span class="hl" id="heroHL">your SIP journey</span></h1>
+  <p class="hero-sub" id="heroSub">Share your goals and get matched with a mutual fund advisor who'll compare options across top fund houses — completely free.</p>
+
+  <!-- LEAD FORM -->
+  <div class="form-card" id="formCard">
+    <div class="form-inner" id="formInner">
+      <div class="form-card-title" id="formTitle">Get Connected to a Fund Advisor</div>
+      <p class="form-card-sub" id="formSub">A licensed advisor will call you within 2 hours. No spam, no obligation.</p>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Full Name</label>
+          <input class="form-input" type="text" placeholder="Rahul Sharma" id="inp-name"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Mobile Number</label>
+          <input class="form-input" type="tel" placeholder="+91 98765 43210" id="inp-phone"/>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Email Address</label>
+          <input class="form-input" type="email" placeholder="rahul@email.com" id="inp-email"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Age</label>
+          <input class="form-input" type="number" placeholder="28" min="18" max="70" id="inp-age"/>
+        </div>
+      </div>
+
+      <!-- Dynamic fields per product -->
+      <div class="dynamic-fields visible" id="fields-mf">
+        <div class="form-row single">
+          <div class="form-group">
+            <label class="form-label">Monthly Investment Amount</label>
+            <div class="range-wrap">
+              <div class="range-display">
+                <span class="range-val" id="mf-range-val">₹5,000</span>
+                <span class="range-unit">/month</span>
+              </div>
+              <input class="range-input" type="range" min="500" max="100000" step="500" value="5000" oninput="updateRange('mf',this.value)"/>
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Investment Goal</label>
+            <select class="form-select">
+              <option value="">Select goal</option>
+              <option>Retirement Corpus</option>
+              <option>Child Education</option>
+              <option>Home Purchase</option>
+              <option>Wealth Creation</option>
+              <option>Tax Saving (ELSS)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Risk Appetite</label>
+            <select class="form-select">
+              <option>Conservative</option>
+              <option selected>Moderate</option>
+              <option>Aggressive</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="dynamic-fields" id="fields-term">
+        <div class="form-row single">
+          <div class="form-group">
+            <label class="form-label">Desired Coverage Amount</label>
+            <div class="range-wrap">
+              <div class="range-display">
+                <span class="range-val" id="term-range-val">₹1 Crore</span>
+                <span class="range-unit">life cover</span>
+              </div>
+              <input class="range-input" type="range" min="1" max="10" step="1" value="1" oninput="updateRange('term',this.value)"/>
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Annual Income</label>
+            <select class="form-select">
+              <option>Below ₹5 LPA</option>
+              <option selected>₹5–10 LPA</option>
+              <option>₹10–25 LPA</option>
+              <option>Above ₹25 LPA</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Smoker?</label>
+            <select class="form-select">
+              <option selected>Non-Smoker</option>
+              <option>Smoker</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="dynamic-fields" id="fields-save">
+        <div class="form-row single">
+          <div class="form-group">
+            <label class="form-label">Monthly Savings Target</label>
+            <div class="range-wrap">
+              <div class="range-display">
+                <span class="range-val" id="save-range-val">₹10,000</span>
+                <span class="range-unit">/month</span>
+              </div>
+              <input class="range-input" type="range" min="1000" max="200000" step="1000" value="10000" oninput="updateRange('save',this.value)"/>
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Savings Goal</label>
+            <select class="form-select">
+              <option>Emergency Fund</option>
+              <option>Marriage</option>
+              <option>Child Future</option>
+              <option selected>Retirement</option>
+              <option>Business Capital</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Time Horizon</label>
+            <select class="form-select">
+              <option>1–3 years</option>
+              <option>3–7 years</option>
+              <option selected>7–15 years</option>
+              <option>15+ years</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="dynamic-fields" id="fields-hlth">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Cover Required</label>
+            <select class="form-select">
+              <option>₹5 Lakh</option>
+              <option selected>₹10 Lakh</option>
+              <option>₹25 Lakh</option>
+              <option>₹50 Lakh</option>
+              <option>₹1 Crore+</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Plan Type</label>
+            <select class="form-select">
+              <option selected>Individual</option>
+              <option>Family Floater</option>
+              <option>Senior Citizen</option>
+              <option>Critical Illness</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Family Members to Cover</label>
+            <select class="form-select">
+              <option selected>Just Me</option>
+              <option>Me + Spouse</option>
+              <option>Me + Spouse + 1 Child</option>
+              <option>Me + Spouse + 2 Children</option>
+              <option>Include Parents</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Pre-existing Conditions?</label>
+            <select class="form-select">
+              <option selected>None</option>
+              <option>Diabetes</option>
+              <option>Hypertension</option>
+              <option>Others</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn-submit" id="submitBtn" onclick="handleSubmit()">
+        <span id="submitText">Connect Me With an Advisor</span>
+        <span class="arrow">→</span>
+      </button>
+
+      <p class="form-disclaimer">
+        By continuing, you agree to our <a href="#">Privacy Policy</a> &amp; <a href="#">Terms</a>.
+        We connect you with licensed advisors. Your data is encrypted &amp; never sold.
+      </p>
+    </div>
+
+    <div class="success-msg" id="successMsg">
+      <div class="success-icon">🎉</div>
+      <div class="success-title">You're all set!</div>
+      <p class="success-sub">Our advisor will call you within 2 hours.<br>Check your WhatsApp for a confirmation message.</p>
+    </div>
+  </div>
+
+  <div class="proof-row">
+    <div class="proof-item"><span class="proof-dot">✓</span>No spam calls</div>
+    <div class="proof-item"><span class="proof-dot">✓</span>100% free service</div>
+    <div class="proof-item"><span class="proof-dot">✓</span>Free consultation</div>
+    <div class="proof-item"><span class="proof-dot">✓</span>SSL secured</div>
+  </div>
+
+</section>
+
+<!-- ── MARQUEE ── -->
+<div class="marquee-wrap">
+  <div class="marquee-inner">
+    <span class="m-item"><span class="m-dot"></span>100% Free Comparison Service</span>
+    <span class="m-item"><span class="m-dot"></span>Connect with Licensed Advisors</span>
+    <span class="m-item"><span class="m-dot"></span>50+ Partner Insurers &amp; Fund Houses</span>
+    <span class="m-item"><span class="m-dot"></span>10,000+ Leads Connected</span>
+    <span class="m-item"><span class="m-dot"></span>No Hidden Charges Ever</span>
+    <span class="m-item"><span class="m-dot"></span>4.8★ User Satisfaction</span>
+    <span class="m-item"><span class="m-dot"></span>Callback Within 2 Hours</span>
+    <span class="m-item"><span class="m-dot"></span>Trusted by Families Across India</span>
+    <span class="m-item"><span class="m-dot"></span>100% Free Comparison Service</span>
+    <span class="m-item"><span class="m-dot"></span>Connect with Licensed Advisors</span>
+    <span class="m-item"><span class="m-dot"></span>50+ Partner Insurers &amp; Fund Houses</span>
+    <span class="m-item"><span class="m-dot"></span>10,000+ Leads Connected</span>
+    <span class="m-item"><span class="m-dot"></span>No Hidden Charges Ever</span>
+    <span class="m-item"><span class="m-dot"></span>4.8★ User Satisfaction</span>
+    <span class="m-item"><span class="m-dot"></span>Callback Within 2 Hours</span>
+    <span class="m-item"><span class="m-dot"></span>Trusted by Families Across India</span>
+  </div>
+</div>
+
+<!-- ── TRUST NUMBERS ── -->
+<section class="trust-section">
+  <div class="trust-inner">
+    <div class="trust-grid">
+      <div class="trust-box">
+        <div class="trust-num c1">10,000+</div>
+        <div class="trust-lbl">Leads Connected</div>
+      </div>
+      <div class="trust-box">
+        <div class="trust-num c2">50+</div>
+        <div class="trust-lbl">Partner Advisors &amp; Insurers</div>
+      </div>
+      <div class="trust-box">
+        <div class="trust-num c3">2 hrs</div>
+        <div class="trust-lbl">Average Callback Time</div>
+      </div>
+      <div class="trust-box">
+        <div class="trust-num c4">4.8 ★</div>
+        <div class="trust-lbl">User Satisfaction Score</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PRODUCTS DEEP-DIVE ── -->
+<section class="products-section" id="products">
+  <div class="inner">
+    <div class="section-label">What We Offer</div>
+    <h2 class="section-h2">Financial products built for every life stage</h2>
+
+    <div class="products-grid">
+
+      <div class="prod-card mf">
+        <span class="prod-highlight">Most Popular</span>
+        <div class="prod-icon">📈</div>
+        <div class="prod-name">Mutual Funds</div>
+        <p class="prod-desc">Tell us your goals and we'll connect you with top-rated fund advisors. Compare SIP options, get a personalised plan, and start investing.</p>
+        <div class="prod-tags">
+          <span class="ptag">Tax Saving ELSS</span>
+          <span class="ptag">SIP from ₹500</span>
+          <span class="ptag">Zero Lock-in</span>
+          <span class="ptag">Free Comparison</span>
+        </div>
+        <button class="prod-cta" onclick="switchProduct('mf');scrollToForm()">Get Connected →</button>
+      </div>
+
+      <div class="prod-card term">
+        <span class="prod-highlight">Save up to 40%</span>
+        <div class="prod-icon">🛡️</div>
+        <div class="prod-name">Term Insurance</div>
+        <p class="prod-desc">Share your details and get connected to licensed term insurance advisors who compare 30+ insurers to find you the right cover at the best price.</p>
+        <div class="prod-tags">
+          <span class="ptag">₹1 Cr from ₹490/mo</span>
+          <span class="ptag">30+ Insurers</span>
+          <span class="ptag">Free Quotes</span>
+          <span class="ptag">Expert Guidance</span>
+        </div>
+        <button class="prod-cta" onclick="switchProduct('term');scrollToForm()">Get Quotes →</button>
+      </div>
+
+      <div class="prod-card save">
+        <span class="prod-highlight">Guaranteed Returns</span>
+        <div class="prod-icon">🏦</div>
+        <div class="prod-name">Savings Plans</div>
+        <p class="prod-desc">Connect with savings plan specialists who'll help you compare guaranteed-return plans for your child's education, marriage, or retirement goals.</p>
+        <div class="prod-tags">
+          <span class="ptag">Guaranteed Returns</span>
+          <span class="ptag">Capital Safe</span>
+          <span class="ptag">Tax Benefits</span>
+          <span class="ptag">Flexible Tenure</span>
+        </div>
+        <button class="prod-cta" onclick="switchProduct('save');scrollToForm()">Explore Plans →</button>
+      </div>
+
+      <div class="prod-card hlth">
+        <span class="prod-highlight">No Claim Bonus</span>
+        <div class="prod-icon">❤️‍🩹</div>
+        <div class="prod-name">Health Insurance</div>
+        <p class="prod-desc">Get matched with health insurance experts who compare cashless plans across top insurers for you and your family — completely free of charge.</p>
+        <div class="prod-tags">
+          <span class="ptag">10,000+ Hospitals</span>
+          <span class="ptag">Cashless Plans</span>
+          <span class="ptag">₹5L–₹1Cr Cover</span>
+          <span class="ptag">Free Matching</span>
+        </div>
+        <button class="prod-cta" onclick="switchProduct('hlth');scrollToForm()">Find Plans →</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW IT WORKS ── -->
+<section class="how-section" id="how">
+  <div class="how-inner">
+    <div class="section-label" style="color:var(--violet)">Our Process</div>
+    <h2 class="section-h2">Your plan in 4 simple steps</h2>
+    <div class="how-steps">
+      <div class="how-step">
+        <div class="step-num-circle s1">1</div>
+        <div class="step-title">Share Your Goals</div>
+        <p class="step-desc">Fill the form above. Tell us your financial goals, income, and what matters most to you.</p>
+      </div>
+      <div class="how-step">
+        <div class="step-num-circle s2">2</div>
+        <div class="step-title">An Expert Calls You</div>
+        <p class="step-desc">A licensed advisor from our partner network calls within 2 hours for a free 30-minute needs assessment — no pressure, no obligation.</p>
+      </div>
+      <div class="how-step">
+        <div class="step-num-circle s3">3</div>
+        <div class="step-title">Compare &amp; Choose</div>
+        <p class="step-desc">Receive a personalised comparison of products, providers, premiums, and features — so you can make an informed decision yourself.</p>
+      </div>
+      <div class="how-step">
+        <div class="step-num-circle s4">4</div>
+        <div class="step-title">Get Started</div>
+        <p class="step-desc">Once you choose a product, the advisor you're connected with handles onboarding directly. Our job is done when you're in safe hands.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TESTIMONIALS ── -->
+<section class="testi-section" id="reviews">
+  <div class="testi-inner">
+    <div class="section-label" style="color:var(--gold)">Customer Stories</div>
+    <h2 class="section-h2">10,000+ people connected with the right advisor</h2>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">"I filled the form and got a call within 90 minutes. The advisor I was connected with helped me start a ₹5,000/month SIP. Really smooth experience and zero pressure."</p>
+        <div class="testi-author">
+          <div class="author-av av1">RS</div>
+          <div>
+            <div class="author-name">Riya Sharma</div>
+            <div class="author-sub">Software Engineer, Bangalore</div>
+          </div>
+          <span class="product-tag-mini ptm-mf">Mutual Fund</span>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">"Got connected to a term insurance advisor same day. They compared 8 plans transparently and explained the claim ratios. Ended up buying HDFC Life — great experience overall."</p>
+        <div class="testi-author">
+          <div class="author-av av2">AK</div>
+          <div>
+            <div class="author-name">Arjun Kulkarni</div>
+            <div class="author-sub">Business Owner, Pune</div>
+          </div>
+          <span class="product-tag-mini ptm-term">Term Insurance</span>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">"Found the right family health plan through WealthPath in under an hour. The advisor they connected me with was knowledgeable and helped us pick a cashless plan at a hospital nearby."</p>
+        <div class="testi-author">
+          <div class="author-av av3">PM</div>
+          <div>
+            <div class="author-name">Priya Menon</div>
+            <div class="author-sub">Teacher, Chennai</div>
+          </div>
+          <span class="product-tag-mini ptm-hlth">Health Insurance</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SECOND LEAD CTA ── -->
+<section class="cta2-section">
+  <div class="cta2-inner">
+    <div class="cta2-card">
+      <div class="section-label" style="color:var(--teal);position:relative;">Still thinking?</div>
+      <h2 class="cta2-h">Talk to an expert.<br><span style="color:var(--teal)">It's completely free.</span></h2>
+      <p class="cta2-sub">No commitment. No spam. Just share your number and we'll connect you with the right licensed advisor for your financial goals — within 2 hours.</p>
+      <div class="mini-form">
+        <input class="mini-input" type="tel" placeholder="Enter your mobile number" id="cta2-phone"/>
+        <button class="btn-mini" onclick="handleCta2()">Get a Callback →</button>
+      </div>
+      <div class="cta2-badges">
+        <span class="cta-badge"><span class="cta-badge-ico">🔒</span>SSL Encrypted</span>
+        <span class="cta-badge"><span class="cta-badge-ico">🆓</span>100% Free Service</span>
+        <span class="cta-badge"><span class="cta-badge-ico">🚫</span>No Spam Calls</span>
+        <span class="cta-badge"><span class="cta-badge-ico">⭐</span>4.8/5 Satisfaction</span>
+        <span class="cta-badge"><span class="cta-badge-ico">📞</span>Callback in 2 Hours</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PARTNERS ── -->
+<section class="partners-section">
+  <div class="partners-inner">
+    <p class="partners-label">Advisors on our platform work with leading insurers &amp; fund houses including</p>
+    <div class="partners-row">
+      <span class="partner-logo">HDFC Life</span>
+      <span class="partner-logo">ICICI Prudential</span>
+      <span class="partner-logo">Mirae Asset</span>
+      <span class="partner-logo">SBI Mutual Fund</span>
+      <span class="partner-logo">Star Health</span>
+      <span class="partner-logo">Niva Bupa</span>
+      <span class="partner-logo">Max Life</span>
+      <span class="partner-logo">Axis Bluechip</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand">
+        <span class="footer-brand-mark">💰</span>
+        WealthPath
+      </div>
+      <p class="footer-about">A free lead connection platform helping individuals across India find and compare financial products through licensed advisors.</p>
+        WealthPath is a lead generation platform. We are not registered with SEBI, IRDAI, or AMFI. We do not sell or advise on financial products directly.
+      </div>
+    </div>
+    <div>
+      <div class="f-col-title">Products</div>
+      <ul class="f-links">
+        <li><a href="#">Mutual Funds</a></li>
+        <li><a href="#">Term Insurance</a></li>
+        <li><a href="#">Savings Plans</a></li>
+        <li><a href="#">Health Insurance</a></li>
+        <li><a href="#">NPS / PPF</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="f-col-title">Company</div>
+      <ul class="f-links">
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Our Advisors</a></li>
+        <li><a href="#">Press</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="f-col-title">Legal</div>
+      <ul class="f-links">
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Use</a></li>
+        <li><a href="#">Disclaimer</a></li>
+        <li><a href="#">Grievance Redressal</a></li>
+        <li><a href="#">Cookie Policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2024 WealthPath. All rights reserved.</span>
+    <p class="footer-sebi">WealthPath is a lead generation and comparison platform only. We connect users with third-party licensed advisors, brokers, and distributors. We do not provide investment advice, sell insurance, or manage funds. All financial products are offered by respective SEBI/IRDAI/AMFI registered entities. Please verify credentials of any advisor before transacting.</p>
+  </div>
+</footer>
+
+<script>
+// ── PRODUCT DATA ──
+const products = {
+  mf: {
+    theme: 'theme-mf',
+    kicker: 'Find the Right Mutual Fund Today',
+    h1: 'Connect with experts &amp; start <span class="hl">your SIP journey</span>',
+    sub: 'Share your goals and get matched with a mutual fund advisor who\'ll compare options across top fund houses — completely free.',
+    formTitle: 'Get Connected to a Fund Advisor',
+    formSub: 'A licensed advisor will call you within 2 hours. No spam, no obligation.',
+    submitText: 'Connect Me With an Advisor',
+    logoMark: '📈',
+  },
+  term: {
+    theme: 'theme-term',
+    kicker: 'Find the Right Term Cover Today',
+    h1: 'Get ₹1 Crore life cover <span class="hl">starting ₹490/month</span>',
+    sub: 'Share your details and get connected to a licensed term insurance advisor who\'ll compare 30+ insurers to find the right plan for you.',
+    formTitle: 'Get Your Free Term Insurance Quote',
+    formSub: 'A licensed advisor will call you with quotes. No spam, no obligation.',
+    submitText: 'Get Free Term Plan Quotes',
+    logoMark: '🛡️',
+  },
+  save: {
+    theme: 'theme-save',
+    kicker: 'Find the Right Savings Plan Today',
+    h1: 'Save smart &amp; explore <span class="hl">guaranteed return plans</span>',
+    sub: 'Connect with savings plan specialists who compare plans across top providers to match your goals, timeline, and budget.',
+    formTitle: 'Find Your Ideal Savings Plan',
+    formSub: 'A savings advisor will call you within 2 hours. Free &amp; no obligation.',
+    submitText: 'Connect Me With a Savings Expert',
+    logoMark: '🏦',
+  },
+  hlth: {
+    theme: 'theme-hlth',
+    kicker: 'Find the Right Health Plan Today',
+    h1: 'Health insurance your family <span class="hl">can actually rely on</span>',
+    sub: 'Get matched with health insurance advisors who compare cashless plans across top insurers for your family — completely free.',
+    formTitle: 'Get Free Health Insurance Quotes',
+    formSub: 'A health insurance advisor will call you within 2 hours. No spam.',
+    submitText: 'Find My Best Health Plan',
+    logoMark: '❤️‍🩹',
+  }
+};
+
+function switchProduct(key) {
+  const p = products[key];
+
+  // swap body theme class
+  document.body.className = p.theme;
+
+  // update hero text
+  document.getElementById('heroKicker').textContent = p.kicker;
+  document.getElementById('heroH1').innerHTML = p.h1;
+  document.getElementById('heroSub').textContent = p.sub;
+  document.getElementById('formTitle').textContent = p.formTitle;
+  document.getElementById('formSub').textContent = p.formSub;
+  document.getElementById('submitText').textContent = p.submitText;
+  document.getElementById('logoMark').textContent = p.logoMark;
+
+  // swap active tab
+  document.querySelectorAll('.ptab').forEach(t => t.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+
+  // swap dynamic fields
+  document.querySelectorAll('.dynamic-fields').forEach(f => f.classList.remove('visible'));
+  const f = document.getElementById('fields-' + key);
+  if (f) f.classList.add('visible');
+}
+
+function updateRange(type, val) {
+  const el = document.getElementById(type + '-range-val');
+  if (type === 'mf') {
+    el.textContent = '₹' + parseInt(val).toLocaleString('en-IN');
+  } else if (type === 'term') {
+    el.textContent = '₹' + val + ' Crore' + (val > 1 ? 's' : '');
+  } else if (type === 'save') {
+    el.textContent = '₹' + parseInt(val).toLocaleString('en-IN');
+  }
+}
+
+function handleSubmit() {
+  const name = document.getElementById('inp-name').value.trim();
+  const phone = document.getElementById('inp-phone').value.trim();
+  if (!name || !phone) {
+    document.getElementById('inp-name').style.borderColor = !name ? 'var(--rose)' : '';
+    document.getElementById('inp-phone').style.borderColor = !phone ? 'var(--rose)' : '';
+    return;
+  }
+  document.getElementById('formInner').style.display = 'none';
+  document.getElementById('successMsg').classList.add('show');
+}
+
+function handleCta2() {
+  const ph = document.getElementById('cta2-phone').value.trim();
+  if (!ph) { document.getElementById('cta2-phone').style.borderColor='var(--rose)'; return; }
+  document.getElementById('cta2-phone').value = '';
+  document.getElementById('cta2-phone').placeholder = '✓ We\'ll call you shortly!';
+  document.getElementById('cta2-phone').style.color = 'var(--green)';
+}
+
+function scrollToForm() {
+  document.getElementById('formCard').scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+// init range inputs style
+document.querySelectorAll('.range-input').forEach(r => {
+  r.style.background = 'rgba(255,255,255,0.1)';
+});
+</script>
+</body>
+</html>
