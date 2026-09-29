@@ -38,6 +38,21 @@ export default function Footer() {
           <h4 className="font-mono text-[0.65rem] tracking-[0.14em] text-text-secondary uppercase mb-5">Resources</h4>
           <ul className="list-none p-0 m-0 space-y-3">
             <li>
+              <Link href="/term-insurance" className="text-text-secondary hover:text-primary-custom text-[0.875rem] transition-colors">
+                Term Insurance Guide
+              </Link>
+            </li>
+            <li>
+              <Link href="/health-insurance" className="text-text-secondary hover:text-primary-custom text-[0.875rem] transition-colors">
+                Health Insurance Guide
+              </Link>
+            </li>
+            <li>
+              <Link href="/mutual-funds" className="text-text-secondary hover:text-primary-custom text-[0.875rem] transition-colors">
+                Mutual Funds Hub
+              </Link>
+            </li>
+            <li>
               <Link href="/calculator" className="text-text-secondary hover:text-primary-custom text-[0.875rem] transition-colors">
                 Calculators
               </Link>

@@ -205,7 +205,7 @@ export default function ChatWidget() {
   return (
     <>
       {/* Floating Action Buttons Group */}
-      <div className="fixed bottom-6 right-6 flex flex-col items-center space-y-3.5 z-40 font-sans">
+      <div className="fixed bottom-20 right-4 sm:bottom-6 sm:right-6 xl:bottom-6 xl:right-6 flex flex-col items-center space-y-3 z-40 font-sans">
         {/* WhatsApp Redirection Button */}
         <motion.a
           href="https://wa.me/9118004195920?text=Hi%20InsurEdge%2C%20I%20would%20like%20to%20get%20unbiased%20advice%20on%20my%20insurance."
@@ -241,7 +241,7 @@ export default function ChatWidget() {
             initial={{ opacity: 0, scale: 0.95, y: 30 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 30 }}
-            className="fixed bottom-28 right-6 w-96 max-w-[calc(100vw-2rem)] bg-surface border border-border-custom rounded-3xl shadow-2xl overflow-hidden z-40 flex flex-col h-[500px] transition-colors duration-300"
+            className="fixed bottom-24 right-4 sm:bottom-28 sm:right-6 w-[calc(100vw-2rem)] sm:w-96 max-w-full bg-surface border border-border-custom rounded-3xl shadow-2xl overflow-hidden z-40 flex flex-col h-[480px] max-h-[calc(100dvh-120px)] transition-colors duration-300"
           >
             {/* Header */}
             <div className="bg-background/80 px-6 py-4 flex items-center justify-between border-b border-border-custom backdrop-blur-md">

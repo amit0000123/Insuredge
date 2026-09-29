@@ -176,6 +176,16 @@ function ServicesContent() {
                       <strong className="text-text-primary block mb-0.5">Tax Exemption Note:</strong> Term insurance premiums paid are fully deductible up to ₹1.5 Lakhs annually under Section 80C of the Income Tax Act.
                     </div>
                   </div>
+
+                  <div className="pt-2 flex flex-wrap gap-3">
+                    <Link
+                      href="/term-insurance"
+                      className="px-5 py-2.5 rounded-full bg-gradient-to-r from-primary-custom to-purple-600 text-white font-bold text-xs sm:text-sm shadow-md shadow-primary-custom/20 hover:opacity-95 transition-opacity inline-flex items-center gap-1.5"
+                    >
+                      <span>Explore Term Insurance Myths &amp; Complete Guide</span>
+                      <ChevronRight className="h-4 w-4" />
+                    </Link>
+                  </div>
                 </>
               )}
 
@@ -213,6 +223,16 @@ function ServicesContent() {
                     <div className="text-text-secondary leading-relaxed">
                       <strong className="text-text-primary block mb-0.5">Tax Exemption Note:</strong> Health insurance premiums help you claim up to ₹25,000 (self/family) and up to ₹50,000 (senior parents) under Section 80D.
                     </div>
+                  </div>
+
+                  <div className="pt-2 flex flex-wrap gap-3">
+                    <Link
+                      href="/health-insurance"
+                      className="px-5 py-2.5 rounded-full bg-gradient-to-r from-rose-500 to-pink-600 text-white font-bold text-xs sm:text-sm shadow-md shadow-rose-500/20 hover:opacity-95 transition-opacity inline-flex items-center gap-1.5"
+                    >
+                      <span>Explore Complete Health Insurance Guide</span>
+                      <ChevronRight className="h-4 w-4" />
+                    </Link>
                   </div>
                 </>
               )}
@@ -252,29 +272,42 @@ function ServicesContent() {
                 <>
                   <div className="space-y-3">
                     <span className="text-xs font-bold text-primary-custom uppercase tracking-widest block font-mono">
-                      Market Linked Wealth Building
+                      Mutual Fund Investment in India
                     </span>
                     <h2 className="text-3xl font-extrabold font-display text-text-primary">
-                      Disciplined SIP Investments
+                      Invest Smarter. Build Wealth with the Right Financial Professional.
                     </h2>
                     <p className="text-text-secondary leading-relaxed text-sm">
-                      Accumulate wealth over long horizons using low-cost mutual funds. Our SEBI-registered advisory services review active vs passive allocations, thematic risk weights, and historical roll-over returns.
+                      Whether you’re planning your first SIP, investing for your family’s future, saving for retirement, or working towards long-term wealth creation, mutual funds can play an important role in your financial journey.
+                    </p>
+                    <p className="text-text-secondary leading-relaxed text-xs">
+                      The challenge isn’t just deciding whether to invest—it’s understanding where to begin. Connect with experienced financial professionals to explore investment options without any obligation to invest.
                     </p>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
                     <div className="bg-surface border border-border-custom rounded-2xl p-5">
-                      <h4 className="font-bold text-text-primary text-sm mb-1.5">Goal-Based Portfolios</h4>
+                      <h4 className="font-bold text-text-primary text-sm mb-1.5">Experienced Professionals</h4>
                       <p className="text-xs text-text-secondary leading-relaxed">
-                        Bespoke allocations split according to short, medium, and multi-decade wealth compound targets.
+                        Match with vetted advisors based on your specific requirements, timeline, and risk comfort.
                       </p>
                     </div>
                     <div className="bg-surface border border-border-custom rounded-2xl p-5">
-                      <h4 className="font-bold text-text-primary text-sm mb-1.5">ELSS Tax Saving Funds</h4>
+                      <h4 className="font-bold text-text-primary text-sm mb-1.5">Zero-Obligation Learning</h4>
                       <p className="text-xs text-text-secondary leading-relaxed">
-                        Save tax under section 80C with the shortest lock-in period of 3 years compared to PPF, NSC, or bank FDs.
+                        Get answers to your investment questions in simple language before committing any money.
                       </p>
                     </div>
+                  </div>
+
+                  <div className="pt-2 flex flex-wrap gap-3">
+                    <Link
+                      href="/mutual-funds"
+                      className="px-5 py-2.5 rounded-full bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-bold text-xs sm:text-sm shadow-md shadow-emerald-500/20 hover:opacity-95 transition-opacity inline-flex items-center gap-1.5"
+                    >
+                      <span>Explore Mutual Funds Hub</span>
+                      <ChevronRight className="h-4 w-4" />
+                    </Link>
                   </div>
                 </>
               )}

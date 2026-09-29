@@ -5,22 +5,17 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/term",
-        destination: "/services?tab=term",
+        destination: "/term-insurance",
         permanent: true,
       },
       {
         source: "/health",
-        destination: "/services?tab=health",
+        destination: "/health-insurance",
         permanent: true,
       },
       {
         source: "/savings",
         destination: "/services?tab=savings",
-        permanent: true,
-      },
-      {
-        source: "/mutual-funds",
-        destination: "/services?tab=mutual-funds",
         permanent: true,
       },
       {

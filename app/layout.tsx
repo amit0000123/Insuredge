@@ -55,7 +55,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Navbar />
-          <main className="flex-grow pt-[68px]">
+          <main className="flex-grow pt-[68px] pb-16 xl:pb-0">
             {children}
           </main>
           <ChatWidget />
