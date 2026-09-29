@@ -133,7 +133,7 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative z-10 flex flex-col items-center px-[5vw] pt-20 pb-24 text-center">
         {/* Product Switcher Tabs */}
-        <div className="product-tabs inline-flex bg-white/5 border border-border-custom p-1.5 rounded-full gap-1.5 mb-12 backdrop-blur-md max-w-full overflow-x-auto no-scrollbar shadow-2xl relative z-20">
+        <div className="product-tabs inline-flex bg-white border border-slate-200 p-1.5 rounded-full gap-1.5 mb-12 backdrop-blur-md max-w-full overflow-x-auto no-scrollbar shadow-lg shadow-slate-200/50 relative z-20">
           {tabs.map((tab) => {
             const isTabActive = activeTab === tab.key;
             return (
@@ -142,10 +142,10 @@ export default function Home() {
                 onClick={() => handleTabChange(tab.key)}
                 className={`ptab flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold tracking-wide border-none cursor-pointer whitespace-nowrap transition-all duration-300 select-none ${
                   isTabActive
-                    ? "bg-accent-custom text-[#050816]"
-                    : "text-text-secondary hover:text-text-primary hover:bg-white/3"
+                    ? "bg-accent-custom text-white shadow-md"
+                    : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"
                 }`}
-                style={isTabActive ? { boxShadow: "0 4px 20px var(--accent-glow)" } : undefined}
+                style={isTabActive ? { boxShadow: "0 4px 16px var(--accent-glow)" } : undefined}
               >
                 <span>{tab.icon}</span>
                 {tab.label}
@@ -159,13 +159,13 @@ export default function Home() {
           <p className="hero-kicker text-xs font-bold font-display tracking-[0.2em] text-accent-custom uppercase transition-colors duration-500">
             {currentProduct.kicker}
           </p>
-          <h1 className="hero-h1 font-display text-4xl sm:text-5xl md:text-[5.5rem] font-extrabold leading-[1.0] tracking-tight text-text-primary max-w-5xl mx-auto transition-all duration-500">
+          <h1 className="hero-h1 font-display text-4xl sm:text-5xl md:text-[5.5rem] font-extrabold leading-[1.0] tracking-tight text-slate-900 max-w-5xl mx-auto transition-all duration-500">
             {currentProduct.h1First}{" "}
             <span className="text-accent-custom bg-clip-text transition-colors duration-500 block sm:inline-block">
               {currentProduct.h1Highlight}
             </span>
           </h1>
-          <p className="hero-sub text-sm sm:text-base md:text-[1.05rem] text-text-secondary max-w-2xl mx-auto leading-relaxed transition-all duration-500 font-sans mt-4">
+          <p className="hero-sub text-sm sm:text-base md:text-[1.05rem] text-slate-600 max-w-2xl mx-auto leading-relaxed transition-all duration-500 font-sans mt-4">
             {currentProduct.sub}
           </p>
         </div>
@@ -174,14 +174,14 @@ export default function Home() {
         <div
           ref={formRef}
           id="lead-form-card"
-          className="form-card w-full max-w-[580px] bg-surface/90 dark:bg-[#0b1120]/85 border border-border-custom rounded-[24px] p-8 md:p-10 shadow-2xl backdrop-blur-2xl relative overflow-hidden text-left transition-all duration-500"
+          className="form-card w-full max-w-[580px] bg-white border border-slate-200/90 rounded-[28px] p-8 md:p-10 shadow-xl shadow-slate-200/60 relative overflow-hidden text-left transition-all duration-500"
           style={{
-            boxShadow: "0 40px 80px rgba(0, 0, 0, 0.4), 0 0 40px var(--accent-glow)",
+            boxShadow: "0 20px 45px -10px rgba(15, 23, 42, 0.08), 0 0 30px var(--accent-glow)",
           }}
         >
           {/* Accent glow on form top right */}
           <div
-            className="absolute top-[-60px] right-[-60px] w-[220px] h-[220px] rounded-full pointer-events-none opacity-60 transition-all duration-700"
+            className="absolute top-[-60px] right-[-60px] w-[220px] h-[220px] rounded-full pointer-events-none opacity-40 transition-all duration-700"
             style={{
               background: "radial-gradient(circle, var(--accent-glow) 0%, transparent 65%)",
             }}
@@ -199,10 +199,10 @@ export default function Home() {
                 className="space-y-6 relative z-10"
               >
                 <div>
-                  <h3 className="form-card-title font-display text-xl md:text-2xl font-bold text-text-primary tracking-tight transition-colors duration-500">
+                  <h3 className="form-card-title font-display text-xl md:text-2xl font-bold text-slate-900 tracking-tight transition-colors duration-500">
                     {currentProduct.formTitle}
                   </h3>
-                  <p className="form-card-sub text-xs text-text-secondary leading-normal mt-1 transition-colors duration-500">
+                  <p className="form-card-sub text-xs text-slate-500 leading-normal mt-1 transition-colors duration-500">
                     {currentProduct.formSub}
                   </p>
                 </div>
@@ -210,7 +210,7 @@ export default function Home() {
                 {/* Grid Inputs (Name, Phone) */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-[0.72rem] font-bold text-text-secondary tracking-wider uppercase font-sans">
+                    <label className="text-[0.72rem] font-bold text-slate-500 tracking-wider uppercase font-sans">
                       Full Name
                     </label>
                     <input
@@ -219,15 +219,15 @@ export default function Home() {
                       placeholder="Rahul Sharma"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      className={`form-input-custom w-full bg-white/5 border rounded-xl px-4 py-3 text-sm text-text-primary outline-none transition-all placeholder:text-text-secondary/40 font-sans focus:bg-white/8 ${
+                      className={`form-input-custom w-full bg-slate-50 hover:bg-slate-50/80 focus:bg-white border rounded-xl px-4 py-3 text-sm text-slate-900 outline-none transition-all placeholder:text-slate-400 font-sans focus:border-accent-custom focus:ring-2 focus:ring-accent-custom/20 ${
                         validationErrors.name
-                          ? "border-rose-500/50 focus:border-rose-500 focus:ring-4 focus:ring-rose-500/10"
-                          : "border-border-custom"
+                          ? "border-rose-500 focus:border-rose-500 focus:ring-4 focus:ring-rose-500/10"
+                          : "border-slate-200"
                       }`}
                     />
                   </div>
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-[0.72rem] font-bold text-text-secondary tracking-wider uppercase font-sans">
+                    <label className="text-[0.72rem] font-bold text-slate-500 tracking-wider uppercase font-sans">
                       Mobile Number
                     </label>
                     <input
@@ -236,10 +236,10 @@ export default function Home() {
                       placeholder="+91 98765 43210"
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
-                      className={`form-input-custom w-full bg-white/5 border rounded-xl px-4 py-3 text-sm text-text-primary outline-none transition-all placeholder:text-text-secondary/40 font-sans focus:bg-white/8 ${
+                      className={`form-input-custom w-full bg-slate-50 hover:bg-slate-50/80 focus:bg-white border rounded-xl px-4 py-3 text-sm text-slate-900 outline-none transition-all placeholder:text-slate-400 font-sans focus:border-accent-custom focus:ring-2 focus:ring-accent-custom/20 ${
                         validationErrors.phone
-                          ? "border-rose-500/50 focus:border-rose-500 focus:ring-4 focus:ring-rose-500/10"
-                          : "border-border-custom"
+                          ? "border-rose-500 focus:border-rose-500 focus:ring-4 focus:ring-rose-500/10"
+                          : "border-slate-200"
                       }`}
                     />
                   </div>
@@ -248,7 +248,7 @@ export default function Home() {
                 {/* Grid Inputs (Email, Age) */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-[0.72rem] font-bold text-text-secondary tracking-wider uppercase font-sans">
+                    <label className="text-[0.72rem] font-bold text-slate-500 tracking-wider uppercase font-sans">
                       Email Address
                     </label>
                     <input
@@ -257,11 +257,11 @@ export default function Home() {
                       placeholder="rahul@email.com"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="form-input-custom w-full bg-white/5 border border-border-custom rounded-xl px-4 py-3 text-sm text-text-primary outline-none transition-all placeholder:text-text-secondary/40 font-sans focus:bg-white/8"
+                      className="form-input-custom w-full bg-slate-50 hover:bg-slate-50/80 focus:bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 outline-none transition-all placeholder:text-slate-400 font-sans focus:border-accent-custom focus:ring-2 focus:ring-accent-custom/20"
                     />
                   </div>
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-[0.72rem] font-bold text-text-secondary tracking-wider uppercase font-sans">
+                    <label className="text-[0.72rem] font-bold text-slate-500 tracking-wider uppercase font-sans">
                       Age
                     </label>
                     <input
@@ -272,17 +272,17 @@ export default function Home() {
                       max="70"
                       value={age}
                       onChange={(e) => setAge(e.target.value)}
-                      className="form-input-custom w-full bg-white/5 border border-border-custom rounded-xl px-4 py-3 text-sm text-text-primary outline-none transition-all placeholder:text-text-secondary/40 font-sans focus:bg-white/8"
+                      className="form-input-custom w-full bg-slate-50 hover:bg-slate-50/80 focus:bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 outline-none transition-all placeholder:text-slate-400 font-sans focus:border-accent-custom focus:ring-2 focus:ring-accent-custom/20"
                     />
                   </div>
                 </div>
 
                 {/* Product Specific Sub-panels */}
-                <div className="border-t border-border-custom/50 pt-5 mt-2 transition-all duration-300">
+                <div className="border-t border-slate-100 pt-5 mt-2 transition-all duration-300">
                   {activeTab === "mf" && (
                     <div className="space-y-5">
                       <div className="flex flex-col gap-1.5">
-                        <label className="text-[0.72rem] font-bold text-text-secondary tracking-wider uppercase font-sans">
+                        <label className="text-[0.72rem] font-bold text-slate-500 tracking-wider uppercase font-sans">
                           Monthly Investment Amount
                         </label>
                         <div className="space-y-2.5 mt-1">
@@ -290,7 +290,7 @@ export default function Home() {
                             <span className="font-display text-2xl font-bold text-accent-custom transition-colors duration-500">
                               ₹{sipAmount.toLocaleString("en-IN")}
                             </span>
-                            <span className="text-xs text-text-secondary font-medium font-sans">/month</span>
+                            <span className="text-xs text-slate-500 font-medium font-sans">/month</span>
                           </div>
                           <input
                             suppressHydrationWarning
@@ -307,14 +307,14 @@ export default function Home() {
 
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="flex flex-col gap-1.5">
-                          <label className="text-[0.72rem] font-bold text-text-secondary tracking-wider uppercase font-sans">
+                          <label className="text-[0.72rem] font-bold text-slate-500 tracking-wider uppercase font-sans">
                             Investment Goal
                           </label>
                           <select
                             suppressHydrationWarning
                             value={mfGoal}
                             onChange={(e) => setMfGoal(e.target.value)}
-                            className="form-select-custom bg-surface dark:bg-[#0f1525] border border-border-custom rounded-xl px-3.5 py-3 text-sm text-text-primary outline-none transition-all font-sans focus:bg-white/5 cursor-pointer"
+                            className="form-select-custom w-full bg-slate-50 hover:bg-slate-50/80 focus:bg-white border border-slate-200 rounded-xl px-3.5 py-3 text-sm text-slate-900 outline-none transition-all font-sans cursor-pointer focus:border-accent-custom focus:ring-2 focus:ring-accent-custom/20"
                           >
                             <option value="">Select Goal</option>
                             <option value="Retirement">Retirement Corpus</option>
@@ -325,14 +325,14 @@ export default function Home() {
                           </select>
                         </div>
                         <div className="flex flex-col gap-1.5">
-                          <label className="text-[0.72rem] font-bold text-text-secondary tracking-wider uppercase font-sans">
+                          <label className="text-[0.72rem] font-bold text-slate-500 tracking-wider uppercase font-sans">
                             Risk Appetite
                           </label>
                           <select
                             suppressHydrationWarning
                             value={mfRisk}
                             onChange={(e) => setMfRisk(e.target.value)}
-                            className="form-select-custom bg-surface dark:bg-[#0f1525] border border-border-custom rounded-xl px-3.5 py-3 text-sm text-text-primary outline-none transition-all font-sans focus:bg-white/5 cursor-pointer"
+                            className="form-select-custom w-full bg-slate-50 hover:bg-slate-50/80 focus:bg-white border border-slate-200 rounded-xl px-3.5 py-3 text-sm text-slate-900 outline-none transition-all font-sans cursor-pointer focus:border-accent-custom focus:ring-2 focus:ring-accent-custom/20"
                           >
                             <option value="Conservative">Conservative</option>
                             <option value="Moderate">Moderate</option>
@@ -346,7 +346,7 @@ export default function Home() {
                   {activeTab === "term" && (
                     <div className="space-y-5">
                       <div className="flex flex-col gap-1.5">
-                        <label className="text-[0.72rem] font-bold text-text-secondary tracking-wider uppercase font-sans">
+                        <label className="text-[0.72rem] font-bold text-slate-500 tracking-wider uppercase font-sans">
                           Desired Coverage Amount
                         </label>
                         <div className="space-y-2.5 mt-1">
@@ -354,7 +354,7 @@ export default function Home() {
                             <span className="font-display text-2xl font-bold text-accent-custom transition-colors duration-500">
                               ₹{termCoverage} Crore{termCoverage > 1 ? "s" : ""}
                             </span>
-                            <span className="text-xs text-text-secondary font-medium font-sans">life cover</span>
+                            <span className="text-xs text-slate-500 font-medium font-sans">life cover</span>
                           </div>
                           <input
                             suppressHydrationWarning
@@ -371,14 +371,14 @@ export default function Home() {
 
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="flex flex-col gap-1.5">
-                          <label className="text-[0.72rem] font-bold text-text-secondary tracking-wider uppercase font-sans">
+                          <label className="text-[0.72rem] font-bold text-slate-500 tracking-wider uppercase font-sans">
                             Annual Income
                           </label>
                           <select
                             suppressHydrationWarning
                             value={termIncome}
                             onChange={(e) => setTermIncome(e.target.value)}
-                            className="form-select-custom bg-surface dark:bg-[#0f1525] border border-border-custom rounded-xl px-3.5 py-3 text-sm text-text-primary outline-none transition-all font-sans focus:bg-white/5 cursor-pointer"
+                            className="form-select-custom w-full bg-slate-50 hover:bg-slate-50/80 focus:bg-white border border-slate-200 rounded-xl px-3.5 py-3 text-sm text-slate-900 outline-none transition-all font-sans cursor-pointer focus:border-accent-custom focus:ring-2 focus:ring-accent-custom/20"
                           >
                             <option value="Below ₹5 LPA">Below ₹5 LPA</option>
                             <option value="₹5–10 LPA">₹5–10 LPA</option>
@@ -387,14 +387,14 @@ export default function Home() {
                           </select>
                         </div>
                         <div className="flex flex-col gap-1.5">
-                          <label className="text-[0.72rem] font-bold text-text-secondary tracking-wider uppercase font-sans">
+                          <label className="text-[0.72rem] font-bold text-slate-500 tracking-wider uppercase font-sans">
                             Smoker?
                           </label>
                           <select
                             suppressHydrationWarning
                             value={termSmoker}
                             onChange={(e) => setTermSmoker(e.target.value)}
-                            className="form-select-custom bg-surface dark:bg-[#0f1525] border border-border-custom rounded-xl px-3.5 py-3 text-sm text-text-primary outline-none transition-all font-sans focus:bg-white/5 cursor-pointer"
+                            className="form-select-custom w-full bg-slate-50 hover:bg-slate-50/80 focus:bg-white border border-slate-200 rounded-xl px-3.5 py-3 text-sm text-slate-900 outline-none transition-all font-sans cursor-pointer focus:border-accent-custom focus:ring-2 focus:ring-accent-custom/20"
                           >
                             <option value="Non-Smoker">Non-Smoker</option>
                             <option value="Smoker">Smoker</option>
@@ -407,7 +407,7 @@ export default function Home() {
                   {activeTab === "save" && (
                     <div className="space-y-5">
                       <div className="flex flex-col gap-1.5">
-                        <label className="text-[0.72rem] font-bold text-text-secondary tracking-wider uppercase font-sans">
+                        <label className="text-[0.72rem] font-bold text-slate-500 tracking-wider uppercase font-sans">
                           Monthly Savings Target
                         </label>
                         <div className="space-y-2.5 mt-1">
@@ -415,7 +415,7 @@ export default function Home() {
                             <span className="font-display text-2xl font-bold text-accent-custom transition-colors duration-500">
                               ₹{savingsAmount.toLocaleString("en-IN")}
                             </span>
-                            <span className="text-xs text-text-secondary font-medium font-sans">/month savings</span>
+                            <span className="text-xs text-slate-500 font-medium font-sans">/month savings</span>
                           </div>
                           <input
                             suppressHydrationWarning
@@ -432,14 +432,14 @@ export default function Home() {
 
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="flex flex-col gap-1.5">
-                          <label className="text-[0.72rem] font-bold text-text-secondary tracking-wider uppercase font-sans">
+                          <label className="text-[0.72rem] font-bold text-slate-500 tracking-wider uppercase font-sans">
                             Savings Goal
                           </label>
                           <select
                             suppressHydrationWarning
                             value={saveGoal}
                             onChange={(e) => setSaveGoal(e.target.value)}
-                            className="form-select-custom bg-surface dark:bg-[#0f1525] border border-border-custom rounded-xl px-3.5 py-3 text-sm text-text-primary outline-none transition-all font-sans focus:bg-white/5 cursor-pointer"
+                            className="form-select-custom w-full bg-slate-50 hover:bg-slate-50/80 focus:bg-white border border-slate-200 rounded-xl px-3.5 py-3 text-sm text-slate-900 outline-none transition-all font-sans cursor-pointer focus:border-accent-custom focus:ring-2 focus:ring-accent-custom/20"
                           >
                             <option value="Emergency Fund">Emergency Fund</option>
                             <option value="Marriage">Marriage</option>
@@ -449,14 +449,14 @@ export default function Home() {
                           </select>
                         </div>
                         <div className="flex flex-col gap-1.5">
-                          <label className="text-[0.72rem] font-bold text-text-secondary tracking-wider uppercase font-sans">
+                          <label className="text-[0.72rem] font-bold text-slate-500 tracking-wider uppercase font-sans">
                             Time Horizon
                           </label>
                           <select
                             suppressHydrationWarning
                             value={saveHorizon}
                             onChange={(e) => setSaveHorizon(e.target.value)}
-                            className="form-select-custom bg-surface dark:bg-[#0f1525] border border-border-custom rounded-xl px-3.5 py-3 text-sm text-text-primary outline-none transition-all font-sans focus:bg-white/5 cursor-pointer"
+                            className="form-select-custom w-full bg-slate-50 hover:bg-slate-50/80 focus:bg-white border border-slate-200 rounded-xl px-3.5 py-3 text-sm text-slate-900 outline-none transition-all font-sans cursor-pointer focus:border-accent-custom focus:ring-2 focus:ring-accent-custom/20"
                           >
                             <option value="1–3 years">1–3 years</option>
                             <option value="3–7 years">3–7 years</option>
@@ -472,14 +472,14 @@ export default function Home() {
                     <div className="space-y-5">
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="flex flex-col gap-1.5">
-                          <label className="text-[0.72rem] font-bold text-text-secondary tracking-wider uppercase font-sans">
+                          <label className="text-[0.72rem] font-bold text-slate-500 tracking-wider uppercase font-sans">
                             Cover Required
                           </label>
                           <select
                             suppressHydrationWarning
                             value={healthCover}
                             onChange={(e) => setHealthCover(e.target.value)}
-                            className="form-select-custom bg-surface dark:bg-[#0f1525] border border-border-custom rounded-xl px-3.5 py-3 text-sm text-text-primary outline-none transition-all font-sans focus:bg-white/5 cursor-pointer"
+                            className="form-select-custom w-full bg-slate-50 hover:bg-slate-50/80 focus:bg-white border border-slate-200 rounded-xl px-3.5 py-3 text-sm text-slate-900 outline-none transition-all font-sans cursor-pointer focus:border-accent-custom focus:ring-2 focus:ring-accent-custom/20"
                           >
                             <option value="₹5 Lakh">₹5 Lakh</option>
                             <option value="₹10 Lakh">₹10 Lakh</option>
@@ -489,14 +489,14 @@ export default function Home() {
                           </select>
                         </div>
                         <div className="flex flex-col gap-1.5">
-                          <label className="text-[0.72rem] font-bold text-text-secondary tracking-wider uppercase font-sans">
+                          <label className="text-[0.72rem] font-bold text-slate-500 tracking-wider uppercase font-sans">
                             Plan Type
                           </label>
                           <select
                             suppressHydrationWarning
                             value={healthType}
                             onChange={(e) => setHealthType(e.target.value)}
-                            className="form-select-custom bg-surface dark:bg-[#0f1525] border border-border-custom rounded-xl px-3.5 py-3 text-sm text-text-primary outline-none transition-all font-sans focus:bg-white/5 cursor-pointer"
+                            className="form-select-custom w-full bg-slate-50 hover:bg-slate-50/80 focus:bg-white border border-slate-200 rounded-xl px-3.5 py-3 text-sm text-slate-900 outline-none transition-all font-sans cursor-pointer focus:border-accent-custom focus:ring-2 focus:ring-accent-custom/20"
                           >
                             <option value="Individual">Individual</option>
                             <option value="Family Floater">Family Floater</option>
@@ -508,14 +508,14 @@ export default function Home() {
 
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="flex flex-col gap-1.5">
-                          <label className="text-[0.72rem] font-bold text-text-secondary tracking-wider uppercase font-sans">
+                          <label className="text-[0.72rem] font-bold text-slate-500 tracking-wider uppercase font-sans">
                             Family Members to Cover
                           </label>
                           <select
                             suppressHydrationWarning
                             value={healthFamily}
                             onChange={(e) => setHealthFamily(e.target.value)}
-                            className="form-select-custom bg-surface dark:bg-[#0f1525] border border-border-custom rounded-xl px-3.5 py-3 text-sm text-text-primary outline-none transition-all font-sans focus:bg-white/5 cursor-pointer"
+                            className="form-select-custom w-full bg-slate-50 hover:bg-slate-50/80 focus:bg-white border border-slate-200 rounded-xl px-3.5 py-3 text-sm text-slate-900 outline-none transition-all font-sans cursor-pointer focus:border-accent-custom focus:ring-2 focus:ring-accent-custom/20"
                           >
                             <option value="Just Me">Just Me</option>
                             <option value="Me + Spouse">Me + Spouse</option>
@@ -525,14 +525,14 @@ export default function Home() {
                           </select>
                         </div>
                         <div className="flex flex-col gap-1.5">
-                          <label className="text-[0.72rem] font-bold text-text-secondary tracking-wider uppercase font-sans">
+                          <label className="text-[0.72rem] font-bold text-slate-500 tracking-wider uppercase font-sans">
                             Pre-existing Conditions?
                           </label>
                           <select
                             suppressHydrationWarning
                             value={healthConditions}
                             onChange={(e) => setHealthConditions(e.target.value)}
-                            className="form-select-custom bg-surface dark:bg-[#0f1525] border border-border-custom rounded-xl px-3.5 py-3 text-sm text-text-primary outline-none transition-all font-sans focus:bg-white/5 cursor-pointer"
+                            className="form-select-custom w-full bg-slate-50 hover:bg-slate-50/80 focus:bg-white border border-slate-200 rounded-xl px-3.5 py-3 text-sm text-slate-900 outline-none transition-all font-sans cursor-pointer focus:border-accent-custom focus:ring-2 focus:ring-accent-custom/20"
                           >
                             <option value="None">None</option>
                             <option value="Diabetes">Diabetes</option>
@@ -549,22 +549,22 @@ export default function Home() {
                 <button
                   suppressHydrationWarning
                   type="submit"
-                  className="w-full py-4 bg-accent-custom text-[#050816] font-display font-extrabold text-base border-none rounded-xl cursor-pointer tracking-tight transition-all duration-300 hover:scale-[1.01] flex items-center justify-center gap-2 group relative z-10"
+                  className="w-full py-4 bg-accent-custom text-white font-display font-extrabold text-base border-none rounded-xl cursor-pointer tracking-tight transition-all duration-300 hover:scale-[1.01] hover:brightness-105 active:scale-[0.99] flex items-center justify-center gap-2 group relative z-10 shadow-lg"
                   style={{
-                    boxShadow: "0 8px 32px var(--accent-glow)",
+                    boxShadow: "0 8px 24px var(--accent-glow)",
                   }}
                 >
                   <span>{currentProduct.submitText}</span>
                   <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
                 </button>
 
-                <p className="text-[0.7rem] text-text-secondary/60 text-center leading-relaxed font-sans pt-1">
+                <p className="text-[0.72rem] text-slate-500 text-center leading-relaxed font-sans pt-1">
                   By continuing, you agree to our{" "}
-                  <Link href="/privacy" className="text-text-secondary underline hover:text-text-primary">
+                  <Link href="/privacy" className="text-slate-700 underline font-medium hover:text-slate-900">
                     Privacy Policy
                   </Link>{" "}
                   &amp;{" "}
-                  <Link href="/terms" className="text-text-secondary underline hover:text-text-primary">
+                  <Link href="/terms" className="text-slate-700 underline font-medium hover:text-slate-900">
                     Terms
                   </Link>
                   . We connect you with licensed advisors. Your data is encrypted &amp; never sold.
@@ -580,13 +580,13 @@ export default function Home() {
                 className="text-center py-10 space-y-4 relative z-10 font-sans"
               >
                 <div className="text-5xl">🎉</div>
-                <h3 className="font-display text-2xl font-bold text-text-primary">You're all set!</h3>
-                <p className="text-sm text-text-secondary leading-relaxed max-w-sm mx-auto">
+                <h3 className="font-display text-2xl font-bold text-slate-900">You're all set!</h3>
+                <p className="text-sm text-slate-600 leading-relaxed max-w-sm mx-auto">
                   A licensed advisor will call you within 2 hours. Keep your phone close. We have sent a confirmation details message to your mobile number.
                 </p>
                 <button
                   onClick={() => setIsSubmitted(false)}
-                  className="mt-6 border border-border-custom bg-white/5 text-text-primary text-xs font-semibold px-4 py-2 rounded-full cursor-pointer hover:bg-white/10 transition-all font-sans"
+                  className="mt-6 border border-slate-200 bg-slate-50 text-slate-800 text-xs font-semibold px-4 py-2 rounded-full cursor-pointer hover:bg-slate-100 transition-all font-sans"
                 >
                   Fill Another Request
                 </button>
@@ -625,7 +625,7 @@ export default function Home() {
       </section>
 
       {/* Marquee Bar with moving dots */}
-      <div className="marquee-bar bg-white/[0.02] border-y border-border-custom py-4 overflow-hidden relative z-10 backdrop-blur-sm">
+      <div className="marquee-bar bg-slate-50/80 border-y border-slate-200 py-4 overflow-hidden relative z-10 backdrop-blur-sm">
         <div className="marquee-track flex gap-12 w-max animate-marquee font-sans font-semibold text-[0.8rem] text-text-secondary tracking-wide uppercase">
           <span className="m-item flex items-center gap-2">
             <span className="m-dot"></span>100% Free Comparison Service
@@ -836,13 +836,13 @@ export default function Home() {
                 suppressHydrationWarning
                 key={cat.title}
                 onClick={() => handleExploreProduct(cat.tab as any)}
-                className="cat-card p-6 bg-background/50 border border-border-custom rounded-2xl cursor-pointer hover:border-accent-custom/40 hover:-translate-y-1 transition-all duration-300 group hover:shadow-lg shadow-black/10 text-left w-full block focus:outline-none relative overflow-hidden"
+                className="cat-card p-6 bg-white border border-slate-200/80 rounded-2xl cursor-pointer hover:border-accent-custom/40 hover:-translate-y-1 transition-all duration-300 group hover:shadow-xl shadow-slate-200/40 text-left w-full block focus:outline-none relative overflow-hidden"
               >
                 <div className="flex justify-between items-start mb-4">
-                  <div className="cat-icon w-12 h-12 rounded-xl bg-white/5 border border-border-custom flex items-center justify-center text-xl transition-colors duration-300">
+                  <div className="cat-icon w-12 h-12 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center text-xl transition-colors duration-300">
                     {cat.icon}
                   </div>
-                  <span className="text-[0.62rem] font-bold tracking-wider font-mono uppercase bg-white/5 border border-border-custom text-text-secondary px-2 py-0.5 rounded-full">
+                  <span className="text-[0.62rem] font-bold tracking-wider font-mono uppercase bg-slate-100 border border-slate-200 text-slate-600 px-2 py-0.5 rounded-full">
                     {cat.tag}
                   </span>
                 </div>
@@ -903,7 +903,7 @@ export default function Home() {
                   },
                 ].map((pillar) => (
                   <div key={pillar.title} className="pillar flex gap-5 py-6 items-start">
-                    <div className="pillar-ico w-10 h-10 rounded-xl bg-white/5 border border-border-custom flex items-center justify-center text-lg mt-0.5 shrink-0">
+                    <div className="pillar-ico w-10 h-10 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center text-lg mt-0.5 shrink-0">
                       {pillar.icon}
                     </div>
                     <div>
@@ -916,8 +916,8 @@ export default function Home() {
             </div>
 
             {/* Right Comparison Table */}
-            <div className="compare-table bg-surface border border-border-custom rounded-[20px] overflow-hidden backdrop-blur-md font-sans shadow-2xl">
-              <div className="compare-head grid grid-cols-[1.4fr_1fr_1fr] bg-background/40 border-b border-border-custom text-[0.72rem] font-bold tracking-wider uppercase font-mono">
+            <div className="compare-table bg-white border border-slate-200 rounded-[20px] overflow-hidden font-sans shadow-xl shadow-slate-200/40">
+              <div className="compare-head grid grid-cols-[1.4fr_1fr_1fr] bg-slate-50 border-b border-slate-200 text-[0.72rem] font-bold tracking-wider uppercase font-mono">
                 <div className="p-4 pl-5">Feature</div>
                 <div className="p-4 text-accent-custom transition-colors duration-500">InsurEdge</div>
                 <div className="p-4 text-text-secondary">Traditional Aggregators</div>
@@ -990,7 +990,7 @@ export default function Home() {
             ].map((rev, idx) => (
               <div
                 key={idx}
-                className="testi-card p-7 bg-background/50 border border-border-custom rounded-2xl flex flex-col justify-between hover:border-border-custom/80 transition-all hover:-translate-y-1 duration-200"
+                className="testi-card p-7 bg-white border border-slate-200/80 rounded-2xl flex flex-col justify-between hover:border-slate-300 transition-all hover:-translate-y-1 duration-200 shadow-sm hover:shadow-md"
               >
                 <div className="space-y-4">
                   <div className="text-yellow-500 text-sm tracking-wide">★★★★★</div>
@@ -1020,9 +1020,9 @@ export default function Home() {
 
       {/* Second Lead CTA Section */}
       <section className="cta2-section py-24 px-[5vw] relative z-10 text-center">
-        <div className="max-w-5xl mx-auto bg-surface/60 border border-border-custom rounded-[28px] p-10 md:p-16 relative overflow-hidden backdrop-blur-md shadow-2xl">
+        <div className="max-w-5xl mx-auto bg-white border border-slate-200/90 rounded-[28px] p-10 md:p-16 relative overflow-hidden shadow-xl shadow-slate-200/50">
           <div
-            className="absolute inset-0 pointer-events-none opacity-40"
+            className="absolute inset-0 pointer-events-none opacity-20"
             style={{
               background: "radial-gradient(ellipse 60% 70% at 50% 50%, var(--accent-glow) 0%, transparent 65%)",
             }}
@@ -1051,17 +1051,17 @@ export default function Home() {
                   value={ctaPhone}
                   disabled={ctaSubmitted}
                   onChange={(e) => setCtaPhone(e.target.value)}
-                  className={`flex-grow bg-white/5 border rounded-full px-6 py-3.5 text-sm outline-none transition-all placeholder:text-text-secondary/40 font-sans ${
+                  className={`flex-grow bg-slate-50 border rounded-full px-6 py-3.5 text-sm text-slate-900 outline-none transition-all placeholder:text-slate-400 font-sans shadow-sm ${
                     ctaSubmitted
-                      ? "border-emerald-500/30 text-emerald-400 placeholder:text-emerald-400/80 bg-emerald-500/5"
-                      : "border-border-custom focus:border-accent-custom focus:bg-white/8 focus:ring-4 focus:ring-accent-custom/10"
+                      ? "border-emerald-500/30 text-emerald-600 placeholder:text-emerald-600 bg-emerald-50"
+                      : "border-slate-200 focus:border-accent-custom focus:bg-white focus:ring-4 focus:ring-accent-custom/10"
                   }`}
                 />
                 <button
                   suppressHydrationWarning
                   type="submit"
                   disabled={ctaSubmitted}
-                  className="bg-accent-custom hover:opacity-90 disabled:opacity-80 disabled:cursor-not-allowed text-[#050816] font-display font-extrabold text-sm px-8 py-3.5 rounded-full shadow-[0_8px_28px_var(--accent-glow)] transition-all cursor-pointer flex items-center justify-center gap-1.5 whitespace-nowrap border-none"
+                  className="bg-accent-custom hover:opacity-90 disabled:opacity-80 disabled:cursor-not-allowed text-white font-display font-extrabold text-sm px-8 py-3.5 rounded-full shadow-[0_8px_24px_var(--accent-glow)] transition-all cursor-pointer flex items-center justify-center gap-1.5 whitespace-nowrap border-none"
                 >
                   {ctaSubmitted ? "Success" : "Get Callback"} &rarr;
                 </button>

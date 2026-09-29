@@ -50,8 +50,9 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-background text-text-primary transition-colors duration-300">
         <ThemeProvider
           attribute="class"
-          defaultTheme="dark"
-          enableSystem={true}
+          defaultTheme="light"
+          enableSystem={false}
+          storageKey="insuredge_theme"
           disableTransitionOnChange
         >
           <Navbar />

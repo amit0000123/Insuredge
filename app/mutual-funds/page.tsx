@@ -283,21 +283,21 @@ export default function MutualFundsPage() {
 
             {/* Right Card: Instant Quick Callback Form */}
             <div className="lg:col-span-5">
-              <div className="bg-surface/90 backdrop-blur-xl border border-border-custom rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden text-left">
+              <div className="bg-white border border-slate-200/90 rounded-3xl p-6 sm:p-8 shadow-xl shadow-slate-200/50 relative overflow-hidden text-left">
                 <div className="absolute top-0 right-0 w-36 h-36 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none" />
 
                 <div className="flex items-center justify-between mb-4">
-                  <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-bold font-mono">
+                  <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-600 text-xs font-bold font-mono">
                     <PhoneCall className="h-3.5 w-3.5" />
                     Quick Callback SLA
                   </div>
                   <span className="text-xs text-text-secondary font-mono">⚡ 2-Hour Response</span>
                 </div>
 
-                <h3 className="text-xl sm:text-2xl font-bold font-display text-text-primary mb-2">
+                <h3 className="text-xl sm:text-2xl font-bold font-display text-slate-900 mb-2">
                   Request a Free Callback
                 </h3>
-                <p className="text-xs sm:text-sm text-text-secondary mb-6 leading-relaxed">
+                <p className="text-xs sm:text-sm text-slate-600 mb-6 leading-relaxed">
                   Speak directly with an accredited mutual fund professional. Get honest answers in simple language.
                 </p>
 
@@ -318,7 +318,7 @@ export default function MutualFundsPage() {
                     </p>
                     <button
                       onClick={() => setCbSubmitted(false)}
-                      className="text-xs text-emerald-600 dark:text-emerald-400 font-bold underline hover:no-underline pt-2 cursor-pointer"
+                      className="text-xs text-emerald-600 font-bold underline hover:no-underline pt-2 cursor-pointer"
                     >
                       Submit another query
                     </button>
@@ -326,7 +326,7 @@ export default function MutualFundsPage() {
                 ) : (
                   <form onSubmit={handleCallbackSubmit} className="space-y-4">
                     <div>
-                      <label className="block text-xs font-bold uppercase tracking-wider text-text-secondary mb-1.5 font-mono">
+                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5 font-mono">
                         Your Full Name
                       </label>
                       <input
@@ -334,16 +334,16 @@ export default function MutualFundsPage() {
                         value={cbName}
                         onChange={(e) => setCbName(e.target.value)}
                         placeholder="e.g. Rahul Sharma"
-                        className="w-full px-4 py-3 rounded-xl bg-background border border-border-custom text-text-primary text-sm focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all"
+                        className="w-full px-4 py-3 rounded-xl bg-slate-50 hover:bg-slate-50/80 focus:bg-white border border-slate-200 text-slate-900 placeholder:text-slate-400 text-sm focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold uppercase tracking-wider text-text-secondary mb-1.5 font-mono">
+                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5 font-mono">
                         Mobile Number (WhatsApp Enabled)
                       </label>
                       <div className="relative">
-                        <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-xs font-semibold text-text-secondary font-mono">
+                        <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-xs font-semibold text-slate-500 font-mono">
                           +91
                         </span>
                         <input
@@ -352,19 +352,19 @@ export default function MutualFundsPage() {
                           value={cbPhone}
                           onChange={(e) => setCbPhone(e.target.value.replace(/\D/g, ""))}
                           placeholder="98765 43210"
-                          className="w-full pl-12 pr-4 py-3 rounded-xl bg-background border border-border-custom text-text-primary text-sm focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all font-mono"
+                          className="w-full pl-12 pr-4 py-3 rounded-xl bg-slate-50 hover:bg-slate-50/80 focus:bg-white border border-slate-200 text-slate-900 placeholder:text-slate-400 text-sm focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all font-mono"
                         />
                       </div>
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold uppercase tracking-wider text-text-secondary mb-1.5 font-mono">
+                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5 font-mono">
                         Primary Investment Objective
                       </label>
                       <select
                         value={cbGoal}
                         onChange={(e) => setCbGoal(e.target.value)}
-                        className="w-full px-4 py-3 rounded-xl bg-background border border-border-custom text-text-primary text-sm focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all cursor-pointer"
+                        className="w-full px-4 py-3 rounded-xl bg-slate-50 hover:bg-slate-50/80 focus:bg-white border border-slate-200 text-slate-900 text-sm focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all cursor-pointer"
                       >
                         <option value="First-time SIP">Starting my first SIP</option>
                         <option value="Portfolio Review">Review existing mutual fund portfolio</option>
