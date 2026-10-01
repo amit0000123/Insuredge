@@ -22,6 +22,7 @@ import {
   FileCheck2,
   Calendar,
   Grid,
+  BookOpen,
 } from "lucide-react";
 import { useTheme } from "next-themes";
 import { motion, AnimatePresence } from "framer-motion";
@@ -59,7 +60,7 @@ const navLinks = [
     href: "/mutual-funds",
     icon: TrendingUp,
     badge: "SIP & Wealth",
-    badgeColor: "bg-blue-500/10 text-blue-500 border-blue-500/20",
+    badgeColor: "bg-blue-500/10 text-blue-500 border-blue-200/20",
     category: "products",
     description: "Disciplined SIP & tax-saving strategies",
   },
@@ -79,6 +80,14 @@ const navLinks = [
     badgeColor: "bg-purple-500/10 text-purple-500 border-purple-500/20",
     category: "tools",
     description: "SIP, Term Cover & delay cost calculators",
+  },
+  {
+    name: "Blog",
+    href: "/blog",
+    icon: BookOpen,
+    badge: null,
+    category: "tools",
+    description: "Financial guides, tax & policy insights",
   },
   {
     name: "About Us",

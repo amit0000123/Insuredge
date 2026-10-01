@@ -8,6 +8,7 @@ import {
   TrendingUp,
   CheckCircle2,
   ArrowRight,
+  ChevronRight,
   ChevronDown,
   ChevronUp,
   PhoneCall,
@@ -31,6 +32,9 @@ import {
   ArrowUpRight,
   ShieldCheck,
   Coins,
+  BookOpen,
+  Clock,
+  Calendar,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -50,6 +54,72 @@ export default function Home() {
 
   // FAQ Accordion State
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
+
+  // Blog Tab State
+  const [selectedBlogTab, setSelectedBlogTab] = useState<string>("All");
+
+  const homeBlogArticles = [
+    {
+      id: "1",
+      title: "IRDAI New Term Insurance Guidelines — What Changes for You",
+      excerpt: "IRDAI's latest circular standardises exclusion clauses and mandates higher claim settlement disclosures across all Indian insurers.",
+      category: "Term Insurance",
+      author: "Amit Sharma",
+      date: "Jun 12, 2026",
+      readTime: "5 min read",
+      badgeColor: "bg-emerald-50 text-emerald-800 border-emerald-200/60",
+    },
+    {
+      id: "2",
+      title: "Section 80D Explained: Save Up to ₹75,000 in Tax on Health Insurance",
+      excerpt: "Complete guide to maximising tax deductions under Section 80D for yourself, your family, and senior citizen parents.",
+      category: "Tax Planning",
+      author: "Priya Nair",
+      date: "Jun 05, 2026",
+      readTime: "6 min read",
+      badgeColor: "bg-amber-50 text-amber-800 border-amber-200/60",
+    },
+    {
+      id: "3",
+      title: "SIP vs Lumpsum in 2026: Which Strategy Wins in a Volatile Market?",
+      excerpt: "A data-backed comparison of rupee cost averaging through SIP versus deploying lumpsum capital during volatile index phases.",
+      category: "Mutual Funds",
+      author: "Rahul Verma",
+      date: "May 28, 2026",
+      readTime: "7 min read",
+      badgeColor: "bg-blue-50 text-blue-800 border-blue-200/60",
+    },
+    {
+      id: "4",
+      title: "Critical Illness Riders: Are They Worth Adding to Your Term Plan?",
+      excerpt: "A detailed breakdown of Critical Illness riders — understanding accelerated vs standalone payouts and when they make financial sense.",
+      category: "Term Insurance",
+      author: "Amit Sharma",
+      date: "May 20, 2026",
+      readTime: "6 min read",
+      badgeColor: "bg-emerald-50 text-emerald-800 border-emerald-200/60",
+    },
+    {
+      id: "5",
+      title: "10 Hidden Health Insurance Exclusions You Must Know Before Buying",
+      excerpt: "From specific waiting periods to non-payable consumables and room rent sub-limits, understand what your health policy won't pay for.",
+      category: "Health Insurance",
+      author: "Dr. Sunita Rao",
+      date: "May 12, 2026",
+      readTime: "8 min read",
+      badgeColor: "bg-rose-50 text-rose-800 border-rose-200/60",
+    },
+    {
+      id: "6",
+      title: "Direct vs Regular Mutual Funds: How Much Are You Losing in Commissions?",
+      excerpt: "Learn how the expense ratio difference between Direct and Regular mutual fund plans compounds into lakhs over a 15-year horizon.",
+      category: "Mutual Funds",
+      author: "Rahul Verma",
+      date: "Apr 28, 2026",
+      readTime: "5 min read",
+      badgeColor: "bg-blue-50 text-blue-800 border-blue-200/60",
+    },
+  ];
 
   const enquiryFormRef = useRef<HTMLDivElement>(null);
 
@@ -1159,6 +1229,102 @@ export default function Home() {
                 </div>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* ========================================================================= */}
+        {/* FINANCIAL INSIGHTS & BLOG SECTION */}
+        {/* ========================================================================= */}
+        <section className="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="text-center max-w-3xl mx-auto mb-12 space-y-4">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600 font-mono block">
+              Knowledge &amp; Insights
+            </span>
+            <h2 className="text-2xl sm:text-4xl font-display font-extrabold text-slate-900 tracking-tight">
+              Latest Financial Guides &amp; Articles
+            </h2>
+            <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+              Clear, jargon-free explanations to help you navigate insurance policies, tax benefits, and wealth creation strategies.
+            </p>
+
+            {/* Category Filter Pills */}
+            <div className="flex flex-wrap items-center justify-center gap-2 pt-4">
+              {["All", "Term Insurance", "Health Insurance", "Mutual Funds", "Tax Planning"].map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setSelectedBlogTab(cat)}
+                  className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
+                    selectedBlogTab === cat
+                      ? "bg-emerald-600 text-white shadow-sm"
+                      : "bg-white border border-slate-200 text-slate-600 hover:text-slate-900 hover:border-slate-300"
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {homeBlogArticles
+              .filter((art) => selectedBlogTab === "All" || art.category === selectedBlogTab)
+              .map((article) => (
+                <article
+                  key={article.id}
+                  className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-7 flex flex-col justify-between shadow-xs hover:border-emerald-300 hover:shadow-md transition-all text-left group"
+                >
+                  <div className="space-y-3.5">
+                    <div className="flex items-center justify-between text-xs">
+                      <span className={`px-2.5 py-1 rounded-lg border font-bold uppercase tracking-wider font-mono text-[10px] ${article.badgeColor}`}>
+                        {article.category}
+                      </span>
+                      <span className="flex items-center gap-1 text-slate-400 font-medium text-[11px]">
+                        <Clock className="w-3 h-3" />
+                        {article.readTime}
+                      </span>
+                    </div>
+
+                    <h3 className="text-lg font-bold font-display text-slate-900 leading-snug group-hover:text-emerald-700 transition-colors">
+                      {article.title}
+                    </h3>
+
+                    <p className="text-slate-600 text-xs sm:text-sm leading-relaxed line-clamp-3">
+                      {article.excerpt}
+                    </p>
+                  </div>
+
+                  <div className="pt-5 border-t border-slate-100 mt-6 flex items-center justify-between">
+                    <div>
+                      <p className="text-xs font-bold text-slate-900">
+                        {article.author}
+                      </p>
+                      <p className="text-[11px] text-slate-400">
+                        {article.date}
+                      </p>
+                    </div>
+
+                    <Link
+                      href="/blog"
+                      className="text-xs font-bold text-emerald-700 hover:text-emerald-800 inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform"
+                    >
+                      <span>Read Guide</span>
+                      <ChevronRight className="w-4 h-4" />
+                    </Link>
+                  </div>
+                </article>
+              ))}
+          </div>
+
+          {/* View All Guides CTA */}
+          <div className="mt-12 text-center">
+            <Link
+              href="/blog"
+              className="inline-flex items-center gap-2 px-7 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold rounded-xl transition-all shadow-sm hover:shadow"
+            >
+              <BookOpen className="w-4 h-4" />
+              <span>Explore All Guides in Knowledge Hub</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
         </section>
 
