@@ -414,10 +414,10 @@ export default function BlogPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] text-slate-900 font-sans selection:bg-emerald-500 selection:text-white">
+    <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#050816] text-slate-900 dark:text-slate-100 font-sans selection:bg-emerald-500 selection:text-white transition-colors duration-300">
       {/* Background Soft Glow */}
       <div className="fixed inset-0 pointer-events-none z-0">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[450px] bg-gradient-to-b from-emerald-50/50 via-blue-50/30 to-transparent blur-3xl" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[450px] bg-gradient-to-b from-emerald-50/50 via-blue-50/30 to-transparent dark:from-emerald-950/20 dark:via-blue-950/10 blur-3xl" />
       </div>
 
       <div className="relative z-10">
@@ -425,12 +425,12 @@ export default function BlogPage() {
         {/* TOP OWNER / ADMIN ACCESS BAR */}
         {/* ========================================================================= */}
         <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-6 flex justify-between items-center">
-          <div className="flex items-center space-x-2 text-xs font-semibold uppercase tracking-wider text-slate-400 font-mono">
-            <Link href="/" className="hover:text-emerald-700 transition-colors">
+          <div className="flex items-center space-x-2 text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500 font-mono">
+            <Link href="/" className="hover:text-emerald-700 dark:hover:text-emerald-400 transition-colors">
               Home
             </Link>
             <ChevronRight className="h-3 w-3" />
-            <span className="text-slate-700">Blog &amp; Knowledge Hub</span>
+            <span className="text-slate-700 dark:text-slate-300">Blog &amp; Knowledge Hub</span>
           </div>
 
           <div className="flex items-center gap-3">
@@ -445,7 +445,7 @@ export default function BlogPage() {
                 </button>
                 <button
                   onClick={() => setIsOwnerMode(false)}
-                  className="px-3 py-2 bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 text-xs font-bold rounded-xl inline-flex items-center gap-1.5 transition-colors cursor-pointer"
+                  className="px-3 py-2 bg-rose-50 dark:bg-rose-950/40 hover:bg-rose-100 dark:hover:bg-rose-900/50 text-rose-700 dark:text-rose-400 border border-rose-200 dark:border-rose-800/50 text-xs font-bold rounded-xl inline-flex items-center gap-1.5 transition-colors cursor-pointer"
                 >
                   <Lock className="w-3 h-3" />
                   <span>Exit Owner Mode</span>
@@ -454,10 +454,10 @@ export default function BlogPage() {
             ) : (
               <button
                 onClick={() => setShowPinModal(true)}
-                className="px-3.5 py-1.5 bg-white border border-slate-200 hover:border-emerald-300 hover:bg-emerald-50/40 text-slate-600 hover:text-emerald-800 text-xs font-semibold rounded-xl inline-flex items-center gap-1.5 transition-all shadow-xs cursor-pointer"
+                className="px-3.5 py-1.5 bg-white dark:bg-[#0B1120] border border-slate-200 dark:border-slate-800 hover:border-emerald-300 dark:hover:border-emerald-700 hover:bg-emerald-50/40 dark:hover:bg-emerald-950/40 text-slate-600 dark:text-slate-300 hover:text-emerald-800 dark:hover:text-emerald-400 text-xs font-semibold rounded-xl inline-flex items-center gap-1.5 transition-all shadow-xs cursor-pointer"
                 title="Publish or manage blogs as owner"
               >
-                <KeyRound className="w-3.5 h-3.5 text-emerald-600" />
+                <KeyRound className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
                 <span>Owner Portal</span>
               </button>
             )}
@@ -509,16 +509,16 @@ export default function BlogPage() {
         {/* HERO / HEADER SECTION */}
         {/* ========================================================================= */}
         <section className="pt-10 sm:pt-14 pb-10 sm:pb-14 px-4 sm:px-6 max-w-6xl mx-auto text-center space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200/80 text-emerald-800 text-xs sm:text-sm font-semibold shadow-xs">
-            <BookOpen className="w-4 h-4 text-emerald-600" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200/80 dark:border-emerald-800/60 text-emerald-800 dark:text-emerald-400 text-xs sm:text-sm font-semibold shadow-xs">
+            <BookOpen className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
             <span>InsurEdge Knowledge Hub</span>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-display font-extrabold text-slate-950 tracking-tight leading-[1.15]">
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-display font-extrabold text-slate-950 dark:text-white tracking-tight leading-[1.15]">
             Financial Guides &amp; Insights
           </h1>
 
-          <p className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed">
             Practical, jargon-free guides to help you make informed decisions across Term Insurance, Health Insurance, and Mutual Funds.
           </p>
 
@@ -532,12 +532,12 @@ export default function BlogPage() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search articles, guides, topics (e.g. 80D, riders, SIP, exclusions)..."
-                className="w-full bg-white border border-slate-200 rounded-2xl py-3.5 pl-12 pr-4 text-slate-900 placeholder:text-slate-400 text-sm shadow-xs focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500 transition-all"
+                className="w-full bg-white dark:bg-[#0B1120] border border-slate-200 dark:border-slate-800 rounded-2xl py-3.5 pl-12 pr-4 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 text-sm shadow-xs focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500 transition-all"
               />
               {searchQuery && (
                 <button
                   onClick={() => setSearchQuery("")}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 text-xs font-semibold"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-xs font-semibold cursor-pointer"
                 >
                   Clear
                 </button>
@@ -553,7 +553,7 @@ export default function BlogPage() {
                   className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
                     selectedCategory === cat
                       ? "bg-emerald-600 text-white shadow-sm"
-                      : "bg-white border border-slate-200 text-slate-600 hover:text-slate-900 hover:border-slate-300"
+                      : "bg-white dark:bg-[#0B1120] border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:border-slate-300 dark:hover:border-slate-700"
                   }`}
                 >
                   {cat}
@@ -568,13 +568,13 @@ export default function BlogPage() {
         {/* ========================================================================= */}
         {selectedCategory === "All" && !searchQuery && featuredArticle && (
           <section className="py-4 px-4 sm:px-6 max-w-6xl mx-auto">
-            <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-10 shadow-xs hover:border-emerald-300 transition-all text-left relative">
+            <div className="bg-white dark:bg-[#0B1120] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-10 shadow-xs hover:border-emerald-300 dark:hover:border-emerald-700/60 transition-all text-left relative">
               <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold uppercase tracking-wider font-mono">
-                  <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-400 text-xs font-bold uppercase tracking-wider font-mono">
+                  <Sparkles className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
                   Featured Guide
                 </span>
-                <div className="flex items-center gap-4 text-xs text-slate-500 font-medium">
+                <div className="flex items-center gap-4 text-xs text-slate-500 dark:text-slate-400 font-medium">
                   <span className="flex items-center gap-1.5">
                     <Calendar className="w-3.5 h-3.5" />
                     {featuredArticle.date}
@@ -586,24 +586,24 @@ export default function BlogPage() {
                 </div>
               </div>
 
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-display font-extrabold text-slate-950 tracking-tight mb-4">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-display font-extrabold text-slate-950 dark:text-white tracking-tight mb-4">
                 {featuredArticle.title}
               </h2>
 
-              <p className="text-slate-600 text-base sm:text-lg leading-relaxed mb-6 max-w-3xl">
+              <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed mb-6 max-w-3xl">
                 {featuredArticle.excerpt}
               </p>
 
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-6 border-t border-slate-100">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-6 border-t border-slate-100 dark:border-slate-800">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-emerald-100 text-emerald-800 font-bold flex items-center justify-center font-display text-sm">
+                  <div className="w-10 h-10 rounded-full bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-400 font-bold flex items-center justify-center font-display text-sm">
                     {featuredArticle.author.charAt(0)}
                   </div>
                   <div>
-                    <p className="text-sm font-bold text-slate-900">
+                    <p className="text-sm font-bold text-slate-900 dark:text-white">
                       {featuredArticle.author}
                     </p>
-                    <p className="text-xs text-slate-500">
+                    <p className="text-xs text-slate-500 dark:text-slate-400">
                       {featuredArticle.authorRole}
                     </p>
                   </div>
@@ -613,7 +613,7 @@ export default function BlogPage() {
                   {isOwnerMode && (
                     <button
                       onClick={() => handleOpenEditArticle(featuredArticle)}
-                      className="px-4 py-2 border border-slate-200 hover:border-slate-300 text-slate-700 text-xs font-bold rounded-xl inline-flex items-center gap-1 cursor-pointer"
+                      className="px-4 py-2 border border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600 text-slate-700 dark:text-slate-300 text-xs font-bold rounded-xl inline-flex items-center gap-1 cursor-pointer"
                     >
                       <Edit3 className="w-3.5 h-3.5" />
                       <span>Edit</span>
@@ -637,9 +637,9 @@ export default function BlogPage() {
         {/* ========================================================================= */}
         <section className="py-10 sm:py-14 px-4 sm:px-6 max-w-6xl mx-auto">
           <div className="flex items-center justify-between mb-8">
-            <h2 className="text-xl sm:text-2xl font-display font-extrabold text-slate-900">
+            <h2 className="text-xl sm:text-2xl font-display font-extrabold text-slate-900 dark:text-white">
               {selectedCategory === "All" ? "All Articles" : `${selectedCategory} Articles`}
-              <span className="text-sm font-normal text-slate-500 ml-2">
+              <span className="text-sm font-normal text-slate-500 dark:text-slate-400 ml-2">
                 ({filteredArticles.length})
               </span>
             </h2>
@@ -656,10 +656,10 @@ export default function BlogPage() {
           </div>
 
           {filteredArticles.length === 0 ? (
-            <div className="text-center py-16 bg-white border border-slate-200 rounded-3xl p-8 space-y-3">
+            <div className="text-center py-16 bg-white dark:bg-[#0B1120] border border-slate-200 dark:border-slate-800 rounded-3xl p-8 space-y-3">
               <BookOpen className="w-10 h-10 text-slate-400 mx-auto" />
-              <p className="text-slate-800 font-bold text-lg">No articles found</p>
-              <p className="text-slate-500 text-sm max-w-md mx-auto">
+              <p className="text-slate-800 dark:text-white font-bold text-lg">No articles found</p>
+              <p className="text-slate-500 dark:text-slate-400 text-sm max-w-md mx-auto">
                 No articles matched your search or category filter. Try clearing your search term.
               </p>
               <button
@@ -677,34 +677,34 @@ export default function BlogPage() {
               {filteredArticles.map((article) => (
                 <article
                   key={article.id}
-                  className="bg-white border border-slate-200 rounded-3xl p-6 flex flex-col justify-between shadow-xs hover:border-emerald-300 hover:shadow-md transition-all text-left group relative"
+                  className="bg-white dark:bg-[#0B1120] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 flex flex-col justify-between shadow-xs hover:border-emerald-300 dark:hover:border-emerald-700/60 hover:shadow-md transition-all text-left group relative"
                 >
                   <div className="space-y-3.5">
                     <div className="flex items-center justify-between text-xs">
-                      <span className="px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-800 font-bold uppercase tracking-wider font-mono text-[10px]">
+                      <span className="px-2.5 py-1 rounded-lg bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-400 font-bold uppercase tracking-wider font-mono text-[10px]">
                         {article.category}
                       </span>
-                      <span className="flex items-center gap-1 text-slate-400 font-medium text-[11px]">
+                      <span className="flex items-center gap-1 text-slate-400 dark:text-slate-500 font-medium text-[11px]">
                         <Clock className="w-3 h-3" />
                         {article.readTime}
                       </span>
                     </div>
 
-                    <h3 className="text-lg font-bold font-display text-slate-900 leading-snug group-hover:text-emerald-700 transition-colors">
+                    <h3 className="text-lg font-bold font-display text-slate-900 dark:text-white leading-snug group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors">
                       {article.title}
                     </h3>
 
-                    <p className="text-slate-600 text-xs sm:text-sm leading-relaxed line-clamp-3">
+                    <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm leading-relaxed line-clamp-3">
                       {article.excerpt}
                     </p>
                   </div>
 
-                  <div className="pt-5 border-t border-slate-100 mt-6 flex items-center justify-between">
+                  <div className="pt-5 border-t border-slate-100 dark:border-slate-800 mt-6 flex items-center justify-between">
                     <div>
-                      <p className="text-xs font-bold text-slate-900">
+                      <p className="text-xs font-bold text-slate-900 dark:text-white">
                         {article.author}
                       </p>
-                      <p className="text-[11px] text-slate-400">
+                      <p className="text-[11px] text-slate-400 dark:text-slate-500">
                         {article.date}
                       </p>
                     </div>
@@ -714,14 +714,14 @@ export default function BlogPage() {
                         <>
                           <button
                             onClick={() => handleOpenEditArticle(article)}
-                            className="p-1.5 rounded-lg text-slate-500 hover:text-emerald-700 hover:bg-emerald-50 transition-colors cursor-pointer"
+                            className="p-1.5 rounded-lg text-slate-500 dark:text-slate-400 hover:text-emerald-700 dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-colors cursor-pointer"
                             title="Edit this post"
                           >
                             <Edit3 className="w-3.5 h-3.5" />
                           </button>
                           <button
                             onClick={() => handleDeleteArticle(article.id, article.title)}
-                            className="p-1.5 rounded-lg text-slate-500 hover:text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer"
+                            className="p-1.5 rounded-lg text-slate-500 dark:text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40 transition-colors cursor-pointer"
                             title="Delete this post"
                           >
                             <Trash2 className="w-3.5 h-3.5" />
@@ -730,7 +730,7 @@ export default function BlogPage() {
                       )}
                       <button
                         onClick={() => setActiveArticle(article)}
-                        className="text-xs font-bold text-emerald-700 hover:text-emerald-800 inline-flex items-center gap-1 cursor-pointer pl-1"
+                        className="text-xs font-bold text-emerald-700 dark:text-emerald-400 hover:text-emerald-800 dark:hover:text-emerald-300 inline-flex items-center gap-1 cursor-pointer pl-1"
                       >
                         <span>Read</span>
                         <ChevronRight className="w-4 h-4" />
@@ -754,19 +754,19 @@ export default function BlogPage() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 onClick={() => setActiveArticle(null)}
-                className="fixed inset-0 bg-slate-950/60 backdrop-blur-xs"
+                className="fixed inset-0 bg-slate-950/70 dark:bg-black/80 backdrop-blur-xs"
               />
 
               <motion.div
                 initial={{ opacity: 0, scale: 0.95, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                className="relative bg-white border border-slate-200 rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 sm:p-10 z-10 text-left"
+                className="relative bg-white dark:bg-[#0B1120] border border-slate-200 dark:border-slate-800 rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 sm:p-10 z-10 text-left"
               >
                 {/* Close Button */}
                 <button
                   onClick={() => setActiveArticle(null)}
-                  className="absolute top-6 right-6 p-2 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 hover:text-slate-900 transition-colors cursor-pointer"
+                  className="absolute top-6 right-6 p-2 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer"
                   aria-label="Close article modal"
                 >
                   <X className="w-5 h-5" />
@@ -775,33 +775,33 @@ export default function BlogPage() {
                 {/* Article Header */}
                 <div className="space-y-4 mb-8 pr-12">
                   <div className="flex flex-wrap items-center gap-3 text-xs">
-                    <span className="px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 font-bold uppercase tracking-wider font-mono">
+                    <span className="px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-400 font-bold uppercase tracking-wider font-mono">
                       {activeArticle.category}
                     </span>
                     <span className="text-slate-400">•</span>
-                    <span className="text-slate-500 font-medium">
+                    <span className="text-slate-500 dark:text-slate-400 font-medium">
                       {activeArticle.date}
                     </span>
                     <span className="text-slate-400">•</span>
-                    <span className="text-slate-500 font-medium">
+                    <span className="text-slate-500 dark:text-slate-400 font-medium">
                       {activeArticle.readTime}
                     </span>
                   </div>
 
-                  <h2 className="text-2xl sm:text-3xl lg:text-4xl font-display font-extrabold text-slate-950 leading-tight">
+                  <h2 className="text-2xl sm:text-3xl lg:text-4xl font-display font-extrabold text-slate-950 dark:text-white leading-tight">
                     {activeArticle.title}
                   </h2>
 
-                  <div className="flex items-center justify-between pt-4 border-t border-slate-100">
+                  <div className="flex items-center justify-between pt-4 border-t border-slate-100 dark:border-slate-800">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-emerald-100 text-emerald-800 font-bold flex items-center justify-center font-display text-sm">
+                      <div className="w-10 h-10 rounded-full bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-400 font-bold flex items-center justify-center font-display text-sm">
                         {activeArticle.author.charAt(0)}
                       </div>
                       <div>
-                        <p className="text-sm font-bold text-slate-900">
+                        <p className="text-sm font-bold text-slate-900 dark:text-white">
                           {activeArticle.author}
                         </p>
-                        <p className="text-xs text-slate-500">
+                        <p className="text-xs text-slate-500 dark:text-slate-400">
                           {activeArticle.authorRole}
                         </p>
                       </div>
@@ -809,7 +809,7 @@ export default function BlogPage() {
 
                     <button
                       onClick={() => handleShare(activeArticle)}
-                      className="px-3.5 py-1.5 rounded-xl border border-slate-200 hover:border-slate-300 text-slate-600 hover:text-slate-900 text-xs font-semibold inline-flex items-center gap-1.5 transition-colors cursor-pointer"
+                      className="px-3.5 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white text-xs font-semibold inline-flex items-center gap-1.5 transition-colors cursor-pointer"
                     >
                       <Share2 className="w-3.5 h-3.5" />
                       <span>{copiedLink ? "Link Copied!" : "Share"}</span>
@@ -819,15 +819,15 @@ export default function BlogPage() {
 
                 {/* Key Takeaways Box */}
                 {activeArticle.takeaways && activeArticle.takeaways.length > 0 && (
-                  <div className="mb-8 p-5 rounded-2xl bg-emerald-50/80 border border-emerald-200/80 space-y-2.5">
-                    <div className="flex items-center gap-2 font-display font-bold text-sm text-emerald-950">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <div className="mb-8 p-5 rounded-2xl bg-emerald-50/80 dark:bg-emerald-950/40 border border-emerald-200/80 dark:border-emerald-800/50 space-y-2.5">
+                    <div className="flex items-center gap-2 font-display font-bold text-sm text-emerald-950 dark:text-emerald-200">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
                       <span>Key Takeaways</span>
                     </div>
-                    <ul className="space-y-1.5 text-xs sm:text-sm text-emerald-900">
+                    <ul className="space-y-1.5 text-xs sm:text-sm text-emerald-900 dark:text-emerald-300">
                       {activeArticle.takeaways.map((point, idx) => (
                         <li key={idx} className="flex items-start gap-2">
-                          <span className="text-emerald-600 font-bold">•</span>
+                          <span className="text-emerald-600 dark:text-emerald-400 font-bold">•</span>
                           <span>{point}</span>
                         </li>
                       ))}
@@ -836,19 +836,19 @@ export default function BlogPage() {
                 )}
 
                 {/* Article Content */}
-                <div className="prose prose-slate max-w-none text-slate-700 text-sm sm:text-base leading-relaxed space-y-4">
+                <div className="prose dark:prose-invert prose-slate max-w-none text-slate-700 dark:text-slate-300 text-sm sm:text-base leading-relaxed space-y-4">
                   {activeArticle.content.split("\n\n").map((para, i) => (
                     <p key={i}>{para}</p>
                   ))}
                 </div>
 
                 {/* Bottom CTA within Article */}
-                <div className="mt-10 pt-6 border-t border-slate-200/80 flex flex-col sm:flex-row items-center justify-between gap-4 bg-[#F8FAFC] p-6 rounded-2xl">
+                <div className="mt-10 pt-6 border-t border-slate-200/80 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 bg-[#F8FAFC] dark:bg-[#050816] p-6 rounded-2xl">
                   <div>
-                    <h4 className="font-display font-bold text-slate-900 text-sm">
+                    <h4 className="font-display font-bold text-slate-900 dark:text-white text-sm">
                       Need Personalized Guidance?
                     </h4>
-                    <p className="text-xs text-slate-500">
+                    <p className="text-xs text-slate-500 dark:text-slate-400">
                       Connect with a certified professional to discuss your requirements.
                     </p>
                   </div>
@@ -884,25 +884,25 @@ export default function BlogPage() {
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
-                className="relative bg-white border border-slate-200 rounded-3xl max-w-md w-full p-6 sm:p-8 z-10 shadow-2xl text-left space-y-5"
+                className="relative bg-white dark:bg-[#0B1120] border border-slate-200 dark:border-slate-800 rounded-3xl max-w-md w-full p-6 sm:p-8 z-10 shadow-2xl text-left space-y-5"
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2.5">
-                    <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center">
+                    <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400 flex items-center justify-center">
                       <KeyRound className="w-5 h-5" />
                     </div>
                     <div>
-                      <h3 className="font-display font-bold text-lg text-slate-900">
+                      <h3 className="font-display font-bold text-lg text-slate-900 dark:text-white">
                         Owner Authentication
                       </h3>
-                      <p className="text-xs text-slate-500">
+                      <p className="text-xs text-slate-500 dark:text-slate-400">
                         Enter owner PIN to publish &amp; edit blogs
                       </p>
                     </div>
                   </div>
                   <button
                     onClick={() => setShowPinModal(false)}
-                    className="p-1.5 rounded-full hover:bg-slate-100 text-slate-400 hover:text-slate-700"
+                    className="p-1.5 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400 hover:text-slate-700 dark:hover:text-slate-200"
                   >
                     <X className="w-4 h-4" />
                   </button>
@@ -910,7 +910,7 @@ export default function BlogPage() {
 
                 <form onSubmit={handlePinSubmit} className="space-y-4">
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1.5">
                       Owner PIN / Password
                     </label>
                     <input
@@ -922,15 +922,15 @@ export default function BlogPage() {
                         setPinError("");
                       }}
                       placeholder="Enter 1234 or admin"
-                      className="w-full bg-[#F8FAFC] border border-slate-200 rounded-xl py-3 px-4 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500"
+                      className="w-full bg-[#F8FAFC] dark:bg-[#111827] border border-slate-200 dark:border-slate-700 rounded-xl py-3 px-4 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500"
                     />
                     {pinError && (
-                      <p className="text-xs text-rose-600 font-semibold mt-1.5">
+                      <p className="text-xs text-rose-600 dark:text-rose-400 font-semibold mt-1.5">
                         {pinError}
                       </p>
                     )}
-                    <p className="text-[11px] text-slate-400 mt-1">
-                      Default owner PIN is <code className="text-emerald-700 font-bold bg-emerald-50 px-1 py-0.5 rounded">1234</code>
+                    <p className="text-[11px] text-slate-400 dark:text-slate-400 mt-1">
+                      Default owner PIN is <code className="text-emerald-700 dark:text-emerald-400 font-bold bg-emerald-50 dark:bg-emerald-950/60 px-1 py-0.5 rounded">1234</code>
                     </p>
                   </div>
 
@@ -938,7 +938,7 @@ export default function BlogPage() {
                     <button
                       type="button"
                       onClick={() => setShowPinModal(false)}
-                      className="px-4 py-2.5 rounded-xl border border-slate-200 text-slate-600 text-xs font-semibold hover:bg-slate-50 cursor-pointer"
+                      className="px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 text-xs font-semibold hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer"
                     >
                       Cancel
                     </button>
@@ -973,26 +973,26 @@ export default function BlogPage() {
                 initial={{ opacity: 0, scale: 0.95, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                className="relative bg-white border border-slate-200 rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 sm:p-8 z-10 text-left space-y-6"
+                className="relative bg-white dark:bg-[#0B1120] border border-slate-200 dark:border-slate-800 rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 sm:p-8 z-10 text-left space-y-6"
               >
                 {/* Modal Header */}
-                <div className="flex items-center justify-between pb-4 border-b border-slate-100">
+                <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center font-bold">
+                    <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400 flex items-center justify-center font-bold">
                       <FileText className="w-5 h-5" />
                     </div>
                     <div>
-                      <h3 className="font-display font-extrabold text-xl text-slate-900">
+                      <h3 className="font-display font-extrabold text-xl text-slate-900 dark:text-white">
                         {editingArticleId ? "Edit Article" : "Write New Blog Post"}
                       </h3>
-                      <p className="text-xs text-slate-500">
+                      <p className="text-xs text-slate-500 dark:text-slate-400">
                         Publish your own financial guide or insurance post to InsurEdge
                       </p>
                     </div>
                   </div>
                   <button
                     onClick={() => setShowEditorModal(false)}
-                    className="p-2 rounded-full hover:bg-slate-100 text-slate-400 hover:text-slate-700 cursor-pointer"
+                    className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 cursor-pointer"
                   >
                     <X className="w-5 h-5" />
                   </button>
@@ -1000,8 +1000,8 @@ export default function BlogPage() {
 
                 {/* Success alert */}
                 {formSuccessMessage && (
-                  <div className="p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold flex items-center gap-2">
-                    <Check className="w-4 h-4 text-emerald-600" />
+                  <div className="p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800/60 text-emerald-800 dark:text-emerald-300 text-xs font-bold flex items-center gap-2">
+                    <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
                     <span>{formSuccessMessage}</span>
                   </div>
                 )}
@@ -1010,7 +1010,7 @@ export default function BlogPage() {
                 <form onSubmit={handleSaveArticle} className="space-y-4">
                   {/* Article Title */}
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1.5">
                       Article Title *
                     </label>
                     <input
@@ -1019,27 +1019,27 @@ export default function BlogPage() {
                       value={formTitle}
                       onChange={(e) => setFormTitle(e.target.value)}
                       placeholder="e.g. 5 Hidden Exclusions in Health Insurance You Must Know"
-                      className="w-full bg-[#F8FAFC] border border-slate-200 rounded-xl py-3 px-4 text-slate-900 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500"
+                      className="w-full bg-[#F8FAFC] dark:bg-[#111827] border border-slate-200 dark:border-slate-700 rounded-xl py-3 px-4 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500"
                     />
                   </div>
 
                   {/* Category & Read Time Grid */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                      <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1.5">
                         Category *
                       </label>
                       <select
                         value={formCategory}
                         onChange={(e) => setFormCategory(e.target.value)}
-                        className="w-full bg-[#F8FAFC] border border-slate-200 rounded-xl py-3 px-4 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500"
+                        className="w-full bg-[#F8FAFC] dark:bg-[#111827] border border-slate-200 dark:border-slate-700 rounded-xl py-3 px-4 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500"
                       >
                         {PREDEFINED_CATEGORIES.map((cat) => (
-                          <option key={cat} value={cat}>
+                          <option key={cat} value={cat} className="dark:bg-[#111827] dark:text-white">
                             {cat}
                           </option>
                         ))}
-                        <option value="Custom">+ Custom Category...</option>
+                        <option value="Custom" className="dark:bg-[#111827] dark:text-white">+ Custom Category...</option>
                       </select>
                       {formCategory === "Custom" && (
                         <input
@@ -1048,13 +1048,13 @@ export default function BlogPage() {
                           value={formCustomCategory}
                           onChange={(e) => setFormCustomCategory(e.target.value)}
                           placeholder="Type custom category name"
-                          className="mt-2 w-full bg-[#F8FAFC] border border-slate-200 rounded-xl py-2 px-3 text-xs"
+                          className="mt-2 w-full bg-[#F8FAFC] dark:bg-[#111827] border border-slate-200 dark:border-slate-700 rounded-xl py-2 px-3 text-xs text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500"
                         />
                       )}
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                      <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1.5">
                         Estimated Read Time
                       </label>
                       <input
@@ -1062,7 +1062,7 @@ export default function BlogPage() {
                         value={formReadTime}
                         onChange={(e) => setFormReadTime(e.target.value)}
                         placeholder="e.g. 5 min read"
-                        className="w-full bg-[#F8FAFC] border border-slate-200 rounded-xl py-3 px-4 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500"
+                        className="w-full bg-[#F8FAFC] dark:bg-[#111827] border border-slate-200 dark:border-slate-700 rounded-xl py-3 px-4 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500"
                       />
                     </div>
                   </div>
@@ -1070,7 +1070,7 @@ export default function BlogPage() {
                   {/* Author Details Grid */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                      <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1.5">
                         Author Name
                       </label>
                       <input
@@ -1078,12 +1078,12 @@ export default function BlogPage() {
                         value={formAuthor}
                         onChange={(e) => setFormAuthor(e.target.value)}
                         placeholder="e.g. Harsh (Founder) or Amit Sharma"
-                        className="w-full bg-[#F8FAFC] border border-slate-200 rounded-xl py-3 px-4 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500"
+                        className="w-full bg-[#F8FAFC] dark:bg-[#111827] border border-slate-200 dark:border-slate-700 rounded-xl py-3 px-4 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                      <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1.5">
                         Author Role / Bio
                       </label>
                       <input
@@ -1091,14 +1091,14 @@ export default function BlogPage() {
                         value={formAuthorRole}
                         onChange={(e) => setFormAuthorRole(e.target.value)}
                         placeholder="e.g. Founder &amp; Advisory Specialist"
-                        className="w-full bg-[#F8FAFC] border border-slate-200 rounded-xl py-3 px-4 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500"
+                        className="w-full bg-[#F8FAFC] dark:bg-[#111827] border border-slate-200 dark:border-slate-700 rounded-xl py-3 px-4 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500"
                       />
                     </div>
                   </div>
 
                   {/* Excerpt / Summary */}
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1.5">
                       Short Excerpt (Displayed on Cards)
                     </label>
                     <textarea
@@ -1106,13 +1106,13 @@ export default function BlogPage() {
                       value={formExcerpt}
                       onChange={(e) => setFormExcerpt(e.target.value)}
                       placeholder="Brief 1-2 sentence teaser to hook readers on the cards..."
-                      className="w-full bg-[#F8FAFC] border border-slate-200 rounded-xl py-2.5 px-4 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500"
+                      className="w-full bg-[#F8FAFC] dark:bg-[#111827] border border-slate-200 dark:border-slate-700 rounded-xl py-2.5 px-4 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500"
                     />
                   </div>
 
                   {/* Key Takeaways (One per line) */}
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1.5">
                       Key Takeaways (1 bullet per line)
                     </label>
                     <textarea
@@ -1120,13 +1120,13 @@ export default function BlogPage() {
                       value={formTakeaways}
                       onChange={(e) => setFormTakeaways(e.target.value)}
                       placeholder="Point 1: Always check room rent sublimits&#10;Point 2: Never hide pre-existing medical conditions&#10;Point 3: Compare settlement ratios"
-                      className="w-full bg-[#F8FAFC] border border-slate-200 rounded-xl py-2.5 px-4 text-slate-900 text-sm font-mono text-xs focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500"
+                      className="w-full bg-[#F8FAFC] dark:bg-[#111827] border border-slate-200 dark:border-slate-700 rounded-xl py-2.5 px-4 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 text-sm font-mono text-xs focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500"
                     />
                   </div>
 
                   {/* Main Article Content */}
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1.5">
                       Full Article Body Content *
                     </label>
                     <textarea
@@ -1135,7 +1135,7 @@ export default function BlogPage() {
                       value={formContent}
                       onChange={(e) => setFormContent(e.target.value)}
                       placeholder="Write your article here. Separate paragraphs with an empty line..."
-                      className="w-full bg-[#F8FAFC] border border-slate-200 rounded-xl py-3 px-4 text-slate-900 text-sm leading-relaxed focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500"
+                      className="w-full bg-[#F8FAFC] dark:bg-[#111827] border border-slate-200 dark:border-slate-700 rounded-xl py-3 px-4 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 text-sm leading-relaxed focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500"
                     />
                   </div>
 
@@ -1146,22 +1146,22 @@ export default function BlogPage() {
                       id="formFeatured"
                       checked={formFeatured}
                       onChange={(e) => setFormFeatured(e.target.checked)}
-                      className="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500"
+                      className="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 dark:bg-slate-900 dark:border-slate-700"
                     />
                     <label
                       htmlFor="formFeatured"
-                      className="text-xs font-semibold text-slate-700 cursor-pointer select-none"
+                      className="text-xs font-semibold text-slate-700 dark:text-slate-300 cursor-pointer select-none"
                     >
                       Feature this article as the Hero / Top Spotlight Guide
                     </label>
                   </div>
 
                   {/* Form Actions */}
-                  <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-100">
+                  <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-100 dark:border-slate-800">
                     <button
                       type="button"
                       onClick={() => setShowEditorModal(false)}
-                      className="px-5 py-2.5 rounded-xl border border-slate-200 text-slate-600 text-xs font-semibold hover:bg-slate-50 cursor-pointer"
+                      className="px-5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 text-xs font-semibold hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer"
                     >
                       Cancel
                     </button>
@@ -1182,15 +1182,15 @@ export default function BlogPage() {
         {/* ========================================================================= */}
         {/* BOTTOM CALL TO ACTION */}
         {/* ========================================================================= */}
-        <section className="py-16 bg-white border-t border-slate-200">
+        <section className="py-16 bg-white dark:bg-[#0B1120] border-t border-slate-200 dark:border-slate-800">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center space-y-6">
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600 font-mono block">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600 dark:text-emerald-400 font-mono block">
               Start The Conversation
             </span>
-            <h2 className="text-3xl sm:text-4xl font-display font-extrabold text-slate-900 tracking-tight">
+            <h2 className="text-3xl sm:text-4xl font-display font-extrabold text-slate-900 dark:text-white tracking-tight">
               Ready to Explore Your Options?
             </h2>
-            <p className="text-slate-600 text-base max-w-xl mx-auto leading-relaxed">
+            <p className="text-slate-600 dark:text-slate-300 text-base max-w-xl mx-auto leading-relaxed">
               Tell us what you're looking for, and we'll connect you with a relevant financial specialist across India.
             </p>
             <div className="pt-2">
@@ -1202,7 +1202,7 @@ export default function BlogPage() {
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
-            <p className="text-xs text-slate-400 font-medium">
+            <p className="text-xs text-slate-400 dark:text-slate-400 font-medium">
               Free enquiry • No charges • No obligation
             </p>
           </div>

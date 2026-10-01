@@ -67,7 +67,7 @@ export default function Home() {
       author: "Amit Sharma",
       date: "Jun 12, 2026",
       readTime: "5 min read",
-      badgeColor: "bg-emerald-50 text-emerald-800 border-emerald-200/60",
+      badgeColor: "bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-400 border-emerald-200/60 dark:border-emerald-800/60",
     },
     {
       id: "2",
@@ -77,7 +77,7 @@ export default function Home() {
       author: "Priya Nair",
       date: "Jun 05, 2026",
       readTime: "6 min read",
-      badgeColor: "bg-amber-50 text-amber-800 border-amber-200/60",
+      badgeColor: "bg-amber-50 dark:bg-amber-950/60 text-amber-800 dark:text-amber-400 border-amber-200/60 dark:border-amber-800/60",
     },
     {
       id: "3",
@@ -87,7 +87,7 @@ export default function Home() {
       author: "Rahul Verma",
       date: "May 28, 2026",
       readTime: "7 min read",
-      badgeColor: "bg-blue-50 text-blue-800 border-blue-200/60",
+      badgeColor: "bg-blue-50 dark:bg-blue-950/60 text-blue-800 dark:text-blue-400 border-blue-200/60 dark:border-blue-800/60",
     },
     {
       id: "4",
@@ -97,7 +97,7 @@ export default function Home() {
       author: "Amit Sharma",
       date: "May 20, 2026",
       readTime: "6 min read",
-      badgeColor: "bg-emerald-50 text-emerald-800 border-emerald-200/60",
+      badgeColor: "bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-400 border-emerald-200/60 dark:border-emerald-800/60",
     },
     {
       id: "5",
@@ -107,7 +107,7 @@ export default function Home() {
       author: "Dr. Sunita Rao",
       date: "May 12, 2026",
       readTime: "8 min read",
-      badgeColor: "bg-rose-50 text-rose-800 border-rose-200/60",
+      badgeColor: "bg-rose-50 dark:bg-rose-950/60 text-rose-800 dark:text-rose-400 border-rose-200/60 dark:border-rose-800/60",
     },
     {
       id: "6",
@@ -117,7 +117,7 @@ export default function Home() {
       author: "Rahul Verma",
       date: "Apr 28, 2026",
       readTime: "5 min read",
-      badgeColor: "bg-blue-50 text-blue-800 border-blue-200/60",
+      badgeColor: "bg-blue-50 dark:bg-blue-950/60 text-blue-800 dark:text-blue-400 border-blue-200/60 dark:border-blue-800/60",
     },
   ];
 
@@ -140,12 +140,12 @@ export default function Home() {
               readTime: a.readTime,
               badgeColor:
                 a.category === "Health Insurance"
-                  ? "bg-rose-50 text-rose-800 border-rose-200/60"
+                  ? "bg-rose-50 dark:bg-rose-950/60 text-rose-800 dark:text-rose-400 border-rose-200/60 dark:border-rose-800/60"
                   : a.category === "Mutual Funds"
-                  ? "bg-blue-50 text-blue-800 border-blue-200/60"
+                  ? "bg-blue-50 dark:bg-blue-950/60 text-blue-800 dark:text-blue-400 border-blue-200/60 dark:border-blue-800/60"
                   : a.category === "Tax Planning"
-                  ? "bg-amber-50 text-amber-800 border-amber-200/60"
-                  : "bg-emerald-50 text-emerald-800 border-emerald-200/60",
+                  ? "bg-amber-50 dark:bg-amber-950/60 text-amber-800 dark:text-amber-400 border-amber-200/60 dark:border-amber-800/60"
+                  : "bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-400 border-emerald-200/60 dark:border-emerald-800/60",
             }))
           );
         }
@@ -239,10 +239,10 @@ export default function Home() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] text-slate-900 font-sans selection:bg-emerald-500 selection:text-white">
+    <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#050816] text-slate-900 dark:text-slate-100 font-sans selection:bg-emerald-500 selection:text-white transition-colors duration-300">
       {/* Background Subtle Ambience */}
       <div className="fixed inset-0 pointer-events-none z-0">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[600px] bg-gradient-to-b from-blue-50/70 via-emerald-50/30 to-transparent blur-3xl" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[600px] bg-gradient-to-b from-blue-50/70 via-emerald-50/30 to-transparent dark:from-blue-950/20 dark:via-emerald-950/10 blur-3xl" />
       </div>
 
       <div className="relative z-10">
@@ -253,24 +253,24 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
             {/* Left Content */}
             <div className="lg:col-span-7 text-left space-y-6">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200/80 text-emerald-800 text-xs sm:text-sm font-semibold shadow-xs">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200/80 dark:border-emerald-800/60 text-emerald-800 dark:text-emerald-400 text-xs sm:text-sm font-semibold shadow-xs">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                 <span>India-Wide Professional Connect Platform</span>
               </div>
 
-              <h1 className="text-3xl sm:text-5xl lg:text-[3.5rem] font-display font-extrabold text-slate-950 tracking-tight leading-[1.12]">
+              <h1 className="text-3xl sm:text-5xl lg:text-[3.5rem] font-display font-extrabold text-slate-950 dark:text-white tracking-tight leading-[1.12]">
                 Find the Right Insurance &amp; Investment Professional in India
               </h1>
 
-              <p className="text-lg sm:text-xl font-semibold text-emerald-800 font-display">
+              <p className="text-lg sm:text-xl font-semibold text-emerald-800 dark:text-emerald-400 font-display">
                 Get connected for Term Insurance, Health Insurance and Mutual Funds
               </p>
 
-              <p className="text-slate-600 text-sm sm:text-base leading-relaxed max-w-2xl">
+              <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed max-w-2xl">
                 Looking for the right professional to help you understand your insurance or investment options? InsurEdge connects customers across India with relevant insurance and investment professionals based on their requirements.
               </p>
 
-              <p className="text-slate-600 text-sm sm:text-base leading-relaxed max-w-2xl">
+              <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed max-w-2xl">
                 Tell us what you're looking for, share a few basic details, and we'll help connect you with a suitable professional from our partner network.
               </p>
 
@@ -284,19 +284,19 @@ export default function Home() {
                   <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
                 </button>
 
-                <div className="flex items-center gap-3 text-xs sm:text-sm text-slate-500 font-medium">
+                <div className="flex items-center gap-3 text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-medium">
                   <span className="inline-flex items-center gap-1.5">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
                     Simple enquiry
                   </span>
                   <span>·</span>
                   <span className="inline-flex items-center gap-1.5">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
                     No charge
                   </span>
                   <span>·</span>
                   <span className="inline-flex items-center gap-1.5">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
                     India-wide
                   </span>
                 </div>
@@ -305,22 +305,22 @@ export default function Home() {
 
             {/* Right Quick Preview Card */}
             <div className="lg:col-span-5">
-              <div className="bg-white border border-slate-200/90 rounded-3xl p-6 sm:p-8 shadow-xl shadow-slate-200/60 relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-36 h-36 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none" />
+              <div className="bg-white dark:bg-[#0B1120] border border-slate-200/90 dark:border-slate-800 rounded-3xl p-6 sm:p-8 shadow-xl shadow-slate-200/60 dark:shadow-black/40 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-36 h-36 bg-emerald-500/10 dark:bg-emerald-500/5 rounded-full blur-2xl pointer-events-none" />
 
                 <div className="flex items-center justify-between mb-4">
-                  <span className="text-xs font-bold uppercase tracking-wider text-slate-500 font-mono">
+                  <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 font-mono">
                     Instant Connect
                   </span>
-                  <span className="px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-xs font-bold font-mono">
+                  <span className="px-2.5 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400 text-xs font-bold font-mono">
                     100% Free Service
                   </span>
                 </div>
 
-                <h3 className="text-xl font-bold font-display text-slate-900 mb-2">
+                <h3 className="text-xl font-bold font-display text-slate-900 dark:text-white mb-2">
                   Tell Us What You Need
                 </h3>
-                <p className="text-xs text-slate-500 mb-6 leading-relaxed">
+                <p className="text-xs text-slate-500 dark:text-slate-400 mb-6 leading-relaxed">
                   Select your priority and get connected with an accredited professional within 2 hours.
                 </p>
 
@@ -329,51 +329,51 @@ export default function Home() {
                     {
                       name: "Term Insurance",
                       desc: "Pure protection life cover for your family",
-                      icon: <Shield className="w-5 h-5 text-indigo-600" />,
-                      color: "border-indigo-100 hover:border-indigo-300 hover:bg-indigo-50/30",
+                      icon: <Shield className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />,
+                      color: "border-indigo-100 hover:border-indigo-300 hover:bg-indigo-50/30 dark:border-slate-800 dark:hover:border-indigo-700/60 dark:hover:bg-indigo-950/20",
                     },
                     {
                       name: "Health Insurance",
                       desc: "Comprehensive cashless hospitalisation coverage",
-                      icon: <HeartPulse className="w-5 h-5 text-rose-600" />,
-                      color: "border-rose-100 hover:border-rose-300 hover:bg-rose-50/30",
+                      icon: <HeartPulse className="w-5 h-5 text-rose-600 dark:text-rose-400" />,
+                      color: "border-rose-100 hover:border-rose-300 hover:bg-rose-50/30 dark:border-slate-800 dark:hover:border-rose-700/60 dark:hover:bg-rose-950/20",
                     },
                     {
                       name: "Mutual Funds",
                       desc: "SIP & wealth creation aligned with your goals",
-                      icon: <TrendingUp className="w-5 h-5 text-emerald-600" />,
-                      color: "border-emerald-100 hover:border-emerald-300 hover:bg-emerald-50/30",
+                      icon: <TrendingUp className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />,
+                      color: "border-emerald-100 hover:border-emerald-300 hover:bg-emerald-50/30 dark:border-slate-800 dark:hover:border-emerald-700/60 dark:hover:bg-emerald-950/20",
                     },
                   ].map((item) => (
                     <button
                       key={item.name}
                       onClick={() => scrollToEnquiry(item.name)}
-                      className={`w-full p-3.5 rounded-2xl border bg-white flex items-center justify-between text-left transition-all cursor-pointer group shadow-xs ${item.color}`}
+                      className={`w-full p-3.5 rounded-2xl border bg-white dark:bg-[#111827] flex items-center justify-between text-left transition-all cursor-pointer group shadow-xs ${item.color}`}
                     >
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center shrink-0">
+                        <div className="w-10 h-10 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-100 dark:border-slate-700 flex items-center justify-center shrink-0">
                           {item.icon}
                         </div>
                         <div>
-                          <h4 className="text-sm font-bold text-slate-900 group-hover:text-emerald-700 transition-colors">
+                          <h4 className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors">
                             {item.name}
                           </h4>
-                          <p className="text-xs text-slate-500 leading-tight">
+                          <p className="text-xs text-slate-500 dark:text-slate-400 leading-tight">
                             {item.desc}
                           </p>
                         </div>
                       </div>
-                      <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-emerald-600 group-hover:translate-x-0.5 transition-all shrink-0" />
+                      <ArrowRight className="w-4 h-4 text-slate-400 dark:text-slate-500 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 group-hover:translate-x-0.5 transition-all shrink-0" />
                     </button>
                   ))}
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
                   <span className="flex items-center gap-1.5">
-                    <Lock className="w-3.5 h-3.5 text-slate-400" />
+                    <Lock className="w-3.5 h-3.5 text-slate-400 dark:text-slate-500" />
                     Your data is confidential &amp; encrypted
                   </span>
-                  <span className="font-bold text-emerald-600 font-mono">Verified Advisors</span>
+                  <span className="font-bold text-emerald-600 dark:text-emerald-400 font-mono">Verified Advisors</span>
                 </div>
               </div>
             </div>
@@ -383,47 +383,47 @@ export default function Home() {
         {/* ========================================================================= */}
         {/* WHAT FINANCIAL SOLUTION ARE YOU LOOKING FOR? */}
         {/* ========================================================================= */}
-        <section className="py-16 sm:py-24 bg-white border-y border-slate-200/80">
+        <section className="py-16 sm:py-24 bg-white dark:bg-[#0B1120] border-y border-slate-200/80 dark:border-slate-800/80">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
             <div className="text-center max-w-3xl mx-auto mb-14 space-y-4">
-              <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600 font-mono block">
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600 dark:text-emerald-400 font-mono block">
                 Financial Categories
               </span>
-              <h2 className="text-2xl sm:text-4xl font-display font-extrabold text-slate-900 tracking-tight">
+              <h2 className="text-2xl sm:text-4xl font-display font-extrabold text-slate-900 dark:text-white tracking-tight">
                 What Financial Solution Are You Looking For?
               </h2>
-              <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+              <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
                 Whether you want to protect your family, prepare for healthcare expenses, or start investing for your financial goals, InsurEdge gives you a simple place to begin.
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {/* Term Insurance Card */}
-              <div className="bg-[#F8FAFC] border border-slate-200 rounded-3xl p-6 sm:p-8 flex flex-col justify-between hover:shadow-xl hover:shadow-slate-200/60 hover:-translate-y-1 transition-all duration-300">
+              <div className="bg-[#F8FAFC] dark:bg-[#050816] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 flex flex-col justify-between hover:shadow-xl hover:shadow-slate-200/60 dark:hover:shadow-black/50 hover:-translate-y-1 transition-all duration-300">
                 <div className="space-y-4">
-                  <div className="w-12 h-12 rounded-2xl bg-indigo-50 border border-indigo-100 text-indigo-600 flex items-center justify-center">
+                  <div className="w-12 h-12 rounded-2xl bg-indigo-50 dark:bg-indigo-950/50 border border-indigo-100 dark:border-indigo-800/50 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
                     <Shield className="w-6 h-6" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold font-display text-slate-900 mb-1">
+                    <h3 className="text-xl font-bold font-display text-slate-900 dark:text-white mb-1">
                       Term Insurance
                     </h3>
-                    <p className="text-xs font-semibold text-indigo-600 font-mono">
+                    <p className="text-xs font-semibold text-indigo-600 dark:text-indigo-400 font-mono">
                       Protect your family's financial future with life insurance.
                     </p>
                   </div>
-                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
                     Term insurance provides life cover for a specified policy period. If you're considering term insurance, a relevant insurance professional can help you understand coverage requirements, policy features, premiums, exclusions, and other important terms.
                   </p>
-                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
                     Whether you're buying term insurance for the first time or reviewing your existing life cover, start by telling us what you need.
                   </p>
                 </div>
 
-                <div className="pt-6 mt-6 border-t border-slate-200/80">
+                <div className="pt-6 mt-6 border-t border-slate-200/80 dark:border-slate-800">
                   <Link
                     href="/term-insurance"
-                    className="inline-flex items-center gap-2 text-sm font-bold text-indigo-600 hover:text-indigo-800 transition-colors group"
+                    className="inline-flex items-center gap-2 text-sm font-bold text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 transition-colors group"
                   >
                     <span>Explore Term Insurance</span>
                     <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -432,31 +432,31 @@ export default function Home() {
               </div>
 
               {/* Health Insurance Card */}
-              <div className="bg-[#F8FAFC] border border-slate-200 rounded-3xl p-6 sm:p-8 flex flex-col justify-between hover:shadow-xl hover:shadow-slate-200/60 hover:-translate-y-1 transition-all duration-300">
+              <div className="bg-[#F8FAFC] dark:bg-[#050816] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 flex flex-col justify-between hover:shadow-xl hover:shadow-slate-200/60 dark:hover:shadow-black/50 hover:-translate-y-1 transition-all duration-300">
                 <div className="space-y-4">
-                  <div className="w-12 h-12 rounded-2xl bg-rose-50 border border-rose-100 text-rose-600 flex items-center justify-center">
+                  <div className="w-12 h-12 rounded-2xl bg-rose-50 dark:bg-rose-950/50 border border-rose-100 dark:border-rose-800/50 text-rose-600 dark:text-rose-400 flex items-center justify-center">
                     <HeartPulse className="w-6 h-6" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold font-display text-slate-900 mb-1">
+                    <h3 className="text-xl font-bold font-display text-slate-900 dark:text-white mb-1">
                       Health Insurance
                     </h3>
-                    <p className="text-xs font-semibold text-rose-600 font-mono">
+                    <p className="text-xs font-semibold text-rose-600 dark:text-rose-400 font-mono">
                       Find health insurance options for yourself and your family.
                     </p>
                   </div>
-                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
                     Health insurance can help cover eligible medical and hospitalisation expenses according to the policy's terms, conditions, limits, exclusions, and waiting periods.
                   </p>
-                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
                     If you're looking for individual health insurance, family health insurance, senior citizen health insurance, or want to review your existing coverage, you can connect with a relevant professional through InsurEdge.
                   </p>
                 </div>
 
-                <div className="pt-6 mt-6 border-t border-slate-200/80">
+                <div className="pt-6 mt-6 border-t border-slate-200/80 dark:border-slate-800">
                   <Link
                     href="/health-insurance"
-                    className="inline-flex items-center gap-2 text-sm font-bold text-rose-600 hover:text-rose-800 transition-colors group"
+                    className="inline-flex items-center gap-2 text-sm font-bold text-rose-600 dark:text-rose-400 hover:text-rose-800 dark:hover:text-rose-300 transition-colors group"
                   >
                     <span>Explore Health Insurance</span>
                     <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -465,31 +465,31 @@ export default function Home() {
               </div>
 
               {/* Mutual Funds Card */}
-              <div className="bg-[#F8FAFC] border border-slate-200 rounded-3xl p-6 sm:p-8 flex flex-col justify-between hover:shadow-xl hover:shadow-slate-200/60 hover:-translate-y-1 transition-all duration-300">
+              <div className="bg-[#F8FAFC] dark:bg-[#050816] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 flex flex-col justify-between hover:shadow-xl hover:shadow-slate-200/60 dark:hover:shadow-black/50 hover:-translate-y-1 transition-all duration-300">
                 <div className="space-y-4">
-                  <div className="w-12 h-12 rounded-2xl bg-emerald-50 border border-emerald-100 text-emerald-600 flex items-center justify-center">
+                  <div className="w-12 h-12 rounded-2xl bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-100 dark:border-emerald-800/50 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
                     <TrendingUp className="w-6 h-6" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold font-display text-slate-900 mb-1">
+                    <h3 className="text-xl font-bold font-display text-slate-900 dark:text-white mb-1">
                       Mutual Funds
                     </h3>
-                    <p className="text-xs font-semibold text-emerald-700 font-mono">
+                    <p className="text-xs font-semibold text-emerald-700 dark:text-emerald-400 font-mono">
                       Explore mutual fund investment options based on your goals.
                     </p>
                   </div>
-                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
                     Mutual funds allow investors to participate in professionally managed investment portfolios, but all investments are subject to market risks.
                   </p>
-                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
                     If you're considering starting a SIP, investing for a long-term goal, or simply want to understand mutual funds better, InsurEdge can connect you with an appropriate investment professional.
                   </p>
                 </div>
 
-                <div className="pt-6 mt-6 border-t border-slate-200/80">
+                <div className="pt-6 mt-6 border-t border-slate-200/80 dark:border-slate-800">
                   <Link
                     href="/mutual-funds"
-                    className="inline-flex items-center gap-2 text-sm font-bold text-emerald-700 hover:text-emerald-900 transition-colors group"
+                    className="inline-flex items-center gap-2 text-sm font-bold text-emerald-700 dark:text-emerald-400 hover:text-emerald-900 dark:hover:text-emerald-300 transition-colors group"
                   >
                     <span>Explore Mutual Funds</span>
                     <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -505,16 +505,16 @@ export default function Home() {
         {/* ========================================================================= */}
         <section className="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600 font-mono block">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600 dark:text-emerald-400 font-mono block">
               Simple 5-Step Process
             </span>
-            <h2 className="text-2xl sm:text-4xl font-display font-extrabold text-slate-900 tracking-tight">
+            <h2 className="text-2xl sm:text-4xl font-display font-extrabold text-slate-900 dark:text-white tracking-tight">
               How InsurEdge Helps
             </h2>
-            <p className="text-lg font-semibold text-emerald-800 font-display">
+            <p className="text-lg font-semibold text-emerald-800 dark:text-emerald-400 font-display">
               A simpler way to start your financial journey
             </p>
-            <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+            <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
               Finding the right insurance or investment professional can be difficult when you don't know where to begin. InsurEdge makes the first step simpler.
             </p>
           </div>
@@ -549,16 +549,16 @@ export default function Home() {
             ].map((item) => (
               <div
                 key={item.step}
-                className="bg-white border border-slate-200 rounded-2xl p-6 text-left relative flex flex-col justify-between shadow-xs hover:border-emerald-300 hover:shadow-md transition-all"
+                className="bg-white dark:bg-[#0B1120] border border-slate-200 dark:border-slate-800 rounded-2xl p-6 text-left relative flex flex-col justify-between shadow-xs hover:border-emerald-300 dark:hover:border-emerald-700/60 hover:shadow-md transition-all"
               >
                 <div>
-                  <div className="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 font-display font-extrabold flex items-center justify-center text-sm mb-4">
+                  <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800/60 text-emerald-700 dark:text-emerald-400 font-display font-extrabold flex items-center justify-center text-sm mb-4">
                     {item.step}
                   </div>
-                  <h3 className="text-base font-bold font-display text-slate-900 mb-2">
+                  <h3 className="text-base font-bold font-display text-slate-900 dark:text-white mb-2">
                     {item.title}
                   </h3>
-                  <p className="text-xs text-slate-600 leading-relaxed">
+                  <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
                     {item.desc}
                   </p>
                 </div>
@@ -569,7 +569,7 @@ export default function Home() {
           <div className="mt-12 text-center">
             <button
               onClick={() => scrollToEnquiry()}
-              className="px-8 py-3.5 bg-slate-900 hover:bg-slate-800 text-white font-display font-bold text-sm rounded-xl cursor-pointer shadow-md hover:shadow-lg transition-all inline-flex items-center gap-2"
+              className="px-8 py-3.5 bg-slate-900 hover:bg-slate-800 dark:bg-emerald-600 dark:hover:bg-emerald-700 text-white font-display font-bold text-sm rounded-xl cursor-pointer shadow-md hover:shadow-lg transition-all inline-flex items-center gap-2"
             >
               <span>Submit Your Enquiry</span>
               <ArrowRight className="w-4 h-4" />
@@ -580,16 +580,16 @@ export default function Home() {
         {/* ========================================================================= */}
         {/* WHY CHOOSE INSUREDGE? */}
         {/* ========================================================================= */}
-        <section className="py-16 sm:py-24 bg-white border-y border-slate-200/80">
+        <section className="py-16 sm:py-24 bg-white dark:bg-[#0B1120] border-y border-slate-200/80 dark:border-slate-800/80">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
             <div className="text-center max-w-3xl mx-auto mb-14 space-y-4">
-              <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600 font-mono block">
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600 dark:text-emerald-400 font-mono block">
                 Platform Advantages
               </span>
-              <h2 className="text-2xl sm:text-4xl font-display font-extrabold text-slate-900 tracking-tight">
+              <h2 className="text-2xl sm:text-4xl font-display font-extrabold text-slate-900 dark:text-white tracking-tight">
                 Why Choose InsurEdge?
               </h2>
-              <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+              <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
                 One place to start for insurance and investment enquiries
               </p>
             </div>
@@ -599,45 +599,45 @@ export default function Home() {
                 {
                   title: "Relevant Professional Connections",
                   desc: "We aim to connect your enquiry with a professional whose area of work is relevant to your requirement.",
-                  icon: <Users className="w-5 h-5 text-indigo-600" />,
+                  icon: <Users className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />,
                 },
                 {
                   title: "Simple Process",
                   desc: "You don't need to understand complicated financial terminology before getting started. Tell us what you're looking for and take the first step.",
-                  icon: <CheckCircle2 className="w-5 h-5 text-emerald-600" />,
+                  icon: <CheckCircle2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />,
                 },
                 {
                   title: "Multiple Financial Categories",
                   desc: "Get started with enquiries related to Term Insurance, Health Insurance, and Mutual Funds all under one unified platform.",
-                  icon: <Coins className="w-5 h-5 text-amber-600" />,
+                  icon: <Coins className="w-5 h-5 text-amber-600 dark:text-amber-400" />,
                 },
                 {
                   title: "India-Wide Network",
                   desc: "InsurEdge is designed to connect customers with professionals across India, subject to partner availability in the customer's location.",
-                  icon: <MapPin className="w-5 h-5 text-rose-600" />,
+                  icon: <MapPin className="w-5 h-5 text-rose-600 dark:text-rose-400" />,
                 },
                 {
                   title: "Transparent Role",
                   desc: "InsurEdge is a lead-generation and professional-connect platform. We help facilitate the connection between customers and relevant professionals.",
-                  icon: <Scale className="w-5 h-5 text-blue-600" />,
+                  icon: <Scale className="w-5 h-5 text-blue-600 dark:text-blue-400" />,
                 },
                 {
                   title: "No Charge to Submit an Enquiry",
                   desc: "There is no charge to submit an enquiry through InsurEdge. InsurEdge may receive a lead-generation or referral fee from participating advisors, distributors, or other partners.",
-                  icon: <ShieldCheck className="w-5 h-5 text-emerald-600" />,
+                  icon: <ShieldCheck className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />,
                 },
               ].map((item) => (
                 <div
                   key={item.title}
-                  className="bg-[#F8FAFC] border border-slate-200 rounded-2xl p-6 text-left space-y-3 shadow-xs hover:border-slate-300 transition-all"
+                  className="bg-[#F8FAFC] dark:bg-[#050816] border border-slate-200 dark:border-slate-800 rounded-2xl p-6 text-left space-y-3 shadow-xs hover:border-slate-300 dark:hover:border-slate-700 transition-all"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-white border border-slate-200/80 flex items-center justify-center shrink-0">
+                  <div className="w-10 h-10 rounded-xl bg-white dark:bg-[#111827] border border-slate-200/80 dark:border-slate-700/80 flex items-center justify-center shrink-0">
                     {item.icon}
                   </div>
-                  <h3 className="text-base font-bold font-display text-slate-900">
+                  <h3 className="text-base font-bold font-display text-slate-900 dark:text-white">
                     {item.title}
                   </h3>
-                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
                     {item.desc}
                   </p>
                 </div>
@@ -651,33 +651,33 @@ export default function Home() {
         {/* ========================================================================= */}
         <section className="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center max-w-3xl mx-auto mb-14 space-y-4">
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600 font-mono block">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600 dark:text-emerald-400 font-mono block">
               Requirement-Based Guidance
             </span>
-            <h2 className="text-2xl sm:text-4xl font-display font-extrabold text-slate-900 tracking-tight">
+            <h2 className="text-2xl sm:text-4xl font-display font-extrabold text-slate-900 dark:text-white tracking-tight">
               Insurance &amp; Investment Help Based on Your Requirement
             </h2>
-            <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+            <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
               Different stages in life demand specialized conversations. Here is what an experienced professional can walk you through.
             </p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Term Insurance Checklist */}
-            <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-xs hover:shadow-lg transition-all">
+            <div className="bg-white dark:bg-[#0B1120] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-xs hover:shadow-lg transition-all">
               <div className="space-y-5">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold">
+                  <div className="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-bold">
                     <Shield className="w-5 h-5" />
                   </div>
-                  <h3 className="text-xl font-bold font-display text-slate-900">
+                  <h3 className="text-xl font-bold font-display text-slate-900 dark:text-white">
                     Looking for Term Insurance?
                   </h3>
                 </div>
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
                   Your financial responsibilities can change as your career, family, income, and financial commitments change. A term insurance professional can help you understand factors such as:
                 </p>
-                <ul className="space-y-2.5 text-xs sm:text-sm text-slate-700">
+                <ul className="space-y-2.5 text-xs sm:text-sm text-slate-700 dark:text-slate-300">
                   {[
                     "Life cover requirements",
                     "Policy duration",
@@ -689,17 +689,17 @@ export default function Home() {
                     "Existing insurance coverage evaluation",
                   ].map((pt) => (
                     <li key={pt} className="flex items-start gap-2">
-                      <Check className="w-4 h-4 text-indigo-600 shrink-0 mt-0.5" />
+                      <Check className="w-4 h-4 text-indigo-600 dark:text-indigo-400 shrink-0 mt-0.5" />
                       <span>{pt}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
-              <div className="pt-6 mt-6 border-t border-slate-100">
+              <div className="pt-6 mt-6 border-t border-slate-100 dark:border-slate-800">
                 <Link
                   href="/term-insurance"
-                  className="text-xs sm:text-sm font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5"
+                  className="text-xs sm:text-sm font-bold text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 flex items-center gap-1.5"
                 >
                   <span>Learn More About Term Insurance</span>
                   <ArrowRight className="w-4 h-4" />
@@ -708,20 +708,20 @@ export default function Home() {
             </div>
 
             {/* Health Insurance Checklist */}
-            <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-xs hover:shadow-lg transition-all">
+            <div className="bg-white dark:bg-[#0B1120] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-xs hover:shadow-lg transition-all">
               <div className="space-y-5">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center font-bold">
+                  <div className="w-10 h-10 rounded-xl bg-rose-50 dark:bg-rose-950/50 text-rose-600 dark:text-rose-400 flex items-center justify-center font-bold">
                     <HeartPulse className="w-5 h-5" />
                   </div>
-                  <h3 className="text-xl font-bold font-display text-slate-900">
+                  <h3 className="text-xl font-bold font-display text-slate-900 dark:text-white">
                     Looking for Health Insurance?
                   </h3>
                 </div>
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
                   Healthcare expenses can be unpredictable, which is why understanding health insurance coverage before you need it can be important. Depending on your requirements, you may want to understand:
                 </p>
-                <ul className="space-y-2.5 text-xs sm:text-sm text-slate-700">
+                <ul className="space-y-2.5 text-xs sm:text-sm text-slate-700 dark:text-slate-300">
                   {[
                     "Individual health insurance",
                     "Family floater health insurance",
@@ -734,17 +734,17 @@ export default function Home() {
                     "Policy exclusions & restorative benefits",
                   ].map((pt) => (
                     <li key={pt} className="flex items-start gap-2">
-                      <Check className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
+                      <Check className="w-4 h-4 text-rose-600 dark:text-rose-400 shrink-0 mt-0.5" />
                       <span>{pt}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
-              <div className="pt-6 mt-6 border-t border-slate-100">
+              <div className="pt-6 mt-6 border-t border-slate-100 dark:border-slate-800">
                 <Link
                   href="/health-insurance"
-                  className="text-xs sm:text-sm font-bold text-rose-600 hover:text-rose-800 flex items-center gap-1.5"
+                  className="text-xs sm:text-sm font-bold text-rose-600 dark:text-rose-400 hover:text-rose-800 dark:hover:text-rose-300 flex items-center gap-1.5"
                 >
                   <span>Learn More About Health Insurance</span>
                   <ArrowRight className="w-4 h-4" />
@@ -753,20 +753,20 @@ export default function Home() {
             </div>
 
             {/* Mutual Funds Checklist */}
-            <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-xs hover:shadow-lg transition-all">
+            <div className="bg-white dark:bg-[#0B1120] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-xs hover:shadow-lg transition-all">
               <div className="space-y-5">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold">
+                  <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold">
                     <TrendingUp className="w-5 h-5" />
                   </div>
-                  <h3 className="text-xl font-bold font-display text-slate-900">
+                  <h3 className="text-xl font-bold font-display text-slate-900 dark:text-white">
                     Looking to Invest in Mutual Funds?
                   </h3>
                 </div>
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
                   Before investing, it's important to understand your financial goals, investment horizon, risk tolerance, and the characteristics of the investment product. A relevant investment professional can discuss:
                 </p>
-                <ul className="space-y-2.5 text-xs sm:text-sm text-slate-700">
+                <ul className="space-y-2.5 text-xs sm:text-sm text-slate-700 dark:text-slate-300">
                   {[
                     "SIP (Systematic Investment Plan) structure",
                     "Lump-sum investment options",
@@ -778,17 +778,17 @@ export default function Home() {
                     "Long-term financial milestones",
                   ].map((pt) => (
                     <li key={pt} className="flex items-start gap-2">
-                      <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                      <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
                       <span>{pt}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
-              <div className="pt-6 mt-6 border-t border-slate-100">
+              <div className="pt-6 mt-6 border-t border-slate-100 dark:border-slate-800">
                 <Link
                   href="/mutual-funds"
-                  className="text-xs sm:text-sm font-bold text-emerald-700 hover:text-emerald-900 flex items-center gap-1.5"
+                  className="text-xs sm:text-sm font-bold text-emerald-700 dark:text-emerald-400 hover:text-emerald-900 dark:hover:text-emerald-300 flex items-center gap-1.5"
                 >
                   <span>Learn More About Mutual Funds</span>
                   <ArrowRight className="w-4 h-4" />
@@ -801,77 +801,77 @@ export default function Home() {
         {/* ========================================================================= */}
         {/* WHAT CAN YOU ASK A FINANCIAL PROFESSIONAL? */}
         {/* ========================================================================= */}
-        <section className="py-16 sm:py-24 bg-white border-y border-slate-200/80">
+        <section className="py-16 sm:py-24 bg-white dark:bg-[#0B1120] border-y border-slate-200/80 dark:border-slate-800/80">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
             <div className="text-center max-w-3xl mx-auto mb-14 space-y-4">
-              <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600 font-mono block">
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600 dark:text-emerald-400 font-mono block">
                 Sample Conversations
               </span>
-              <h2 className="text-2xl sm:text-4xl font-display font-extrabold text-slate-900 tracking-tight">
+              <h2 className="text-2xl sm:text-4xl font-display font-extrabold text-slate-900 dark:text-white tracking-tight">
                 What Can You Ask a Financial Professional?
               </h2>
-              <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+              <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
                 You don't need to know exactly which product you want before submitting an enquiry. You can start with a question.
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {/* For Term Insurance */}
-              <div className="bg-[#F8FAFC] border border-slate-200 rounded-2xl p-6 text-left space-y-4">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 text-indigo-700 font-mono text-xs font-bold">
+              <div className="bg-[#F8FAFC] dark:bg-[#050816] border border-slate-200 dark:border-slate-800 rounded-2xl p-6 text-left space-y-4">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-400 font-mono text-xs font-bold">
                   For Term Insurance
                 </div>
                 <div className="space-y-3">
-                  <div className="p-3.5 bg-white rounded-xl border border-slate-200/80 text-xs sm:text-sm text-slate-800 font-medium italic shadow-2xs">
+                  <div className="p-3.5 bg-white dark:bg-[#111827] rounded-xl border border-slate-200/80 dark:border-slate-700/80 text-xs sm:text-sm text-slate-800 dark:text-slate-200 font-medium italic shadow-2xs">
                     "How much term insurance cover might I need?"
                   </div>
-                  <div className="p-3.5 bg-white rounded-xl border border-slate-200/80 text-xs sm:text-sm text-slate-800 font-medium italic shadow-2xs">
+                  <div className="p-3.5 bg-white dark:bg-[#111827] rounded-xl border border-slate-200/80 dark:border-slate-700/80 text-xs sm:text-sm text-slate-800 dark:text-slate-200 font-medium italic shadow-2xs">
                     "What should I compare before buying a term plan?"
                   </div>
-                  <div className="p-3.5 bg-white rounded-xl border border-slate-200/80 text-xs sm:text-sm text-slate-800 font-medium italic shadow-2xs">
+                  <div className="p-3.5 bg-white dark:bg-[#111827] rounded-xl border border-slate-200/80 dark:border-slate-700/80 text-xs sm:text-sm text-slate-800 dark:text-slate-200 font-medium italic shadow-2xs">
                     "How does my age and income affect my insurance requirement?"
                   </div>
                 </div>
               </div>
 
               {/* For Health Insurance */}
-              <div className="bg-[#F8FAFC] border border-slate-200 rounded-2xl p-6 text-left space-y-4">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-50 text-rose-700 font-mono text-xs font-bold">
+              <div className="bg-[#F8FAFC] dark:bg-[#050816] border border-slate-200 dark:border-slate-800 rounded-2xl p-6 text-left space-y-4">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-50 dark:bg-rose-950/60 text-rose-700 dark:text-rose-400 font-mono text-xs font-bold">
                   For Health Insurance
                 </div>
                 <div className="space-y-3">
-                  <div className="p-3.5 bg-white rounded-xl border border-slate-200/80 text-xs sm:text-sm text-slate-800 font-medium italic shadow-2xs">
+                  <div className="p-3.5 bg-white dark:bg-[#111827] rounded-xl border border-slate-200/80 dark:border-slate-700/80 text-xs sm:text-sm text-slate-800 dark:text-slate-200 font-medium italic shadow-2xs">
                     "How much health insurance cover should I consider?"
                   </div>
-                  <div className="p-3.5 bg-white rounded-xl border border-slate-200/80 text-xs sm:text-sm text-slate-800 font-medium italic shadow-2xs">
+                  <div className="p-3.5 bg-white dark:bg-[#111827] rounded-xl border border-slate-200/80 dark:border-slate-700/80 text-xs sm:text-sm text-slate-800 dark:text-slate-200 font-medium italic shadow-2xs">
                     "Should I consider individual or family health insurance?"
                   </div>
-                  <div className="p-3.5 bg-white rounded-xl border border-slate-200/80 text-xs sm:text-sm text-slate-800 font-medium italic shadow-2xs">
+                  <div className="p-3.5 bg-white dark:bg-[#111827] rounded-xl border border-slate-200/80 dark:border-slate-700/80 text-xs sm:text-sm text-slate-800 dark:text-slate-200 font-medium italic shadow-2xs">
                     "What should I check before choosing a health insurance policy?"
                   </div>
                 </div>
               </div>
 
               {/* For Mutual Funds */}
-              <div className="bg-[#F8FAFC] border border-slate-200 rounded-2xl p-6 text-left space-y-4">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 font-mono text-xs font-bold">
+              <div className="bg-[#F8FAFC] dark:bg-[#050816] border border-slate-200 dark:border-slate-800 rounded-2xl p-6 text-left space-y-4">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-400 font-mono text-xs font-bold">
                   For Mutual Funds
                 </div>
                 <div className="space-y-3">
-                  <div className="p-3.5 bg-white rounded-xl border border-slate-200/80 text-xs sm:text-sm text-slate-800 font-medium italic shadow-2xs">
+                  <div className="p-3.5 bg-white dark:bg-[#111827] rounded-xl border border-slate-200/80 dark:border-slate-700/80 text-xs sm:text-sm text-slate-800 dark:text-slate-200 font-medium italic shadow-2xs">
                     "How do I start investing through mutual funds?"
                   </div>
-                  <div className="p-3.5 bg-white rounded-xl border border-slate-200/80 text-xs sm:text-sm text-slate-800 font-medium italic shadow-2xs">
+                  <div className="p-3.5 bg-white dark:bg-[#111827] rounded-xl border border-slate-200/80 dark:border-slate-700/80 text-xs sm:text-sm text-slate-800 dark:text-slate-200 font-medium italic shadow-2xs">
                     "What is a SIP and how does it work?"
                   </div>
-                  <div className="p-3.5 bg-white rounded-xl border border-slate-200/80 text-xs sm:text-sm text-slate-800 font-medium italic shadow-2xs">
+                  <div className="p-3.5 bg-white dark:bg-[#111827] rounded-xl border border-slate-200/80 dark:border-slate-700/80 text-xs sm:text-sm text-slate-800 dark:text-slate-200 font-medium italic shadow-2xs">
                     "How should I think about investment risk and time horizon?"
                   </div>
                 </div>
               </div>
             </div>
 
-            <p className="mt-8 text-center text-xs sm:text-sm text-slate-500 font-medium">
+            <p className="mt-8 text-center text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-medium">
               The professional you are connected with can explain the relevant information applicable to your situation.
             </p>
           </div>
@@ -882,13 +882,13 @@ export default function Home() {
         {/* ========================================================================= */}
         <section className="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center max-w-3xl mx-auto mb-14 space-y-4">
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600 font-mono block">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600 dark:text-emerald-400 font-mono block">
               Audience Profiles
             </span>
-            <h2 className="text-2xl sm:text-4xl font-display font-extrabold text-slate-900 tracking-tight">
+            <h2 className="text-2xl sm:text-4xl font-display font-extrabold text-slate-900 dark:text-white tracking-tight">
               Who Is InsurEdge For?
             </h2>
-            <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+            <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
               InsurEdge is designed for people who are looking for a simpler way to start conversations about insurance and investments.
             </p>
           </div>
@@ -923,13 +923,13 @@ export default function Home() {
             ].map((p) => (
               <div
                 key={p.title}
-                className="bg-white border border-slate-200 rounded-2xl p-6 text-left space-y-3 shadow-xs hover:border-emerald-300 hover:shadow-md transition-all"
+                className="bg-white dark:bg-[#0B1120] border border-slate-200 dark:border-slate-800 rounded-2xl p-6 text-left space-y-3 shadow-xs hover:border-emerald-300 dark:hover:border-emerald-700/60 hover:shadow-md transition-all"
               >
                 <div className="text-3xl mb-2">{p.icon}</div>
-                <h3 className="text-base font-bold font-display text-slate-900">
+                <h3 className="text-base font-bold font-display text-slate-900 dark:text-white">
                   {p.title}
                 </h3>
-                <p className="text-xs text-slate-600 leading-relaxed">
+                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
                   {p.desc}
                 </p>
               </div>
@@ -940,18 +940,18 @@ export default function Home() {
         {/* ========================================================================= */}
         {/* WHY START WITH YOUR REQUIREMENT? */}
         {/* ========================================================================= */}
-        <section className="py-16 sm:py-24 bg-white border-y border-slate-200/80">
+        <section className="py-16 sm:py-24 bg-white dark:bg-[#0B1120] border-y border-slate-200/80 dark:border-slate-800/80">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center space-y-8">
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600 font-mono block">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600 dark:text-emerald-400 font-mono block">
               A Simpler Starting Point
             </span>
-            <h2 className="text-2xl sm:text-4xl font-display font-extrabold text-slate-900 tracking-tight">
+            <h2 className="text-2xl sm:text-4xl font-display font-extrabold text-slate-900 dark:text-white tracking-tight">
               Why Start With Your Requirement?
             </h2>
-            <p className="text-lg font-semibold text-emerald-800 font-display">
+            <p className="text-lg font-semibold text-emerald-800 dark:text-emerald-400 font-display">
               Because the right conversation starts with the right question.
             </p>
-            <p className="text-slate-600 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
+            <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
               You don't always need to know the name of a specific insurance policy or mutual fund before asking for help. You might simply know that:
             </p>
 
@@ -965,14 +965,14 @@ export default function Home() {
               ].map((q) => (
                 <div
                   key={q}
-                  className="px-4 py-2.5 rounded-full bg-slate-50 border border-slate-200 text-xs sm:text-sm font-semibold text-slate-800 shadow-2xs italic"
+                  className="px-4 py-2.5 rounded-full bg-slate-50 dark:bg-[#111827] border border-slate-200 dark:border-slate-700 text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200 shadow-2xs italic"
                 >
                   {q}
                 </div>
               ))}
             </div>
 
-            <p className="text-slate-600 text-sm sm:text-base leading-relaxed pt-2">
+            <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed pt-2">
               That's enough to get started. Tell us what you're looking for and we'll help connect you with a relevant professional.
             </p>
 
@@ -994,15 +994,15 @@ export default function Home() {
           id="start-enquiry"
           className="py-16 sm:py-24 max-w-4xl mx-auto px-4 sm:px-6"
         >
-          <div className="bg-white border border-slate-200 rounded-[28px] p-6 sm:p-10 md:p-12 shadow-xl shadow-slate-200/50 relative overflow-hidden">
+          <div className="bg-white dark:bg-[#0B1120] border border-slate-200 dark:border-slate-800 rounded-[28px] p-6 sm:p-10 md:p-12 shadow-xl shadow-slate-200/50 dark:shadow-black/50 relative overflow-hidden">
             <div className="text-center max-w-2xl mx-auto mb-10 space-y-3">
-              <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600 font-mono block">
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600 dark:text-emerald-400 font-mono block">
                 Free Consultation Request
               </span>
-              <h2 className="text-2xl sm:text-4xl font-display font-extrabold text-slate-900 tracking-tight">
+              <h2 className="text-2xl sm:text-4xl font-display font-extrabold text-slate-900 dark:text-white tracking-tight">
                 Start Your Enquiry
               </h2>
-              <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+              <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
                 Tell us what you're looking for. Complete this short form and a relevant professional from our partner network may contact you regarding your requirement.
               </p>
             </div>
@@ -1019,7 +1019,7 @@ export default function Home() {
                 >
                   {/* Category Selector */}
                   <div className="space-y-2">
-                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 font-mono">
+                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 font-mono">
                       What do you need help with?
                     </label>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
@@ -1038,7 +1038,7 @@ export default function Home() {
                             className={`p-3 rounded-xl border text-xs sm:text-sm font-semibold transition-all cursor-pointer flex items-center justify-center text-center ${
                               isSelected
                                 ? "bg-emerald-600 border-emerald-600 text-white shadow-sm"
-                                : "bg-slate-50 border-slate-200 text-slate-700 hover:border-slate-300"
+                                : "bg-slate-50 dark:bg-[#111827] border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:border-slate-300 dark:hover:border-slate-600"
                             }`}
                           >
                             {cat}
@@ -1051,7 +1051,7 @@ export default function Home() {
                   {/* Form Inputs Grid */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
                     <div className="space-y-1.5">
-                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 font-mono">
+                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 font-mono">
                         Full Name <span className="text-rose-500">*</span>
                       </label>
                       <div className="relative">
@@ -1062,21 +1062,21 @@ export default function Home() {
                           value={fullName}
                           onChange={(e) => setFullName(e.target.value)}
                           placeholder="Enter your full name"
-                          className={`w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 hover:bg-slate-50/80 focus:bg-white border text-sm text-slate-900 placeholder:text-slate-400 outline-none transition-all ${
+                          className={`w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 dark:bg-[#111827] hover:bg-slate-50/80 dark:hover:bg-[#111827]/80 focus:bg-white dark:focus:bg-[#050816] border text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 outline-none transition-all ${
                             validationErrors.name
                               ? "border-rose-500 focus:ring-2 focus:ring-rose-500/20"
-                              : "border-slate-200 focus:border-emerald-600 focus:ring-2 focus:ring-emerald-600/20"
+                              : "border-slate-200 dark:border-slate-700 focus:border-emerald-600 focus:ring-2 focus:ring-emerald-600/20"
                           }`}
                         />
                       </div>
                     </div>
 
                     <div className="space-y-1.5">
-                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 font-mono">
+                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 font-mono">
                         Mobile Number <span className="text-rose-500">*</span>
                       </label>
                       <div className="relative flex">
-                        <span className="inline-flex items-center px-3 rounded-l-xl border border-r-0 border-slate-200 bg-slate-100 text-slate-600 text-sm font-mono">
+                        <span className="inline-flex items-center px-3 rounded-l-xl border border-r-0 border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-sm font-mono">
                           +91
                         </span>
                         <input
@@ -1086,17 +1086,17 @@ export default function Home() {
                           value={mobileNumber}
                           onChange={(e) => setMobileNumber(e.target.value.replace(/\D/g, ""))}
                           placeholder="Enter 10-digit mobile number"
-                          className={`w-full px-4 py-3 rounded-r-xl bg-slate-50 hover:bg-slate-50/80 focus:bg-white border text-sm text-slate-900 placeholder:text-slate-400 outline-none transition-all font-mono ${
+                          className={`w-full px-4 py-3 rounded-r-xl bg-slate-50 dark:bg-[#111827] hover:bg-slate-50/80 dark:hover:bg-[#111827]/80 focus:bg-white dark:focus:bg-[#050816] border text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 outline-none transition-all font-mono ${
                             validationErrors.phone
                               ? "border-rose-500 focus:ring-2 focus:ring-rose-500/20"
-                              : "border-slate-200 focus:border-emerald-600 focus:ring-2 focus:ring-emerald-600/20"
+                              : "border-slate-200 dark:border-slate-700 focus:border-emerald-600 focus:ring-2 focus:ring-emerald-600/20"
                           }`}
                         />
                       </div>
                     </div>
 
                     <div className="space-y-1.5">
-                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 font-mono">
+                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 font-mono">
                         Email Address
                       </label>
                       <div className="relative">
@@ -1106,13 +1106,13 @@ export default function Home() {
                           value={emailAddress}
                           onChange={(e) => setEmailAddress(e.target.value)}
                           placeholder="Enter your email address"
-                          className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 hover:bg-slate-50/80 focus:bg-white border border-slate-200 text-sm text-slate-900 placeholder:text-slate-400 outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-600/20 transition-all"
+                          className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 dark:bg-[#111827] hover:bg-slate-50/80 dark:hover:bg-[#111827]/80 focus:bg-white dark:focus:bg-[#050816] border border-slate-200 dark:border-slate-700 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-600/20 transition-all"
                         />
                       </div>
                     </div>
 
                     <div className="space-y-1.5">
-                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 font-mono">
+                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 font-mono">
                         City
                       </label>
                       <div className="relative">
@@ -1120,10 +1120,10 @@ export default function Home() {
                         <select
                           value={city}
                           onChange={(e) => setCity(e.target.value)}
-                          className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 hover:bg-slate-50/80 focus:bg-white border border-slate-200 text-sm text-slate-900 outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-600/20 transition-all cursor-pointer"
+                          className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 dark:bg-[#111827] hover:bg-slate-50/80 dark:hover:bg-[#111827]/80 focus:bg-white dark:focus:bg-[#050816] border border-slate-200 dark:border-slate-700 text-sm text-slate-900 dark:text-white outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-600/20 transition-all cursor-pointer"
                         >
                           {cityOptions.map((c) => (
-                            <option key={c} value={c}>
+                            <option key={c} value={c} className="bg-white dark:bg-[#111827] text-slate-900 dark:text-white">
                               {c}
                             </option>
                           ))}
@@ -1134,7 +1134,7 @@ export default function Home() {
 
                   {/* Requirement Details */}
                   <div className="space-y-1.5">
-                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 font-mono">
+                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 font-mono">
                       Tell us about your requirement
                     </label>
                     <textarea
@@ -1142,7 +1142,7 @@ export default function Home() {
                       value={requirementText}
                       onChange={(e) => setRequirementText(e.target.value)}
                       placeholder="Briefly describe what you're looking for (e.g. ₹1 Crore term life cover, family floater health plan for 4 members, or starting a monthly SIP for wealth creation)"
-                      className="w-full px-4 py-3 rounded-xl bg-slate-50 hover:bg-slate-50/80 focus:bg-white border border-slate-200 text-sm text-slate-900 placeholder:text-slate-400 outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-600/20 transition-all"
+                      className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-[#111827] hover:bg-slate-50/80 dark:hover:bg-[#111827]/80 focus:bg-white dark:focus:bg-[#050816] border border-slate-200 dark:border-slate-700 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-600/20 transition-all"
                     />
                   </div>
 
@@ -1156,11 +1156,11 @@ export default function Home() {
                   </button>
 
                   {/* Disclaimers below form */}
-                  <div className="space-y-2 pt-2 text-center text-xs text-slate-500 leading-relaxed font-sans">
+                  <div className="space-y-2 pt-2 text-center text-xs text-slate-500 dark:text-slate-400 leading-relaxed font-sans">
                     <p>
                       By submitting this form, you agree that InsurEdge and relevant partner professionals may contact you regarding your enquiry.
                     </p>
-                    <p className="font-semibold text-slate-600">
+                    <p className="font-semibold text-slate-600 dark:text-slate-300">
                       Submitting an enquiry is free. You are not required to purchase a product or service after submitting your enquiry.
                     </p>
                   </div>
@@ -1172,16 +1172,16 @@ export default function Home() {
                   animate={{ opacity: 1, scale: 1 }}
                   className="py-12 text-center space-y-4 font-sans"
                 >
-                  <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto text-2xl font-bold shadow-inner">
+                  <div className="w-16 h-16 rounded-full bg-emerald-100 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mx-auto text-2xl font-bold shadow-inner">
                     ✓
                   </div>
-                  <h3 className="text-2xl font-bold font-display text-slate-900">
+                  <h3 className="text-2xl font-bold font-display text-slate-900 dark:text-white">
                     Enquiry Received Successfully!
                   </h3>
-                  <p className="text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
-                    Thank you, <strong className="text-slate-900">{fullName}</strong>. Your enquiry regarding <strong className="text-emerald-700">{selectedCategory}</strong> has been received. A relevant professional from our partner network may contact you shortly on <strong className="text-slate-900">+91 {mobileNumber}</strong>.
+                  <p className="text-sm text-slate-600 dark:text-slate-300 max-w-md mx-auto leading-relaxed">
+                    Thank you, <strong className="text-slate-900 dark:text-white">{fullName}</strong>. Your enquiry regarding <strong className="text-emerald-700 dark:text-emerald-400">{selectedCategory}</strong> has been received. A relevant professional from our partner network may contact you shortly on <strong className="text-slate-900 dark:text-white">+91 {mobileNumber}</strong>.
                   </p>
-                  <p className="text-xs text-slate-500">
+                  <p className="text-xs text-slate-500 dark:text-slate-400">
                     Zero spam guaranteed. There is no charge or obligation to purchase.
                   </p>
                   <button
@@ -1192,7 +1192,7 @@ export default function Home() {
                       setEmailAddress("");
                       setRequirementText("");
                     }}
-                    className="mt-6 px-6 py-2.5 rounded-full border border-slate-300 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition-all"
+                    className="mt-6 px-6 py-2.5 rounded-full border border-slate-300 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all cursor-pointer"
                   >
                     Submit Another Enquiry
                   </button>
@@ -1205,16 +1205,16 @@ export default function Home() {
         {/* ========================================================================= */}
         {/* WHAT HAPPENS AFTER YOU SUBMIT YOUR ENQUIRY? */}
         {/* ========================================================================= */}
-        <section className="py-16 sm:py-24 bg-white border-y border-slate-200/80">
+        <section className="py-16 sm:py-24 bg-white dark:bg-[#0B1120] border-y border-slate-200/80 dark:border-slate-800/80">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
             <div className="text-center max-w-3xl mx-auto mb-14 space-y-4">
-              <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600 font-mono block">
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600 dark:text-emerald-400 font-mono block">
                 Transparency Guarantee
               </span>
-              <h2 className="text-2xl sm:text-4xl font-display font-extrabold text-slate-900 tracking-tight">
+              <h2 className="text-2xl sm:text-4xl font-display font-extrabold text-slate-900 dark:text-white tracking-tight">
                 What Happens After You Submit Your Enquiry?
               </h2>
-              <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+              <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
                 Clear expectations from the moment you hit submit to making your independent financial decision.
               </p>
             </div>
@@ -1249,15 +1249,15 @@ export default function Home() {
               ].map((item) => (
                 <div
                   key={item.step}
-                  className="bg-[#F8FAFC] border border-slate-200 rounded-2xl p-6 text-left space-y-2 relative"
+                  className="bg-[#F8FAFC] dark:bg-[#050816] border border-slate-200 dark:border-slate-800 rounded-2xl p-6 text-left space-y-2 relative"
                 >
-                  <span className="text-xs font-bold text-emerald-700 font-mono uppercase tracking-wider block">
+                  <span className="text-xs font-bold text-emerald-700 dark:text-emerald-400 font-mono uppercase tracking-wider block">
                     {item.step}
                   </span>
-                  <h3 className="text-base font-bold font-display text-slate-900">
+                  <h3 className="text-base font-bold font-display text-slate-900 dark:text-white">
                     {item.title}
                   </h3>
-                  <p className="text-xs text-slate-600 leading-relaxed">
+                  <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
                     {item.desc}
                   </p>
                 </div>
@@ -1271,13 +1271,13 @@ export default function Home() {
         {/* ========================================================================= */}
         <section className="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center max-w-3xl mx-auto mb-12 space-y-4">
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600 font-mono block">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600 dark:text-emerald-400 font-mono block">
               Knowledge &amp; Insights
             </span>
-            <h2 className="text-2xl sm:text-4xl font-display font-extrabold text-slate-900 tracking-tight">
+            <h2 className="text-2xl sm:text-4xl font-display font-extrabold text-slate-900 dark:text-white tracking-tight">
               Latest Financial Guides &amp; Articles
             </h2>
-            <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+            <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
               Clear, jargon-free explanations to help you navigate insurance policies, tax benefits, and wealth creation strategies.
             </p>
 
@@ -1290,7 +1290,7 @@ export default function Home() {
                   className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
                     selectedBlogTab === cat
                       ? "bg-emerald-600 text-white shadow-sm"
-                      : "bg-white border border-slate-200 text-slate-600 hover:text-slate-900 hover:border-slate-300"
+                      : "bg-white dark:bg-[#0B1120] border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:border-slate-300 dark:hover:border-slate-700"
                   }`}
                 >
                   {cat}
@@ -1305,41 +1305,41 @@ export default function Home() {
               .map((article) => (
                 <article
                   key={article.id}
-                  className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-7 flex flex-col justify-between shadow-xs hover:border-emerald-300 hover:shadow-md transition-all text-left group"
+                  className="bg-white dark:bg-[#0B1120] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-7 flex flex-col justify-between shadow-xs hover:border-emerald-300 dark:hover:border-emerald-700/60 hover:shadow-md transition-all text-left group"
                 >
                   <div className="space-y-3.5">
                     <div className="flex items-center justify-between text-xs">
                       <span className={`px-2.5 py-1 rounded-lg border font-bold uppercase tracking-wider font-mono text-[10px] ${article.badgeColor}`}>
                         {article.category}
                       </span>
-                      <span className="flex items-center gap-1 text-slate-400 font-medium text-[11px]">
+                      <span className="flex items-center gap-1 text-slate-400 dark:text-slate-500 font-medium text-[11px]">
                         <Clock className="w-3 h-3" />
                         {article.readTime}
                       </span>
                     </div>
 
-                    <h3 className="text-lg font-bold font-display text-slate-900 leading-snug group-hover:text-emerald-700 transition-colors">
+                    <h3 className="text-lg font-bold font-display text-slate-900 dark:text-white leading-snug group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors">
                       {article.title}
                     </h3>
 
-                    <p className="text-slate-600 text-xs sm:text-sm leading-relaxed line-clamp-3">
+                    <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm leading-relaxed line-clamp-3">
                       {article.excerpt}
                     </p>
                   </div>
 
-                  <div className="pt-5 border-t border-slate-100 mt-6 flex items-center justify-between">
+                  <div className="pt-5 border-t border-slate-100 dark:border-slate-800 mt-6 flex items-center justify-between">
                     <div>
-                      <p className="text-xs font-bold text-slate-900">
+                      <p className="text-xs font-bold text-slate-900 dark:text-white">
                         {article.author}
                       </p>
-                      <p className="text-[11px] text-slate-400">
+                      <p className="text-[11px] text-slate-400 dark:text-slate-500">
                         {article.date}
                       </p>
                     </div>
 
                     <Link
                       href="/blog"
-                      className="text-xs font-bold text-emerald-700 hover:text-emerald-800 inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform"
+                      className="text-xs font-bold text-emerald-700 dark:text-emerald-400 hover:text-emerald-800 dark:hover:text-emerald-300 inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform"
                     >
                       <span>Read Guide</span>
                       <ChevronRight className="w-4 h-4" />
@@ -1367,13 +1367,13 @@ export default function Home() {
         {/* ========================================================================= */}
         <section className="py-16 sm:py-24 max-w-4xl mx-auto px-4 sm:px-6">
           <div className="text-center max-w-3xl mx-auto mb-14 space-y-4">
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600 font-mono block">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600 dark:text-emerald-400 font-mono block">
               Clear Answers
             </span>
-            <h2 className="text-2xl sm:text-4xl font-display font-extrabold text-slate-900 tracking-tight">
+            <h2 className="text-2xl sm:text-4xl font-display font-extrabold text-slate-900 dark:text-white tracking-tight">
               Frequently Asked Questions About InsurEdge
             </h2>
-            <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+            <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
               Everything you need to know about how our platform operates, our role, and our commitment to transparency.
             </p>
           </div>
@@ -1384,18 +1384,18 @@ export default function Home() {
               return (
                 <div
                   key={faq.q}
-                  className="bg-white border border-slate-200 rounded-2xl overflow-hidden transition-all shadow-xs"
+                  className="bg-white dark:bg-[#0B1120] border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden transition-all shadow-xs"
                 >
                   <button
                     onClick={() => setOpenFaqIndex(isOpen ? null : idx)}
-                    className="w-full p-5 text-left flex items-center justify-between gap-4 cursor-pointer hover:bg-slate-50/50 transition-colors"
+                    className="w-full p-5 text-left flex items-center justify-between gap-4 cursor-pointer hover:bg-slate-50/50 dark:hover:bg-slate-800/40 transition-colors"
                   >
-                    <span className="font-display font-bold text-base text-slate-900">
+                    <span className="font-display font-bold text-base text-slate-900 dark:text-white">
                       {faq.q}
                     </span>
-                    <span className="w-8 h-8 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center shrink-0">
+                    <span className="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 flex items-center justify-center shrink-0">
                       {isOpen ? (
-                        <ChevronUp className="w-4 h-4 text-emerald-700" />
+                        <ChevronUp className="w-4 h-4 text-emerald-700 dark:text-emerald-400" />
                       ) : (
                         <ChevronDown className="w-4 h-4" />
                       )}
@@ -1403,7 +1403,7 @@ export default function Home() {
                   </button>
 
                   {isOpen && (
-                    <div className="px-5 pb-5 pt-1 text-sm text-slate-600 leading-relaxed border-t border-slate-100">
+                    <div className="px-5 pb-5 pt-1 text-sm text-slate-600 dark:text-slate-300 leading-relaxed border-t border-slate-100 dark:border-slate-800">
                       {faq.a}
                     </div>
                   )}
@@ -1416,18 +1416,18 @@ export default function Home() {
         {/* ========================================================================= */}
         {/* FINAL CTA BANNER */}
         {/* ========================================================================= */}
-        <section className="py-16 sm:py-24 bg-white border-y border-slate-200/80">
+        <section className="py-16 sm:py-24 bg-white dark:bg-[#0B1120] border-y border-slate-200/80 dark:border-slate-800/80">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center space-y-6">
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600 font-mono block">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600 dark:text-emerald-400 font-mono block">
               Take the First Step
             </span>
-            <h2 className="text-3xl sm:text-5xl font-display font-extrabold text-slate-900 tracking-tight leading-tight">
+            <h2 className="text-3xl sm:text-5xl font-display font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight">
               Financial Decisions Should Start With Good Information
             </h2>
-            <p className="text-slate-600 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
+            <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
               Insurance and investments are important financial decisions. You deserve the opportunity to understand your options, ask questions, and make an informed decision.
             </p>
-            <p className="text-slate-700 font-semibold text-base">
+            <p className="text-slate-700 dark:text-slate-200 font-semibold text-base">
               Tell us what you're looking for. We'll help you start the conversation.
             </p>
             <div className="pt-2">
@@ -1445,11 +1445,11 @@ export default function Home() {
         {/* ========================================================================= */}
         {/* IMPORTANT INFORMATION (REGULATORY & COMPLIANCE FOOTNOTE) */}
         {/* ========================================================================= */}
-        <section className="py-12 bg-[#F1F5F9] border-t border-slate-200">
+        <section className="py-12 bg-[#F1F5F9] dark:bg-[#02040A] border-t border-slate-200 dark:border-slate-800">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
-            <div className="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 space-y-4 text-xs text-slate-500 leading-relaxed text-left">
-              <div className="flex items-center gap-2 font-display font-bold text-sm text-slate-900">
-                <Info className="w-4 h-4 text-emerald-700 shrink-0" />
+            <div className="bg-white dark:bg-[#0B1120] border border-slate-200 dark:border-slate-800 rounded-2xl p-6 sm:p-8 space-y-4 text-xs text-slate-500 dark:text-slate-400 leading-relaxed text-left">
+              <div className="flex items-center gap-2 font-display font-bold text-sm text-slate-900 dark:text-white">
+                <Info className="w-4 h-4 text-emerald-700 dark:text-emerald-400 shrink-0" />
                 <span>Important Information &amp; Regulatory Disclaimers</span>
               </div>
               <p>
@@ -1464,7 +1464,7 @@ export default function Home() {
               <p>
                 Customers should independently verify the credentials, registration status, and authority of any professional before purchasing an insurance product or making an investment.
               </p>
-              <p className="font-semibold text-slate-700">
+              <p className="font-semibold text-slate-700 dark:text-slate-300">
                 Mutual fund investments are subject to market risks. Read all scheme-related documents carefully before investing.
               </p>
               <p>

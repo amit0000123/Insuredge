@@ -31,10 +31,10 @@ export const metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-[#F8FAFC] text-slate-900 font-sans selection:bg-emerald-500 selection:text-white">
+    <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#050816] text-slate-900 dark:text-slate-100 font-sans selection:bg-emerald-500 selection:text-white transition-colors duration-300">
       {/* Background Subtle Gradient Glow */}
       <div className="fixed inset-0 pointer-events-none z-0">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[500px] bg-gradient-to-b from-blue-50/60 via-emerald-50/30 to-transparent blur-3xl" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[500px] bg-gradient-to-b from-blue-50/60 via-emerald-50/30 to-transparent dark:from-blue-950/20 dark:via-emerald-950/10 blur-3xl" />
       </div>
 
       <div className="relative z-10">
@@ -42,33 +42,33 @@ export default function AboutPage() {
         {/* 1. HERO SECTION: About InsurEdge */}
         {/* ========================================================================= */}
         <section className="pt-14 sm:pt-20 pb-16 sm:pb-24 px-4 sm:px-6 max-w-5xl mx-auto text-center space-y-6">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200/80 text-emerald-800 text-xs sm:text-sm font-semibold shadow-xs">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200/80 dark:border-emerald-800/60 text-emerald-800 dark:text-emerald-400 text-xs sm:text-sm font-semibold shadow-xs">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
             <span>Customer Connection Platform</span>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-display font-extrabold text-slate-950 tracking-tight leading-[1.12]">
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-display font-extrabold text-slate-950 dark:text-white tracking-tight leading-[1.12]">
             About InsurEdge
           </h1>
 
-          <p className="text-xl sm:text-2xl font-bold text-emerald-800 font-display">
+          <p className="text-xl sm:text-2xl font-bold text-emerald-800 dark:text-emerald-400 font-display">
             Making the Search for Financial Professionals Simpler
           </p>
 
-          <div className="max-w-3xl mx-auto space-y-4 text-slate-600 text-base sm:text-lg leading-relaxed pt-2">
+          <div className="max-w-3xl mx-auto space-y-4 text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed pt-2">
             <p>
               Finding someone to speak with about insurance or investments shouldn't feel like a second job.
             </p>
             <p>
               There are countless products, providers, websites, comparisons, and opinions. For someone simply trying to understand their options, knowing who to speak with can be just as difficult as understanding the product itself.
             </p>
-            <p className="font-semibold text-slate-800">
+            <p className="font-semibold text-slate-800 dark:text-slate-200">
               InsurEdge was created to make that first connection simpler.
             </p>
             <p>
               We are a customer-connection and lead-generation platform that helps people across India connect with relevant insurance and investment professionals.
             </p>
-            <p className="text-emerald-900 font-medium bg-emerald-50/80 border border-emerald-200/60 p-4 rounded-2xl">
+            <p className="text-emerald-900 dark:text-emerald-200 font-medium bg-emerald-50/80 dark:bg-emerald-950/40 border border-emerald-200/60 dark:border-emerald-800/40 p-4 rounded-2xl">
               Our focus isn't to make the decision for you. It's to make finding the right person to speak with easier.
             </p>
           </div>
@@ -77,20 +77,20 @@ export default function AboutPage() {
         {/* ========================================================================= */}
         {/* 2. WHY WE STARTED INSUREDGE */}
         {/* ========================================================================= */}
-        <section className="py-16 sm:py-24 bg-white border-y border-slate-200/80">
+        <section className="py-16 sm:py-24 bg-white dark:bg-[#0B1120] border-y border-slate-200/80 dark:border-slate-800/80">
           <div className="max-w-5xl mx-auto px-4 sm:px-6">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
               <div className="lg:col-span-7 space-y-5 text-left">
-                <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600 font-mono block">
+                <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600 dark:text-emerald-400 font-mono block">
                   Origin &amp; Purpose
                 </span>
-                <h2 className="text-2xl sm:text-4xl font-display font-extrabold text-slate-900 tracking-tight">
+                <h2 className="text-2xl sm:text-4xl font-display font-extrabold text-slate-900 dark:text-white tracking-tight">
                   Why We Started InsurEdge
                 </h2>
-                <p className="text-lg font-bold text-emerald-800 font-display">
+                <p className="text-lg font-bold text-emerald-800 dark:text-emerald-400 font-display">
                   Because the first conversation matters.
                 </p>
-                <div className="space-y-4 text-sm sm:text-base text-slate-600 leading-relaxed">
+                <div className="space-y-4 text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
                   <p>
                     Financial decisions are personal.
                   </p>
@@ -103,7 +103,7 @@ export default function AboutPage() {
                   <p>
                     Instead of asking you to figure everything out before you reach out, InsurEdge starts with a simple question:
                   </p>
-                  <div className="p-4 rounded-xl bg-slate-50 border-l-4 border-emerald-600 text-slate-900 font-display font-bold text-base sm:text-lg italic">
+                  <div className="p-4 rounded-xl bg-slate-50 dark:bg-[#111827] border-l-4 border-emerald-600 text-slate-900 dark:text-white font-display font-bold text-base sm:text-lg italic">
                     "What are you looking for?"
                   </div>
                   <p>
@@ -114,28 +114,28 @@ export default function AboutPage() {
 
               {/* Right Decorative Feature Card */}
               <div className="lg:col-span-5">
-                <div className="bg-[#F8FAFC] border border-slate-200 rounded-3xl p-6 sm:p-8 space-y-6 shadow-sm">
-                  <div className="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold">
+                <div className="bg-[#F8FAFC] dark:bg-[#111827] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 space-y-6 shadow-sm">
+                  <div className="w-12 h-12 rounded-2xl bg-emerald-100 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400 flex items-center justify-center font-bold">
                     <Compass className="w-6 h-6" />
                   </div>
-                  <h3 className="text-xl font-bold font-display text-slate-900">
+                  <h3 className="text-xl font-bold font-display text-slate-900 dark:text-white">
                     A Person-First Approach
                   </h3>
-                  <ul className="space-y-3 text-xs sm:text-sm text-slate-700">
+                  <ul className="space-y-3 text-xs sm:text-sm text-slate-700 dark:text-slate-300">
                     <li className="flex items-start gap-2.5">
-                      <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                      <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
                       <span>Starts with your personal goals, not generic product catalogs</span>
                     </li>
                     <li className="flex items-start gap-2.5">
-                      <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                      <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
                       <span>Takes into account age, family dependency, and risk preferences</span>
                     </li>
                     <li className="flex items-start gap-2.5">
-                      <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                      <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
                       <span>Matches you with an accredited specialist in your domain</span>
                     </li>
                     <li className="flex items-start gap-2.5">
-                      <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                      <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
                       <span>Empowers you with information so you decide for yourself</span>
                     </li>
                   </ul>
@@ -150,50 +150,50 @@ export default function AboutPage() {
         {/* ========================================================================= */}
         <section className="py-16 sm:py-24 max-w-5xl mx-auto px-4 sm:px-6 text-center space-y-8">
           <div className="max-w-3xl mx-auto space-y-3">
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600 font-mono block">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600 dark:text-emerald-400 font-mono block">
               Core Principles
             </span>
-            <h2 className="text-2xl sm:text-4xl font-display font-extrabold text-slate-900 tracking-tight">
+            <h2 className="text-2xl sm:text-4xl font-display font-extrabold text-slate-900 dark:text-white tracking-tight">
               Our Philosophy
             </h2>
-            <p className="text-xl sm:text-2xl font-bold text-emerald-800 font-display">
+            <p className="text-xl sm:text-2xl font-bold text-emerald-800 dark:text-emerald-400 font-display">
               Connect first. Understand better. Decide yourself.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left pt-4">
-            <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs space-y-3">
-              <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center font-display font-extrabold">
+            <div className="bg-white dark:bg-[#0B1120] border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-xs space-y-3">
+              <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-400 flex items-center justify-center font-display font-extrabold">
                 1
               </div>
-              <h3 className="text-lg font-bold font-display text-slate-900">
+              <h3 className="text-lg font-bold font-display text-slate-900 dark:text-white">
                 Connect First
               </h3>
-              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
                 We don't believe an online platform should make an important financial decision on behalf of a customer. Our role is to make the connection easier.
               </p>
             </div>
 
-            <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs space-y-3">
-              <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center font-display font-extrabold">
+            <div className="bg-white dark:bg-[#0B1120] border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-xs space-y-3">
+              <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 flex items-center justify-center font-display font-extrabold">
                 2
               </div>
-              <h3 className="text-lg font-bold font-display text-slate-900">
+              <h3 className="text-lg font-bold font-display text-slate-900 dark:text-white">
                 Understand Better
               </h3>
-              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
                 The professional you are connected with can explain relevant products, features, terms, costs, eligibility requirements, exclusions, risks, and other applicable information.
               </p>
             </div>
 
-            <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs space-y-3">
-              <div className="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-700 flex items-center justify-center font-display font-extrabold">
+            <div className="bg-white dark:bg-[#0B1120] border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-xs space-y-3">
+              <div className="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-400 flex items-center justify-center font-display font-extrabold">
                 3
               </div>
-              <h3 className="text-lg font-bold font-display text-slate-900">
+              <h3 className="text-lg font-bold font-display text-slate-900 dark:text-white">
                 Decide Yourself
               </h3>
-              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
                 You can ask questions. You can compare options. And ultimately, you decide whether you want to proceed without pressure or obligation.
               </p>
             </div>
@@ -203,56 +203,56 @@ export default function AboutPage() {
         {/* ========================================================================= */}
         {/* 4. WE RESPECT YOUR TIME & TRANSPARENCY MATTERS */}
         {/* ========================================================================= */}
-        <section className="py-16 sm:py-24 bg-white border-y border-slate-200/80">
+        <section className="py-16 sm:py-24 bg-white dark:bg-[#0B1120] border-y border-slate-200/80 dark:border-slate-800/80">
           <div className="max-w-5xl mx-auto px-4 sm:px-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* Respect Time Box */}
-              <div className="bg-[#F8FAFC] border border-slate-200 rounded-3xl p-6 sm:p-8 space-y-4 text-left">
-                <div className="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center">
+              <div className="bg-[#F8FAFC] dark:bg-[#111827] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 space-y-4 text-left">
+                <div className="w-10 h-10 rounded-xl bg-rose-50 dark:bg-rose-950/50 text-rose-600 dark:text-rose-400 flex items-center justify-center">
                   <Clock className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold font-display text-slate-900 mb-1">
+                  <h3 className="text-xl font-bold font-display text-slate-900 dark:text-white mb-1">
                     We Respect Your Time
                   </h3>
-                  <p className="text-xs font-semibold text-rose-600 font-mono">
+                  <p className="text-xs font-semibold text-rose-600 dark:text-rose-400 font-mono">
                     No Spam. No Unnecessary Hassle.
                   </p>
                 </div>
-                <div className="space-y-3 text-xs sm:text-sm text-slate-600 leading-relaxed">
+                <div className="space-y-3 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
                   <p>
                     We know why people hesitate before submitting their phone number online. They don't want their enquiry to turn into a long list of unrelated calls.
                   </p>
                   <p>
                     We understand that. That's why we want every enquiry to have a clear purpose: helping you connect with a relevant professional for the requirement you submitted.
                   </p>
-                  <p className="font-semibold text-slate-800">
+                  <p className="font-semibold text-slate-800 dark:text-slate-200">
                     We don't want the experience to be about chasing you. We want it to be about helping you find the right conversation.
                   </p>
                 </div>
               </div>
 
               {/* Transparency Box */}
-              <div className="bg-[#F8FAFC] border border-slate-200 rounded-3xl p-6 sm:p-8 space-y-4 text-left">
-                <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
+              <div className="bg-[#F8FAFC] dark:bg-[#111827] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 space-y-4 text-left">
+                <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
                   <Eye className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold font-display text-slate-900 mb-1">
+                  <h3 className="text-xl font-bold font-display text-slate-900 dark:text-white mb-1">
                     Transparency Matters
                   </h3>
-                  <p className="text-xs font-semibold text-emerald-700 font-mono">
+                  <p className="text-xs font-semibold text-emerald-700 dark:text-emerald-400 font-mono">
                     You should know how the platform works.
                   </p>
                 </div>
-                <div className="space-y-3 text-xs sm:text-sm text-slate-600 leading-relaxed">
+                <div className="space-y-3 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
                   <p>
                     InsurEdge is a lead-generation and customer-connection platform. Customers can submit enquiries through InsurEdge without paying us a fee.
                   </p>
                   <p>
                     InsurEdge may receive fees from participating advisors, distributors, or professionals for customer enquiries or leads. We believe being open about this relationship is important.
                   </p>
-                  <p className="font-semibold text-slate-800">
+                  <p className="font-semibold text-slate-800 dark:text-slate-200">
                     A lead enquiry does not mean you have agreed to purchase a product. You remain free to ask questions, evaluate the information provided, and decide whether you want to proceed.
                   </p>
                 </div>
@@ -266,13 +266,13 @@ export default function AboutPage() {
         {/* ========================================================================= */}
         <section className="py-16 sm:py-24 max-w-5xl mx-auto px-4 sm:px-6">
           <div className="text-center max-w-3xl mx-auto mb-14 space-y-4">
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600 font-mono block">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600 dark:text-emerald-400 font-mono block">
               Clear Boundaries
             </span>
-            <h2 className="text-2xl sm:text-4xl font-display font-extrabold text-slate-900 tracking-tight">
+            <h2 className="text-2xl sm:text-4xl font-display font-extrabold text-slate-900 dark:text-white tracking-tight">
               What InsurEdge Is — And Isn't
             </h2>
-            <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+            <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base leading-relaxed">
               We believe upfront clarity is the foundation of trust. Here is exactly what our role is and where it ends.
             </p>
           </div>
@@ -280,22 +280,22 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Pair 1 */}
             <div className="space-y-4">
-              <div className="bg-emerald-50/60 border border-emerald-200/80 rounded-2xl p-5 text-left space-y-2">
-                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-emerald-800 font-mono">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+              <div className="bg-emerald-50/60 dark:bg-emerald-950/30 border border-emerald-200/80 dark:border-emerald-800/40 rounded-2xl p-5 text-left space-y-2">
+                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-emerald-800 dark:text-emerald-400 font-mono">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
                   <span>We Are</span>
                 </div>
-                <p className="text-sm font-semibold text-slate-900">
+                <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">
                   A platform that helps customers find and connect with relevant insurance and investment professionals.
                 </p>
               </div>
 
-              <div className="bg-rose-50/60 border border-rose-200/80 rounded-2xl p-5 text-left space-y-2">
-                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-rose-800 font-mono">
-                  <XCircle className="w-4 h-4 text-rose-600" />
+              <div className="bg-rose-50/60 dark:bg-rose-950/30 border border-rose-200/80 dark:border-rose-800/40 rounded-2xl p-5 text-left space-y-2">
+                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-rose-800 dark:text-rose-400 font-mono">
+                  <XCircle className="w-4 h-4 text-rose-600 dark:text-rose-400" />
                   <span>We Aren't</span>
                 </div>
-                <p className="text-sm font-semibold text-slate-900">
+                <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">
                   An insurance company or insurer.
                 </p>
               </div>
@@ -303,22 +303,22 @@ export default function AboutPage() {
 
             {/* Pair 2 */}
             <div className="space-y-4">
-              <div className="bg-emerald-50/60 border border-emerald-200/80 rounded-2xl p-5 text-left space-y-2">
-                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-emerald-800 font-mono">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+              <div className="bg-emerald-50/60 dark:bg-emerald-950/30 border border-emerald-200/80 dark:border-emerald-800/40 rounded-2xl p-5 text-left space-y-2">
+                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-emerald-800 dark:text-emerald-400 font-mono">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
                   <span>We Are</span>
                 </div>
-                <p className="text-sm font-semibold text-slate-900">
+                <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">
                   A starting point for people looking for professional assistance.
                 </p>
               </div>
 
-              <div className="bg-rose-50/60 border border-rose-200/80 rounded-2xl p-5 text-left space-y-2">
-                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-rose-800 font-mono">
-                  <XCircle className="w-4 h-4 text-rose-600" />
+              <div className="bg-rose-50/60 dark:bg-rose-950/30 border border-rose-200/80 dark:border-rose-800/40 rounded-2xl p-5 text-left space-y-2">
+                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-rose-800 dark:text-rose-400 font-mono">
+                  <XCircle className="w-4 h-4 text-rose-600 dark:text-rose-400" />
                   <span>We Aren't</span>
                 </div>
-                <p className="text-sm font-semibold text-slate-900">
+                <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">
                   A replacement for the professional advice, product documentation, or terms provided by the relevant product provider or professional.
                 </p>
               </div>
@@ -326,22 +326,22 @@ export default function AboutPage() {
 
             {/* Pair 3 */}
             <div className="space-y-4">
-              <div className="bg-emerald-50/60 border border-emerald-200/80 rounded-2xl p-5 text-left space-y-2">
-                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-emerald-800 font-mono">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+              <div className="bg-emerald-50/60 dark:bg-emerald-950/30 border border-emerald-200/80 dark:border-emerald-800/40 rounded-2xl p-5 text-left space-y-2">
+                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-emerald-800 dark:text-emerald-400 font-mono">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
                   <span>We Are</span>
                 </div>
-                <p className="text-sm font-semibold text-slate-900">
+                <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">
                   Focused on making the connection simpler.
                 </p>
               </div>
 
-              <div className="bg-rose-50/60 border border-rose-200/80 rounded-2xl p-5 text-left space-y-2">
-                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-rose-800 font-mono">
-                  <XCircle className="w-4 h-4 text-rose-600" />
+              <div className="bg-rose-50/60 dark:bg-rose-950/30 border border-rose-200/80 dark:border-rose-800/40 rounded-2xl p-5 text-left space-y-2">
+                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-rose-800 dark:text-rose-400 font-mono">
+                  <XCircle className="w-4 h-4 text-rose-600 dark:text-rose-400" />
                   <span>We Aren't</span>
                 </div>
-                <p className="text-sm font-semibold text-slate-900">
+                <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">
                   Here to make the financial decision for you.
                 </p>
               </div>
@@ -352,16 +352,16 @@ export default function AboutPage() {
         {/* ========================================================================= */}
         {/* 6. BUILT AROUND THE CUSTOMER */}
         {/* ========================================================================= */}
-        <section className="py-16 sm:py-24 bg-white border-y border-slate-200/80">
+        <section className="py-16 sm:py-24 bg-white dark:bg-[#0B1120] border-y border-slate-200/80 dark:border-slate-800/80">
           <div className="max-w-5xl mx-auto px-4 sm:px-6">
             <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
-              <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600 font-mono block">
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600 dark:text-emerald-400 font-mono block">
                 Customer-First Design
               </span>
-              <h2 className="text-2xl sm:text-4xl font-display font-extrabold text-slate-900 tracking-tight">
+              <h2 className="text-2xl sm:text-4xl font-display font-extrabold text-slate-900 dark:text-white tracking-tight">
                 Built Around the Customer
               </h2>
-              <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+              <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base leading-relaxed">
                 We want the InsurEdge experience to feel:
               </p>
             </div>
@@ -396,13 +396,13 @@ export default function AboutPage() {
               ].map((p) => (
                 <div
                   key={p.title}
-                  className="bg-[#F8FAFC] border border-slate-200 rounded-2xl p-6 text-left space-y-2 shadow-xs hover:border-emerald-300 transition-all"
+                  className="bg-[#F8FAFC] dark:bg-[#111827] border border-slate-200 dark:border-slate-800 rounded-2xl p-6 text-left space-y-2 shadow-xs hover:border-emerald-300 dark:hover:border-emerald-500/50 transition-all"
                 >
                   <div className="text-2xl mb-2">{p.icon}</div>
-                  <h3 className="text-base font-bold font-display text-slate-900">
+                  <h3 className="text-base font-bold font-display text-slate-900 dark:text-white">
                     {p.title}
                   </h3>
-                  <p className="text-xs text-slate-600 leading-relaxed">
+                  <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                     {p.desc}
                   </p>
                 </div>
@@ -417,25 +417,25 @@ export default function AboutPage() {
         <section className="py-16 sm:py-24 max-w-5xl mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
             {/* Vision */}
-            <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 space-y-4 text-left shadow-xs flex flex-col justify-between">
+            <div className="bg-white dark:bg-[#0B1120] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 space-y-4 text-left shadow-xs flex flex-col justify-between">
               <div className="space-y-4">
-                <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600 font-mono block">
+                <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600 dark:text-emerald-400 font-mono block">
                   Looking Forward
                 </span>
-                <h2 className="text-2xl sm:text-3xl font-display font-extrabold text-slate-900 tracking-tight">
+                <h2 className="text-2xl sm:text-3xl font-display font-extrabold text-slate-900 dark:text-white tracking-tight">
                   Our Vision
                 </h2>
-                <p className="text-base font-bold text-emerald-800 font-display">
+                <p className="text-base font-bold text-emerald-800 dark:text-emerald-400 font-display">
                   A simpler starting point for better financial conversations.
                 </p>
-                <div className="space-y-3 text-xs sm:text-sm text-slate-600 leading-relaxed">
+                <div className="space-y-3 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
                   <p>
                     We want InsurEdge to become a trusted starting point for people who need help navigating insurance and investment decisions.
                   </p>
                   <p>
                     Not by telling everyone what to buy. Not by making financial decisions for customers.
                   </p>
-                  <p className="font-semibold text-slate-800">
+                  <p className="font-semibold text-slate-800 dark:text-slate-200">
                     But by making it easier to find the right professional, ask the right questions, understand the available options, and make an informed decision.
                   </p>
                 </div>
@@ -443,25 +443,25 @@ export default function AboutPage() {
             </div>
 
             {/* What Comes Next */}
-            <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 space-y-4 text-left shadow-xs flex flex-col justify-between">
+            <div className="bg-white dark:bg-[#0B1120] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 space-y-4 text-left shadow-xs flex flex-col justify-between">
               <div className="space-y-4">
-                <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600 font-mono block">
+                <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600 dark:text-emerald-400 font-mono block">
                   Continuous Evolution
                 </span>
-                <h2 className="text-2xl sm:text-3xl font-display font-extrabold text-slate-900 tracking-tight">
+                <h2 className="text-2xl sm:text-3xl font-display font-extrabold text-slate-900 dark:text-white tracking-tight">
                   What Comes Next
                 </h2>
-                <p className="text-base font-bold text-emerald-800 font-display">
+                <p className="text-base font-bold text-emerald-800 dark:text-emerald-400 font-display">
                   InsurEdge is being built around a simple idea:
                 </p>
-                <div className="space-y-3 text-xs sm:text-sm text-slate-600 leading-relaxed">
+                <div className="space-y-3 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
                   <p>
                     Better connections can lead to better conversations.
                   </p>
                   <p>
                     And better conversations can help people make more informed financial decisions.
                   </p>
-                  <p className="font-semibold text-slate-800">
+                  <p className="font-semibold text-slate-800 dark:text-slate-200">
                     We're continuing to improve the way customers discover professionals, submit enquiries, compare information, and get the help they're looking for.
                   </p>
                 </div>
@@ -473,15 +473,15 @@ export default function AboutPage() {
         {/* ========================================================================= */}
         {/* 8. HAVE A REQUIREMENT? (CTA SECTION) */}
         {/* ========================================================================= */}
-        <section className="py-16 sm:py-24 bg-white border-y border-slate-200/80">
+        <section className="py-16 sm:py-24 bg-white dark:bg-[#0B1120] border-y border-slate-200/80 dark:border-slate-800/80">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center space-y-6">
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600 font-mono block">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600 dark:text-emerald-400 font-mono block">
               Take the First Step
             </span>
-            <h2 className="text-3xl sm:text-5xl font-display font-extrabold text-slate-900 tracking-tight">
+            <h2 className="text-3xl sm:text-5xl font-display font-extrabold text-slate-900 dark:text-white tracking-tight">
               Have a Requirement?
             </h2>
-            <p className="text-slate-600 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
+            <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
               If you're exploring Term Insurance, Health Insurance, or Mutual Funds, you can start by telling us what you're looking for.
             </p>
             <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -493,7 +493,7 @@ export default function AboutPage() {
                 <ArrowRight className="w-5 h-5" />
               </Link>
             </div>
-            <p className="text-xs text-slate-500 font-medium">
+            <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">
               Free enquiry • No obligation to purchase
             </p>
           </div>
@@ -502,11 +502,11 @@ export default function AboutPage() {
         {/* ========================================================================= */}
         {/* 9. IMPORTANT INFORMATION (REGULATORY & COMPLIANCE FOOTNOTE) */}
         {/* ========================================================================= */}
-        <section className="py-12 bg-[#F1F5F9] border-t border-slate-200">
+        <section className="py-12 bg-[#F1F5F9] dark:bg-[#050816] border-t border-slate-200 dark:border-slate-800">
           <div className="max-w-5xl mx-auto px-4 sm:px-6">
-            <div className="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 space-y-4 text-xs text-slate-500 leading-relaxed text-left">
-              <div className="flex items-center gap-2 font-display font-bold text-sm text-slate-900">
-                <Info className="w-4 h-4 text-emerald-700 shrink-0" />
+            <div className="bg-white dark:bg-[#0B1120] border border-slate-200 dark:border-slate-800 rounded-2xl p-6 sm:p-8 space-y-4 text-xs text-slate-500 dark:text-slate-400 leading-relaxed text-left">
+              <div className="flex items-center gap-2 font-display font-bold text-sm text-slate-900 dark:text-white">
+                <Info className="w-4 h-4 text-emerald-700 dark:text-emerald-400 shrink-0" />
                 <span>Important Information</span>
               </div>
               <p>
@@ -521,7 +521,7 @@ export default function AboutPage() {
               <p>
                 InsurEdge may receive fees from participating advisors, distributors, or professionals for customer enquiries or leads.
               </p>
-              <p className="font-semibold text-slate-700">
+              <p className="font-semibold text-slate-700 dark:text-slate-300">
                 Submitting an enquiry through InsurEdge is free and does not obligate a customer to purchase any product.
               </p>
             </div>
