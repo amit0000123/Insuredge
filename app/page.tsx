@@ -1,111 +1,72 @@
 "use client";
 
-import { useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 import Link from "next/link";
-import { Sparkles, ArrowRight, Shield, Heart, HelpCircle, Check, Landmark, Star, Clock, Users, ArrowUpRight } from "lucide-react";
+import {
+  Shield,
+  HeartPulse,
+  TrendingUp,
+  CheckCircle2,
+  ArrowRight,
+  ChevronDown,
+  ChevronUp,
+  PhoneCall,
+  HelpCircle,
+  Sparkles,
+  Check,
+  Building2,
+  MapPin,
+  User,
+  Mail,
+  Phone,
+  Info,
+  Lock,
+  Scale,
+  FileText,
+  AlertCircle,
+  ThumbsUp,
+  Star,
+  Users,
+  Compass,
+  ArrowUpRight,
+  ShieldCheck,
+  Coins,
+} from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import OnboardingQuiz from "@/components/OnboardingQuiz";
-
-const productData = {
-  mf: {
-    theme: "theme-mf",
-    kicker: "Find the Right Mutual Fund Today",
-    h1First: "Connect with experts &",
-    h1Highlight: "start your SIP journey",
-    sub: "Share your goals and get matched with a mutual fund advisor who'll compare options across top fund houses — completely free.",
-    formTitle: "Get Connected to a Fund Advisor",
-    formSub: "A licensed advisor will call you within 2 hours. No spam, no obligation.",
-    submitText: "Connect Me With an Advisor",
-  },
-  term: {
-    theme: "theme-term",
-    kicker: "Find the Right Term Cover Today",
-    h1First: "Get ₹1 Crore life cover",
-    h1Highlight: "starting ₹490/month",
-    sub: "Share your details and get connected to a licensed term insurance advisor who'll compare 30+ insurers to find the right plan for you.",
-    formTitle: "Get Your Free Term Insurance Quote",
-    formSub: "A licensed advisor will call you with quotes. No spam, no obligation.",
-    submitText: "Get Free Term Plan Quotes",
-  },
-  save: {
-    theme: "theme-save",
-    kicker: "Find the Right Savings Plan Today",
-    h1First: "Save smart & explore",
-    h1Highlight: "guaranteed return plans",
-    sub: "Connect with savings plan specialists who compare plans across top providers to match your goals, timeline, and budget.",
-    formTitle: "Find Your Ideal Savings Plan",
-    formSub: "A savings advisor will call you within 2 hours. Free & no obligation.",
-    submitText: "Connect Me With a Savings Expert",
-  },
-  hlth: {
-    theme: "theme-hlth",
-    kicker: "Find the Right Health Plan Today",
-    h1First: "Health insurance your family",
-    h1Highlight: "can actually rely on",
-    sub: "Get matched with health insurance advisors who compare cashless plans across top insurers for your family — completely free.",
-    formTitle: "Get Free Health Insurance Quotes",
-    formSub: "A health insurance advisor will call you within 2 hours. No spam.",
-    submitText: "Find My Best Health Plan",
-  },
-};
-
-const tabs = [
-  { key: "mf", label: "Mutual Funds", icon: "📈" },
-  { key: "term", label: "Term Insurance", icon: "🛡️" },
-  { key: "save", label: "Savings Plans", icon: "🏦" },
-  { key: "hlth", label: "Health Insurance", icon: "❤️‍🩹" },
-] as const;
 
 export default function Home() {
-  const [showQuiz, setShowQuiz] = useState(false);
-  const [activeTab, setActiveTab] = useState<"mf" | "term" | "save" | "hlth">("mf");
-
-  // Form states
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
-  const [age, setAge] = useState("");
+  // Enquiry Form State
+  const [selectedCategory, setSelectedCategory] = useState<string>("Term Insurance");
+  const [fullName, setFullName] = useState("");
+  const [mobileNumber, setMobileNumber] = useState("");
+  const [emailAddress, setEmailAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [requirementText, setRequirementText] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [validationErrors, setValidationErrors] = useState<{ name?: boolean; phone?: boolean }>({});
+  const [validationErrors, setValidationErrors] = useState<{
+    name?: boolean;
+    phone?: boolean;
+  }>({});
 
-  // Product specific inputs
-  const [sipAmount, setSipAmount] = useState(5000);
-  const [mfGoal, setMfGoal] = useState("");
-  const [mfRisk, setMfRisk] = useState("Moderate");
+  // FAQ Accordion State
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
 
-  const [termCoverage, setTermCoverage] = useState(1); // Crore
-  const [termIncome, setTermIncome] = useState("₹5–10 LPA");
-  const [termSmoker, setTermSmoker] = useState("Non-Smoker");
+  const enquiryFormRef = useRef<HTMLDivElement>(null);
 
-  const [savingsAmount, setSavingsAmount] = useState(10000);
-  const [saveGoal, setSaveGoal] = useState("Retirement");
-  const [saveHorizon, setSaveHorizon] = useState("7–15 years");
-
-  const [healthCover, setHealthCover] = useState("₹10 Lakh");
-  const [healthType, setHealthType] = useState("Individual");
-  const [healthFamily, setHealthFamily] = useState("Just Me");
-  const [healthConditions, setHealthConditions] = useState("None");
-
-  // Footer / Mini callback form states
-  const [ctaPhone, setCtaPhone] = useState("");
-  const [ctaSubmitted, setCtaSubmitted] = useState(false);
-
-  const formRef = useRef<HTMLDivElement>(null);
-
-  const handleTabChange = (key: "mf" | "term" | "save" | "hlth") => {
-    setActiveTab(key);
+  const scrollToEnquiry = (category?: string) => {
+    if (category) {
+      setSelectedCategory(category);
+    }
+    enquiryFormRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  const handleExploreProduct = (key: "mf" | "term" | "save" | "hlth") => {
-    setActiveTab(key);
-    formRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleEnquirySubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const errors: { name?: boolean; phone?: boolean } = {};
-    if (!name.trim()) errors.name = true;
-    if (!phone.trim()) errors.phone = true;
+    if (!fullName.trim()) errors.name = true;
+    if (!mobileNumber.trim() || mobileNumber.replace(/\D/g, "").length < 10) {
+      errors.phone = true;
+    }
 
     if (Object.keys(errors).length > 0) {
       setValidationErrors(errors);
@@ -116,990 +77,1203 @@ export default function Home() {
     setIsSubmitted(true);
   };
 
-  const handleCtaSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!ctaPhone.trim()) return;
-    setCtaSubmitted(true);
-    setCtaPhone("");
-  };
+  const faqData = [
+    {
+      q: "What is InsurEdge?",
+      a: "InsurEdge is an India-wide lead-generation and professional-connect platform for insurance and investment-related enquiries. We help customers connect with relevant insurance and investment professionals from our partner network.",
+    },
+    {
+      q: "Does InsurEdge sell insurance?",
+      a: "InsurEdge's role is to generate and facilitate customer enquiries and connect customers with relevant professionals. Insurance products are provided by the applicable insurer through the relevant distribution channel.",
+    },
+    {
+      q: "Does InsurEdge provide financial advice?",
+      a: "InsurEdge itself does not provide personalised investment advice. Where investment advice or recommendations are provided, they are provided by the relevant professional or entity subject to their applicable qualifications, registrations, and regulatory requirements.",
+    },
+    {
+      q: "How does InsurEdge make money?",
+      a: "InsurEdge may receive lead-generation, referral, or other applicable fees from participating advisors, distributors, or partners. There is no charge to submit an enquiry through the InsurEdge website.",
+    },
+    {
+      q: "Will someone contact me after I submit an enquiry?",
+      a: "A relevant professional from our partner network may contact you using the details you provide. The timing and availability of contact can depend on the relevant professional and your location.",
+    },
+    {
+      q: "Can I ask for more than one type of financial product?",
+      a: "Yes. If you have multiple requirements—for example, term insurance and health insurance—you can mention them in your enquiry.",
+    },
+    {
+      q: "Is InsurEdge available throughout India?",
+      a: "InsurEdge is designed to serve customers across India, subject to the availability of relevant professionals in the customer's location and the nature of the enquiry.",
+    },
+    {
+      q: "Do I have to buy a product after submitting an enquiry?",
+      a: "No. Submitting an enquiry does not require you to purchase an insurance product, mutual fund, or other financial product. You should evaluate the information provided and make your own decision.",
+    },
+  ];
 
-  const currentProduct = productData[activeTab];
+  const cityOptions = [
+    "Select your city",
+    "Mumbai",
+    "Delhi NCR (Delhi, Noida, Gurgaon)",
+    "Bengaluru",
+    "Hyderabad",
+    "Chennai",
+    "Kolkata",
+    "Pune",
+    "Ahmedabad",
+    "Jaipur",
+    "Lucknow",
+    "Chandigarh",
+    "Kochi",
+    "Indore",
+    "Surat",
+    "Bhopal",
+    "Nagpur",
+    "Patna",
+    "Other City in India",
+  ];
 
   return (
-    <div className={`relative overflow-hidden min-h-screen text-text-primary transition-colors duration-300 theme-${activeTab}`}>
-      {/* Background Mesh */}
-      <div className="mesh"></div>
+    <div className="min-h-screen bg-[#F8FAFC] text-slate-900 font-sans selection:bg-emerald-500 selection:text-white">
+      {/* Background Subtle Ambience */}
+      <div className="fixed inset-0 pointer-events-none z-0">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[600px] bg-gradient-to-b from-blue-50/70 via-emerald-50/30 to-transparent blur-3xl" />
+      </div>
 
-      {/* Hero Section */}
-      <section className="relative z-10 flex flex-col items-center px-[5vw] pt-20 pb-24 text-center">
-        {/* Product Switcher Tabs */}
-        <div className="product-tabs inline-flex bg-white border border-slate-200 p-1.5 rounded-full gap-1.5 mb-12 backdrop-blur-md max-w-full overflow-x-auto no-scrollbar shadow-lg shadow-slate-200/50 relative z-20">
-          {tabs.map((tab) => {
-            const isTabActive = activeTab === tab.key;
-            return (
-              <button
-                key={tab.key}
-                onClick={() => handleTabChange(tab.key)}
-                className={`ptab flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold tracking-wide border-none cursor-pointer whitespace-nowrap transition-all duration-300 select-none ${
-                  isTabActive
-                    ? "bg-accent-custom text-white shadow-md"
-                    : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"
-                }`}
-                style={isTabActive ? { boxShadow: "0 4px 16px var(--accent-glow)" } : undefined}
-              >
-                <span>{tab.icon}</span>
-                {tab.label}
-              </button>
-            );
-          })}
-        </div>
+      <div className="relative z-10">
+        {/* ========================================================================= */}
+        {/* HERO SECTION */}
+        {/* ========================================================================= */}
+        <section className="pt-12 sm:pt-16 pb-16 sm:pb-24 px-4 sm:px-6 max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+            {/* Left Content */}
+            <div className="lg:col-span-7 text-left space-y-6">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200/80 text-emerald-800 text-xs sm:text-sm font-semibold shadow-xs">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                <span>India-Wide Professional Connect Platform</span>
+              </div>
 
-        {/* Dynamic Headings */}
-        <div className="max-w-4xl mx-auto mb-12 space-y-4">
-          <p className="hero-kicker text-xs font-bold font-display tracking-[0.2em] text-accent-custom uppercase transition-colors duration-500">
-            {currentProduct.kicker}
-          </p>
-          <h1 className="hero-h1 font-display text-4xl sm:text-5xl md:text-[5.5rem] font-extrabold leading-[1.0] tracking-tight text-slate-900 max-w-5xl mx-auto transition-all duration-500">
-            {currentProduct.h1First}{" "}
-            <span className="text-accent-custom bg-clip-text transition-colors duration-500 block sm:inline-block">
-              {currentProduct.h1Highlight}
-            </span>
-          </h1>
-          <p className="hero-sub text-sm sm:text-base md:text-[1.05rem] text-slate-600 max-w-2xl mx-auto leading-relaxed transition-all duration-500 font-sans mt-4">
-            {currentProduct.sub}
-          </p>
-        </div>
+              <h1 className="text-3xl sm:text-5xl lg:text-[3.5rem] font-display font-extrabold text-slate-950 tracking-tight leading-[1.12]">
+                Find the Right Insurance &amp; Investment Professional in India
+              </h1>
 
-        {/* Interactive Lead form card */}
-        <div
-          ref={formRef}
-          id="lead-form-card"
-          className="form-card w-full max-w-[580px] bg-white border border-slate-200/90 rounded-[28px] p-8 md:p-10 shadow-xl shadow-slate-200/60 relative overflow-hidden text-left transition-all duration-500"
-          style={{
-            boxShadow: "0 20px 45px -10px rgba(15, 23, 42, 0.08), 0 0 30px var(--accent-glow)",
-          }}
-        >
-          {/* Accent glow on form top right */}
-          <div
-            className="absolute top-[-60px] right-[-60px] w-[220px] h-[220px] rounded-full pointer-events-none opacity-40 transition-all duration-700"
-            style={{
-              background: "radial-gradient(circle, var(--accent-glow) 0%, transparent 65%)",
-            }}
-          ></div>
+              <p className="text-lg sm:text-xl font-semibold text-emerald-800 font-display">
+                Get connected for Term Insurance, Health Insurance and Mutual Funds
+              </p>
 
-          <AnimatePresence mode="wait">
-            {!isSubmitted ? (
-              <motion.form
-                key="form-fields"
-                onSubmit={handleSubmit}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.3 }}
-                className="space-y-6 relative z-10"
-              >
-                <div>
-                  <h3 className="form-card-title font-display text-xl md:text-2xl font-bold text-slate-900 tracking-tight transition-colors duration-500">
-                    {currentProduct.formTitle}
-                  </h3>
-                  <p className="form-card-sub text-xs text-slate-500 leading-normal mt-1 transition-colors duration-500">
-                    {currentProduct.formSub}
+              <p className="text-slate-600 text-sm sm:text-base leading-relaxed max-w-2xl">
+                Looking for the right professional to help you understand your insurance or investment options? InsurEdge connects customers across India with relevant insurance and investment professionals based on their requirements.
+              </p>
+
+              <p className="text-slate-600 text-sm sm:text-base leading-relaxed max-w-2xl">
+                Tell us what you're looking for, share a few basic details, and we'll help connect you with a suitable professional from our partner network.
+              </p>
+
+              {/* CTA and Highlights */}
+              <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+                <button
+                  onClick={() => scrollToEnquiry()}
+                  className="px-8 py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-display font-bold text-base rounded-xl cursor-pointer shadow-lg shadow-emerald-600/20 hover:shadow-xl hover:shadow-emerald-600/30 hover:-translate-y-0.5 active:translate-y-0 transition-all flex items-center justify-center gap-2 group"
+                >
+                  <span>Get a Free Consultation</span>
+                  <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+                </button>
+
+                <div className="flex items-center gap-3 text-xs sm:text-sm text-slate-500 font-medium">
+                  <span className="inline-flex items-center gap-1.5">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                    Simple enquiry
+                  </span>
+                  <span>·</span>
+                  <span className="inline-flex items-center gap-1.5">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                    No charge
+                  </span>
+                  <span>·</span>
+                  <span className="inline-flex items-center gap-1.5">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                    India-wide
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Quick Preview Card */}
+            <div className="lg:col-span-5">
+              <div className="bg-white border border-slate-200/90 rounded-3xl p-6 sm:p-8 shadow-xl shadow-slate-200/60 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-36 h-36 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none" />
+
+                <div className="flex items-center justify-between mb-4">
+                  <span className="text-xs font-bold uppercase tracking-wider text-slate-500 font-mono">
+                    Instant Connect
+                  </span>
+                  <span className="px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-xs font-bold font-mono">
+                    100% Free Service
+                  </span>
+                </div>
+
+                <h3 className="text-xl font-bold font-display text-slate-900 mb-2">
+                  Tell Us What You Need
+                </h3>
+                <p className="text-xs text-slate-500 mb-6 leading-relaxed">
+                  Select your priority and get connected with an accredited professional within 2 hours.
+                </p>
+
+                <div className="space-y-3">
+                  {[
+                    {
+                      name: "Term Insurance",
+                      desc: "Pure protection life cover for your family",
+                      icon: <Shield className="w-5 h-5 text-indigo-600" />,
+                      color: "border-indigo-100 hover:border-indigo-300 hover:bg-indigo-50/30",
+                    },
+                    {
+                      name: "Health Insurance",
+                      desc: "Comprehensive cashless hospitalisation coverage",
+                      icon: <HeartPulse className="w-5 h-5 text-rose-600" />,
+                      color: "border-rose-100 hover:border-rose-300 hover:bg-rose-50/30",
+                    },
+                    {
+                      name: "Mutual Funds",
+                      desc: "SIP & wealth creation aligned with your goals",
+                      icon: <TrendingUp className="w-5 h-5 text-emerald-600" />,
+                      color: "border-emerald-100 hover:border-emerald-300 hover:bg-emerald-50/30",
+                    },
+                  ].map((item) => (
+                    <button
+                      key={item.name}
+                      onClick={() => scrollToEnquiry(item.name)}
+                      className={`w-full p-3.5 rounded-2xl border bg-white flex items-center justify-between text-left transition-all cursor-pointer group shadow-xs ${item.color}`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center shrink-0">
+                          {item.icon}
+                        </div>
+                        <div>
+                          <h4 className="text-sm font-bold text-slate-900 group-hover:text-emerald-700 transition-colors">
+                            {item.name}
+                          </h4>
+                          <p className="text-xs text-slate-500 leading-tight">
+                            {item.desc}
+                          </p>
+                        </div>
+                      </div>
+                      <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-emerald-600 group-hover:translate-x-0.5 transition-all shrink-0" />
+                    </button>
+                  ))}
+                </div>
+
+                <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                  <span className="flex items-center gap-1.5">
+                    <Lock className="w-3.5 h-3.5 text-slate-400" />
+                    Your data is confidential &amp; encrypted
+                  </span>
+                  <span className="font-bold text-emerald-600 font-mono">Verified Advisors</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ========================================================================= */}
+        {/* WHAT FINANCIAL SOLUTION ARE YOU LOOKING FOR? */}
+        {/* ========================================================================= */}
+        <section className="py-16 sm:py-24 bg-white border-y border-slate-200/80">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6">
+            <div className="text-center max-w-3xl mx-auto mb-14 space-y-4">
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600 font-mono block">
+                Financial Categories
+              </span>
+              <h2 className="text-2xl sm:text-4xl font-display font-extrabold text-slate-900 tracking-tight">
+                What Financial Solution Are You Looking For?
+              </h2>
+              <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+                Whether you want to protect your family, prepare for healthcare expenses, or start investing for your financial goals, InsurEdge gives you a simple place to begin.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {/* Term Insurance Card */}
+              <div className="bg-[#F8FAFC] border border-slate-200 rounded-3xl p-6 sm:p-8 flex flex-col justify-between hover:shadow-xl hover:shadow-slate-200/60 hover:-translate-y-1 transition-all duration-300">
+                <div className="space-y-4">
+                  <div className="w-12 h-12 rounded-2xl bg-indigo-50 border border-indigo-100 text-indigo-600 flex items-center justify-center">
+                    <Shield className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold font-display text-slate-900 mb-1">
+                      Term Insurance
+                    </h3>
+                    <p className="text-xs font-semibold text-indigo-600 font-mono">
+                      Protect your family's financial future with life insurance.
+                    </p>
+                  </div>
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    Term insurance provides life cover for a specified policy period. If you're considering term insurance, a relevant insurance professional can help you understand coverage requirements, policy features, premiums, exclusions, and other important terms.
+                  </p>
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    Whether you're buying term insurance for the first time or reviewing your existing life cover, start by telling us what you need.
                   </p>
                 </div>
 
-                {/* Grid Inputs (Name, Phone) */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="flex flex-col gap-1.5">
-                    <label className="text-[0.72rem] font-bold text-slate-500 tracking-wider uppercase font-sans">
-                      Full Name
-                    </label>
-                    <input
-                      suppressHydrationWarning
-                      type="text"
-                      placeholder="Rahul Sharma"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                      className={`form-input-custom w-full bg-slate-50 hover:bg-slate-50/80 focus:bg-white border rounded-xl px-4 py-3 text-sm text-slate-900 outline-none transition-all placeholder:text-slate-400 font-sans focus:border-accent-custom focus:ring-2 focus:ring-accent-custom/20 ${
-                        validationErrors.name
-                          ? "border-rose-500 focus:border-rose-500 focus:ring-4 focus:ring-rose-500/10"
-                          : "border-slate-200"
-                      }`}
-                    />
-                  </div>
-                  <div className="flex flex-col gap-1.5">
-                    <label className="text-[0.72rem] font-bold text-slate-500 tracking-wider uppercase font-sans">
-                      Mobile Number
-                    </label>
-                    <input
-                      suppressHydrationWarning
-                      type="tel"
-                      placeholder="+91 98765 43210"
-                      value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
-                      className={`form-input-custom w-full bg-slate-50 hover:bg-slate-50/80 focus:bg-white border rounded-xl px-4 py-3 text-sm text-slate-900 outline-none transition-all placeholder:text-slate-400 font-sans focus:border-accent-custom focus:ring-2 focus:ring-accent-custom/20 ${
-                        validationErrors.phone
-                          ? "border-rose-500 focus:border-rose-500 focus:ring-4 focus:ring-rose-500/10"
-                          : "border-slate-200"
-                      }`}
-                    />
-                  </div>
-                </div>
-
-                {/* Grid Inputs (Email, Age) */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="flex flex-col gap-1.5">
-                    <label className="text-[0.72rem] font-bold text-slate-500 tracking-wider uppercase font-sans">
-                      Email Address
-                    </label>
-                    <input
-                      suppressHydrationWarning
-                      type="email"
-                      placeholder="rahul@email.com"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      className="form-input-custom w-full bg-slate-50 hover:bg-slate-50/80 focus:bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 outline-none transition-all placeholder:text-slate-400 font-sans focus:border-accent-custom focus:ring-2 focus:ring-accent-custom/20"
-                    />
-                  </div>
-                  <div className="flex flex-col gap-1.5">
-                    <label className="text-[0.72rem] font-bold text-slate-500 tracking-wider uppercase font-sans">
-                      Age
-                    </label>
-                    <input
-                      suppressHydrationWarning
-                      type="number"
-                      placeholder="28"
-                      min="18"
-                      max="70"
-                      value={age}
-                      onChange={(e) => setAge(e.target.value)}
-                      className="form-input-custom w-full bg-slate-50 hover:bg-slate-50/80 focus:bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 outline-none transition-all placeholder:text-slate-400 font-sans focus:border-accent-custom focus:ring-2 focus:ring-accent-custom/20"
-                    />
-                  </div>
-                </div>
-
-                {/* Product Specific Sub-panels */}
-                <div className="border-t border-slate-100 pt-5 mt-2 transition-all duration-300">
-                  {activeTab === "mf" && (
-                    <div className="space-y-5">
-                      <div className="flex flex-col gap-1.5">
-                        <label className="text-[0.72rem] font-bold text-slate-500 tracking-wider uppercase font-sans">
-                          Monthly Investment Amount
-                        </label>
-                        <div className="space-y-2.5 mt-1">
-                          <div className="flex justify-between items-center">
-                            <span className="font-display text-2xl font-bold text-accent-custom transition-colors duration-500">
-                              ₹{sipAmount.toLocaleString("en-IN")}
-                            </span>
-                            <span className="text-xs text-slate-500 font-medium font-sans">/month</span>
-                          </div>
-                          <input
-                            suppressHydrationWarning
-                            type="range"
-                            min="500"
-                            max="100000"
-                            step="500"
-                            value={sipAmount}
-                            onChange={(e) => setSipAmount(Number(e.target.value))}
-                            className="range-input w-full"
-                          />
-                        </div>
-                      </div>
-
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div className="flex flex-col gap-1.5">
-                          <label className="text-[0.72rem] font-bold text-slate-500 tracking-wider uppercase font-sans">
-                            Investment Goal
-                          </label>
-                          <select
-                            suppressHydrationWarning
-                            value={mfGoal}
-                            onChange={(e) => setMfGoal(e.target.value)}
-                            className="form-select-custom w-full bg-slate-50 hover:bg-slate-50/80 focus:bg-white border border-slate-200 rounded-xl px-3.5 py-3 text-sm text-slate-900 outline-none transition-all font-sans cursor-pointer focus:border-accent-custom focus:ring-2 focus:ring-accent-custom/20"
-                          >
-                            <option value="">Select Goal</option>
-                            <option value="Retirement">Retirement Corpus</option>
-                            <option value="Child Education">Child Education</option>
-                            <option value="Home Purchase">Home Purchase</option>
-                            <option value="Wealth Creation">Wealth Creation</option>
-                            <option value="Tax Saving">Tax Saving (ELSS)</option>
-                          </select>
-                        </div>
-                        <div className="flex flex-col gap-1.5">
-                          <label className="text-[0.72rem] font-bold text-slate-500 tracking-wider uppercase font-sans">
-                            Risk Appetite
-                          </label>
-                          <select
-                            suppressHydrationWarning
-                            value={mfRisk}
-                            onChange={(e) => setMfRisk(e.target.value)}
-                            className="form-select-custom w-full bg-slate-50 hover:bg-slate-50/80 focus:bg-white border border-slate-200 rounded-xl px-3.5 py-3 text-sm text-slate-900 outline-none transition-all font-sans cursor-pointer focus:border-accent-custom focus:ring-2 focus:ring-accent-custom/20"
-                          >
-                            <option value="Conservative">Conservative</option>
-                            <option value="Moderate">Moderate</option>
-                            <option value="Aggressive">Aggressive</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {activeTab === "term" && (
-                    <div className="space-y-5">
-                      <div className="flex flex-col gap-1.5">
-                        <label className="text-[0.72rem] font-bold text-slate-500 tracking-wider uppercase font-sans">
-                          Desired Coverage Amount
-                        </label>
-                        <div className="space-y-2.5 mt-1">
-                          <div className="flex justify-between items-center">
-                            <span className="font-display text-2xl font-bold text-accent-custom transition-colors duration-500">
-                              ₹{termCoverage} Crore{termCoverage > 1 ? "s" : ""}
-                            </span>
-                            <span className="text-xs text-slate-500 font-medium font-sans">life cover</span>
-                          </div>
-                          <input
-                            suppressHydrationWarning
-                            type="range"
-                            min="1"
-                            max="10"
-                            step="1"
-                            value={termCoverage}
-                            onChange={(e) => setTermCoverage(Number(e.target.value))}
-                            className="range-input w-full"
-                          />
-                        </div>
-                      </div>
-
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div className="flex flex-col gap-1.5">
-                          <label className="text-[0.72rem] font-bold text-slate-500 tracking-wider uppercase font-sans">
-                            Annual Income
-                          </label>
-                          <select
-                            suppressHydrationWarning
-                            value={termIncome}
-                            onChange={(e) => setTermIncome(e.target.value)}
-                            className="form-select-custom w-full bg-slate-50 hover:bg-slate-50/80 focus:bg-white border border-slate-200 rounded-xl px-3.5 py-3 text-sm text-slate-900 outline-none transition-all font-sans cursor-pointer focus:border-accent-custom focus:ring-2 focus:ring-accent-custom/20"
-                          >
-                            <option value="Below ₹5 LPA">Below ₹5 LPA</option>
-                            <option value="₹5–10 LPA">₹5–10 LPA</option>
-                            <option value="₹10–25 LPA">₹10–25 LPA</option>
-                            <option value="Above ₹25 LPA">Above ₹25 LPA</option>
-                          </select>
-                        </div>
-                        <div className="flex flex-col gap-1.5">
-                          <label className="text-[0.72rem] font-bold text-slate-500 tracking-wider uppercase font-sans">
-                            Smoker?
-                          </label>
-                          <select
-                            suppressHydrationWarning
-                            value={termSmoker}
-                            onChange={(e) => setTermSmoker(e.target.value)}
-                            className="form-select-custom w-full bg-slate-50 hover:bg-slate-50/80 focus:bg-white border border-slate-200 rounded-xl px-3.5 py-3 text-sm text-slate-900 outline-none transition-all font-sans cursor-pointer focus:border-accent-custom focus:ring-2 focus:ring-accent-custom/20"
-                          >
-                            <option value="Non-Smoker">Non-Smoker</option>
-                            <option value="Smoker">Smoker</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {activeTab === "save" && (
-                    <div className="space-y-5">
-                      <div className="flex flex-col gap-1.5">
-                        <label className="text-[0.72rem] font-bold text-slate-500 tracking-wider uppercase font-sans">
-                          Monthly Savings Target
-                        </label>
-                        <div className="space-y-2.5 mt-1">
-                          <div className="flex justify-between items-center">
-                            <span className="font-display text-2xl font-bold text-accent-custom transition-colors duration-500">
-                              ₹{savingsAmount.toLocaleString("en-IN")}
-                            </span>
-                            <span className="text-xs text-slate-500 font-medium font-sans">/month savings</span>
-                          </div>
-                          <input
-                            suppressHydrationWarning
-                            type="range"
-                            min="1000"
-                            max="200000"
-                            step="1000"
-                            value={savingsAmount}
-                            onChange={(e) => setSavingsAmount(Number(e.target.value))}
-                            className="range-input w-full"
-                          />
-                        </div>
-                      </div>
-
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div className="flex flex-col gap-1.5">
-                          <label className="text-[0.72rem] font-bold text-slate-500 tracking-wider uppercase font-sans">
-                            Savings Goal
-                          </label>
-                          <select
-                            suppressHydrationWarning
-                            value={saveGoal}
-                            onChange={(e) => setSaveGoal(e.target.value)}
-                            className="form-select-custom w-full bg-slate-50 hover:bg-slate-50/80 focus:bg-white border border-slate-200 rounded-xl px-3.5 py-3 text-sm text-slate-900 outline-none transition-all font-sans cursor-pointer focus:border-accent-custom focus:ring-2 focus:ring-accent-custom/20"
-                          >
-                            <option value="Emergency Fund">Emergency Fund</option>
-                            <option value="Marriage">Marriage</option>
-                            <option value="Child Future">Child Future</option>
-                            <option value="Retirement">Retirement</option>
-                            <option value="Business Capital">Business Capital</option>
-                          </select>
-                        </div>
-                        <div className="flex flex-col gap-1.5">
-                          <label className="text-[0.72rem] font-bold text-slate-500 tracking-wider uppercase font-sans">
-                            Time Horizon
-                          </label>
-                          <select
-                            suppressHydrationWarning
-                            value={saveHorizon}
-                            onChange={(e) => setSaveHorizon(e.target.value)}
-                            className="form-select-custom w-full bg-slate-50 hover:bg-slate-50/80 focus:bg-white border border-slate-200 rounded-xl px-3.5 py-3 text-sm text-slate-900 outline-none transition-all font-sans cursor-pointer focus:border-accent-custom focus:ring-2 focus:ring-accent-custom/20"
-                          >
-                            <option value="1–3 years">1–3 years</option>
-                            <option value="3–7 years">3–7 years</option>
-                            <option value="7–15 years">7–15 years</option>
-                            <option value="15+ years">15+ years</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {activeTab === "hlth" && (
-                    <div className="space-y-5">
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div className="flex flex-col gap-1.5">
-                          <label className="text-[0.72rem] font-bold text-slate-500 tracking-wider uppercase font-sans">
-                            Cover Required
-                          </label>
-                          <select
-                            suppressHydrationWarning
-                            value={healthCover}
-                            onChange={(e) => setHealthCover(e.target.value)}
-                            className="form-select-custom w-full bg-slate-50 hover:bg-slate-50/80 focus:bg-white border border-slate-200 rounded-xl px-3.5 py-3 text-sm text-slate-900 outline-none transition-all font-sans cursor-pointer focus:border-accent-custom focus:ring-2 focus:ring-accent-custom/20"
-                          >
-                            <option value="₹5 Lakh">₹5 Lakh</option>
-                            <option value="₹10 Lakh">₹10 Lakh</option>
-                            <option value="₹25 Lakh">₹25 Lakh</option>
-                            <option value="₹50 Lakh">₹50 Lakh</option>
-                            <option value="₹1 Crore+">₹1 Crore+</option>
-                          </select>
-                        </div>
-                        <div className="flex flex-col gap-1.5">
-                          <label className="text-[0.72rem] font-bold text-slate-500 tracking-wider uppercase font-sans">
-                            Plan Type
-                          </label>
-                          <select
-                            suppressHydrationWarning
-                            value={healthType}
-                            onChange={(e) => setHealthType(e.target.value)}
-                            className="form-select-custom w-full bg-slate-50 hover:bg-slate-50/80 focus:bg-white border border-slate-200 rounded-xl px-3.5 py-3 text-sm text-slate-900 outline-none transition-all font-sans cursor-pointer focus:border-accent-custom focus:ring-2 focus:ring-accent-custom/20"
-                          >
-                            <option value="Individual">Individual</option>
-                            <option value="Family Floater">Family Floater</option>
-                            <option value="Senior Citizen">Senior Citizen</option>
-                            <option value="Critical Illness">Critical Illness</option>
-                          </select>
-                        </div>
-                      </div>
-
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div className="flex flex-col gap-1.5">
-                          <label className="text-[0.72rem] font-bold text-slate-500 tracking-wider uppercase font-sans">
-                            Family Members to Cover
-                          </label>
-                          <select
-                            suppressHydrationWarning
-                            value={healthFamily}
-                            onChange={(e) => setHealthFamily(e.target.value)}
-                            className="form-select-custom w-full bg-slate-50 hover:bg-slate-50/80 focus:bg-white border border-slate-200 rounded-xl px-3.5 py-3 text-sm text-slate-900 outline-none transition-all font-sans cursor-pointer focus:border-accent-custom focus:ring-2 focus:ring-accent-custom/20"
-                          >
-                            <option value="Just Me">Just Me</option>
-                            <option value="Me + Spouse">Me + Spouse</option>
-                            <option value="Me + Spouse + 1 Child">Me + Spouse + 1 Child</option>
-                            <option value="Me + Spouse + 2 Children">Me + Spouse + 2 Children</option>
-                            <option value="Include Parents">Include Parents</option>
-                          </select>
-                        </div>
-                        <div className="flex flex-col gap-1.5">
-                          <label className="text-[0.72rem] font-bold text-slate-500 tracking-wider uppercase font-sans">
-                            Pre-existing Conditions?
-                          </label>
-                          <select
-                            suppressHydrationWarning
-                            value={healthConditions}
-                            onChange={(e) => setHealthConditions(e.target.value)}
-                            className="form-select-custom w-full bg-slate-50 hover:bg-slate-50/80 focus:bg-white border border-slate-200 rounded-xl px-3.5 py-3 text-sm text-slate-900 outline-none transition-all font-sans cursor-pointer focus:border-accent-custom focus:ring-2 focus:ring-accent-custom/20"
-                          >
-                            <option value="None">None</option>
-                            <option value="Diabetes">Diabetes</option>
-                            <option value="Hypertension">Hypertension</option>
-                            <option value="Others">Others</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                {/* Submit Button */}
-                <button
-                  suppressHydrationWarning
-                  type="submit"
-                  className="w-full py-4 bg-accent-custom text-white font-display font-extrabold text-base border-none rounded-xl cursor-pointer tracking-tight transition-all duration-300 hover:scale-[1.01] hover:brightness-105 active:scale-[0.99] flex items-center justify-center gap-2 group relative z-10 shadow-lg"
-                  style={{
-                    boxShadow: "0 8px 24px var(--accent-glow)",
-                  }}
-                >
-                  <span>{currentProduct.submitText}</span>
-                  <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
-                </button>
-
-                <p className="text-[0.72rem] text-slate-500 text-center leading-relaxed font-sans pt-1">
-                  By continuing, you agree to our{" "}
-                  <Link href="/privacy" className="text-slate-700 underline font-medium hover:text-slate-900">
-                    Privacy Policy
-                  </Link>{" "}
-                  &amp;{" "}
-                  <Link href="/terms" className="text-slate-700 underline font-medium hover:text-slate-900">
-                    Terms
+                <div className="pt-6 mt-6 border-t border-slate-200/80">
+                  <Link
+                    href="/term-insurance"
+                    className="inline-flex items-center gap-2 text-sm font-bold text-indigo-600 hover:text-indigo-800 transition-colors group"
+                  >
+                    <span>Explore Term Insurance</span>
+                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                   </Link>
-                  . We connect you with licensed advisors. Your data is encrypted &amp; never sold.
-                </p>
-              </motion.form>
-            ) : (
-              <motion.div
-                key="success-message"
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.4 }}
-                className="text-center py-10 space-y-4 relative z-10 font-sans"
-              >
-                <div className="text-5xl">🎉</div>
-                <h3 className="font-display text-2xl font-bold text-slate-900">You're all set!</h3>
-                <p className="text-sm text-slate-600 leading-relaxed max-w-sm mx-auto">
-                  A licensed advisor will call you within 2 hours. Keep your phone close. We have sent a confirmation details message to your mobile number.
-                </p>
-                <button
-                  onClick={() => setIsSubmitted(false)}
-                  className="mt-6 border border-slate-200 bg-slate-50 text-slate-800 text-xs font-semibold px-4 py-2 rounded-full cursor-pointer hover:bg-slate-100 transition-all font-sans"
-                >
-                  Fill Another Request
-                </button>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-
-        {/* Social Proof items below Form */}
-        <div className="flex flex-wrap items-center justify-center gap-6 md:gap-8 mt-10 text-[0.82rem] text-text-secondary font-sans">
-          <div className="flex items-center gap-2">
-            <span className="w-5 h-5 rounded-full bg-emerald-500/10 border border-emerald-500/25 flex items-center justify-center text-[0.7rem] text-emerald-400 font-bold">
-              ✓
-            </span>
-            No spam calls
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="w-5 h-5 rounded-full bg-emerald-500/10 border border-emerald-500/25 flex items-center justify-center text-[0.7rem] text-emerald-400 font-bold">
-              ✓
-            </span>
-            100% free service
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="w-5 h-5 rounded-full bg-emerald-500/10 border border-emerald-500/25 flex items-center justify-center text-[0.7rem] text-emerald-400 font-bold">
-              ✓
-            </span>
-            Free consultation
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="w-5 h-5 rounded-full bg-emerald-500/10 border border-emerald-500/25 flex items-center justify-center text-[0.7rem] text-emerald-400 font-bold">
-              ✓
-            </span>
-            SSL secured
-          </div>
-        </div>
-      </section>
-
-      {/* Marquee Bar with moving dots */}
-      <div className="marquee-bar bg-slate-50/80 border-y border-slate-200 py-4 overflow-hidden relative z-10 backdrop-blur-sm">
-        <div className="marquee-track flex gap-12 w-max animate-marquee font-sans font-semibold text-[0.8rem] text-text-secondary tracking-wide uppercase">
-          <span className="m-item flex items-center gap-2">
-            <span className="m-dot"></span>100% Free Comparison Service
-          </span>
-          <span className="m-item flex items-center gap-2">
-            <span className="m-dot"></span>Connect with Licensed Advisors
-          </span>
-          <span className="m-item flex items-center gap-2">
-            <span className="m-dot"></span>50+ Partner Insurers &amp; Fund Houses
-          </span>
-          <span className="m-item flex items-center gap-2">
-            <span className="m-dot"></span>10,000+ Leads Connected
-          </span>
-          <span className="m-item flex items-center gap-2">
-            <span className="m-dot"></span>No Hidden Charges Ever
-          </span>
-          <span className="m-item flex items-center gap-2">
-            <span className="m-dot"></span>4.8★ User Satisfaction
-          </span>
-          <span className="m-item flex items-center gap-2">
-            <span className="m-dot"></span>Callback Within 2 Hours
-          </span>
-          <span className="m-item flex items-center gap-2">
-            <span className="m-dot"></span>Trusted by Families Across India
-          </span>
-          {/* Duplicate loop */}
-          <span className="m-item flex items-center gap-2">
-            <span className="m-dot"></span>100% Free Comparison Service
-          </span>
-          <span className="m-item flex items-center gap-2">
-            <span className="m-dot"></span>Connect with Licensed Advisors
-          </span>
-          <span className="m-item flex items-center gap-2">
-            <span className="m-dot"></span>50+ Partner Insurers &amp; Fund Houses
-          </span>
-          <span className="m-item flex items-center gap-2">
-            <span className="m-dot"></span>10,000+ Leads Connected
-          </span>
-          <span className="m-item flex items-center gap-2">
-            <span className="m-dot"></span>No Hidden Charges Ever
-          </span>
-          <span className="m-item flex items-center gap-2">
-            <span className="m-dot"></span>4.8★ User Satisfaction
-          </span>
-          <span className="m-item flex items-center gap-2">
-            <span className="m-dot"></span>Callback Within 2 Hours
-          </span>
-          <span className="m-item flex items-center gap-2">
-            <span className="m-dot"></span>Trusted by Families Across India
-          </span>
-        </div>
-      </div>
-
-      {/* Trust Stats Section */}
-      <section className="stats-section bg-surface/50 border-y border-border-custom py-16 px-[5vw] relative z-10">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-2 lg:grid-cols-4 border border-border-custom rounded-[20px] overflow-hidden font-sans shadow-xl backdrop-blur-md">
-            <div className="stat-box p-8 text-center border-r border-b lg:border-b-0 border-border-custom bg-background/25">
-              <div className="stat-num font-display text-4xl md:text-5xl font-extrabold text-[#00D4AA] mb-2">
-                10,000+
+                </div>
               </div>
-              <div className="stat-lbl text-[0.85rem] text-text-secondary font-medium">Leads Connected</div>
-            </div>
-            <div className="stat-box p-8 text-center border-r-0 lg:border-r border-b lg:border-b-0 border-border-custom bg-background/25">
-              <div className="stat-num font-display text-4xl md:text-5xl font-extrabold text-[#7C6FF7] mb-2">
-                50+
+
+              {/* Health Insurance Card */}
+              <div className="bg-[#F8FAFC] border border-slate-200 rounded-3xl p-6 sm:p-8 flex flex-col justify-between hover:shadow-xl hover:shadow-slate-200/60 hover:-translate-y-1 transition-all duration-300">
+                <div className="space-y-4">
+                  <div className="w-12 h-12 rounded-2xl bg-rose-50 border border-rose-100 text-rose-600 flex items-center justify-center">
+                    <HeartPulse className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold font-display text-slate-900 mb-1">
+                      Health Insurance
+                    </h3>
+                    <p className="text-xs font-semibold text-rose-600 font-mono">
+                      Find health insurance options for yourself and your family.
+                    </p>
+                  </div>
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    Health insurance can help cover eligible medical and hospitalisation expenses according to the policy's terms, conditions, limits, exclusions, and waiting periods.
+                  </p>
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    If you're looking for individual health insurance, family health insurance, senior citizen health insurance, or want to review your existing coverage, you can connect with a relevant professional through InsurEdge.
+                  </p>
+                </div>
+
+                <div className="pt-6 mt-6 border-t border-slate-200/80">
+                  <Link
+                    href="/health-insurance"
+                    className="inline-flex items-center gap-2 text-sm font-bold text-rose-600 hover:text-rose-800 transition-colors group"
+                  >
+                    <span>Explore Health Insurance</span>
+                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                  </Link>
+                </div>
               </div>
-              <div className="stat-lbl text-[0.85rem] text-text-secondary font-medium">Partner Advisors</div>
-            </div>
-            <div className="stat-box p-8 text-center border-r border-border-custom bg-background/25">
-              <div className="stat-num font-display text-4xl md:text-5xl font-extrabold text-[#F5A623] mb-2">
-                2 Hours
+
+              {/* Mutual Funds Card */}
+              <div className="bg-[#F8FAFC] border border-slate-200 rounded-3xl p-6 sm:p-8 flex flex-col justify-between hover:shadow-xl hover:shadow-slate-200/60 hover:-translate-y-1 transition-all duration-300">
+                <div className="space-y-4">
+                  <div className="w-12 h-12 rounded-2xl bg-emerald-50 border border-emerald-100 text-emerald-600 flex items-center justify-center">
+                    <TrendingUp className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold font-display text-slate-900 mb-1">
+                      Mutual Funds
+                    </h3>
+                    <p className="text-xs font-semibold text-emerald-700 font-mono">
+                      Explore mutual fund investment options based on your goals.
+                    </p>
+                  </div>
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    Mutual funds allow investors to participate in professionally managed investment portfolios, but all investments are subject to market risks.
+                  </p>
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    If you're considering starting a SIP, investing for a long-term goal, or simply want to understand mutual funds better, InsurEdge can connect you with an appropriate investment professional.
+                  </p>
+                </div>
+
+                <div className="pt-6 mt-6 border-t border-slate-200/80">
+                  <Link
+                    href="/mutual-funds"
+                    className="inline-flex items-center gap-2 text-sm font-bold text-emerald-700 hover:text-emerald-900 transition-colors group"
+                  >
+                    <span>Explore Mutual Funds</span>
+                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                  </Link>
+                </div>
               </div>
-              <div className="stat-lbl text-[0.85rem] text-text-secondary font-medium">Average Callback</div>
-            </div>
-            <div className="stat-box p-8 text-center bg-background/25">
-              <div className="stat-num font-display text-4xl md:text-5xl font-extrabold text-[#FF5E7D] mb-2">
-                4.8 ★
-              </div>
-              <div className="stat-lbl text-[0.85rem] text-text-secondary font-medium">User Satisfaction</div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* How It Works Section */}
-      <section id="how-it-works" className="how-section py-24 px-[5vw] relative z-10 bg-background/40">
-        <div className="max-w-7xl mx-auto space-y-16">
-          <div className="space-y-4 text-center">
-            <div className="eyebrow font-mono text-[0.7rem] tracking-[0.15em] text-accent-custom uppercase flex items-center gap-1 justify-center">
-              Our Process
-            </div>
-            <h2 className="section-title font-display text-3xl md:text-5xl font-bold leading-tight tracking-tight max-w-xl mx-auto">
-              Your plan in 4 simple steps
+        {/* ========================================================================= */}
+        {/* HOW INSUREDGE HELPS (5-STEP PROCESS) */}
+        {/* ========================================================================= */}
+        <section className="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600 font-mono block">
+              Simple 5-Step Process
+            </span>
+            <h2 className="text-2xl sm:text-4xl font-display font-extrabold text-slate-900 tracking-tight">
+              How InsurEdge Helps
             </h2>
-            <p className="section-sub text-[1rem] text-text-secondary leading-relaxed max-w-[500px] mx-auto">
-              No jargon. No sales spam. Just clear goals and matched advisors.
+            <p className="text-lg font-semibold text-emerald-800 font-display">
+              A simpler way to start your financial journey
+            </p>
+            <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+              Finding the right insurance or investment professional can be difficult when you don't know where to begin. InsurEdge makes the first step simpler.
             </p>
           </div>
 
-          <div className="how-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 font-sans">
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
             {[
               {
                 step: "1",
-                title: "Share Your Goals",
-                desc: "Fill the form above. Tell us your financial goals, income, and what matters most to you.",
-                color: "s1",
-                shadow: "rgba(0,212,170,0.2)",
+                title: "Tell Us What You Need",
+                desc: "Submit a short enquiry and tell us whether you're looking for term insurance, health insurance, mutual funds, or another related requirement.",
               },
               {
                 step: "2",
-                title: "An Expert Calls You",
-                desc: "A licensed advisor from our partner network calls within 2 hours for a free needs assessment — zero pressure.",
-                color: "s2",
-                shadow: "rgba(124,111,247,0.2)",
+                title: "Share Your Basic Details",
+                desc: "Provide a few details about yourself and your requirement so we can better understand the type of professional you may need.",
               },
               {
                 step: "3",
-                title: "Compare & Choose",
-                desc: "Receive a personalised comparison of products, providers, premiums, and features to choose what fits.",
-                color: "s3",
-                shadow: "rgba(245,166,35,0.2)",
+                title: "Get Connected",
+                desc: "Your enquiry may be shared with a relevant professional from our partner network who can contact you regarding your requirement.",
               },
               {
                 step: "4",
-                title: "Get Started",
-                desc: "Once you choose, the advisor you're connected with handles onboarding directly. Safe and simple.",
-                color: "s4",
-                shadow: "rgba(255,94,125,0.2)",
+                title: "Understand Your Options",
+                desc: "The professional can explain relevant products, features, costs, eligibility requirements, risks, exclusions, and other applicable details.",
               },
-            ].map((item, idx) => (
+              {
+                step: "5",
+                title: "Make Your Own Decision",
+                desc: "Take the information you receive, ask questions, compare your options, and make your own financial decision.",
+              },
+            ].map((item) => (
               <div
-                key={idx}
-                className="how-card p-7 bg-surface/80 border border-border-custom rounded-2xl text-center relative transition-all duration-300 hover:scale-[1.02] hover:border-accent-custom/30 shadow-md backdrop-blur-sm"
+                key={item.step}
+                className="bg-white border border-slate-200 rounded-2xl p-6 text-left relative flex flex-col justify-between shadow-xs hover:border-emerald-300 hover:shadow-md transition-all"
               >
-                <div
-                  className={`step-num-circle w-12 h-12 rounded-full border border-border-custom flex items-center justify-center font-display text-base font-extrabold mb-5 mx-auto`}
-                  style={{
-                    color: "var(--accent)",
-                    boxShadow: `0 0 20px ${item.shadow}`,
-                  }}
-                >
-                  {item.step}
-                </div>
-                <h3 className="step-title font-display text-[1.05rem] font-bold text-text-primary mb-2">
-                  {item.title}
-                </h3>
-                <p className="step-desc text-[0.825rem] text-text-secondary leading-relaxed font-normal">
-                  {item.desc}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Categories / Products Deep Dive Section */}
-      <section className="py-24 px-[5vw] relative z-10 bg-surface">
-        <div className="max-w-7xl mx-auto space-y-16">
-          <div className="space-y-4">
-            <div className="eyebrow font-mono text-[0.7rem] tracking-[0.15em] text-accent-custom uppercase flex items-center gap-1">
-              Categories
-            </div>
-            <h2 className="section-title font-display text-3xl md:text-5xl font-bold leading-tight tracking-tight">
-              Products built for your life stage
-            </h2>
-            <p className="section-sub text-[1rem] text-text-secondary leading-relaxed max-w-[500px]">
-              Evaluate top plans, compound your wealth, and secure family income with verified advisory.
-            </p>
-          </div>
-
-          <div className="cat-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              {
-                title: "Mutual Funds",
-                icon: "📈",
-                desc: "SIP compounding and tax saving ELSS tailored to your timeline",
-                tab: "mf",
-                count: "45 plans reviewed",
-                tag: "Most Popular",
-              },
-              {
-                title: "Term Insurance",
-                icon: "🛡️",
-                desc: "High-value life coverage with claim settlement support guidance",
-                tab: "term",
-                count: "48 plans reviewed",
-                tag: "Save up to 40%",
-              },
-              {
-                title: "Savings Plans",
-                icon: "🏦",
-                desc: "Capital safe instruments with guaranteed tax-free returns",
-                tab: "save",
-                count: "30 plans reviewed",
-                tag: "Guaranteed",
-              },
-              {
-                title: "Health Cover",
-                icon: "❤️‍🩹",
-                desc: "Cashless coverage matching cashless hospital availability",
-                tab: "hlth",
-                count: "62 plans reviewed",
-                tag: "No Claim Bonus",
-              },
-            ].map((cat) => (
-              <button
-                suppressHydrationWarning
-                key={cat.title}
-                onClick={() => handleExploreProduct(cat.tab as any)}
-                className="cat-card p-6 bg-white border border-slate-200/80 rounded-2xl cursor-pointer hover:border-accent-custom/40 hover:-translate-y-1 transition-all duration-300 group hover:shadow-xl shadow-slate-200/40 text-left w-full block focus:outline-none relative overflow-hidden"
-              >
-                <div className="flex justify-between items-start mb-4">
-                  <div className="cat-icon w-12 h-12 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center text-xl transition-colors duration-300">
-                    {cat.icon}
+                <div>
+                  <div className="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 font-display font-extrabold flex items-center justify-center text-sm mb-4">
+                    {item.step}
                   </div>
-                  <span className="text-[0.62rem] font-bold tracking-wider font-mono uppercase bg-slate-100 border border-slate-200 text-slate-600 px-2 py-0.5 rounded-full">
-                    {cat.tag}
-                  </span>
-                </div>
-                <h3 className="cat-name font-display text-[1.1rem] font-bold text-text-primary mb-1">
-                  {cat.title}
-                </h3>
-                <p className="text-[0.78rem] text-text-secondary font-sans leading-relaxed mb-4 min-h-[50px]">
-                  {cat.desc}
-                </p>
-                <div className="flex justify-between items-center pt-2 border-t border-border-custom/50">
-                  <span className="cat-count text-[0.7rem] text-accent-custom font-mono transition-colors duration-300">
-                    {cat.count}
-                  </span>
-                  <span className="text-xs font-bold text-text-secondary group-hover:text-accent-custom transition-all flex items-center gap-1 font-sans">
-                    Get Started &rarr;
-                  </span>
-                </div>
-              </button>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Compare/Pillars Section */}
-      <section className="compare-section py-24 px-[5vw] relative z-10 bg-background">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-            {/* Left Content */}
-            <div className="space-y-8 font-sans">
-              <div className="space-y-4">
-                <div className="eyebrow font-mono text-[0.7rem] tracking-[0.15em] text-accent-custom uppercase flex items-center gap-1">
-                  Our Promise
-                </div>
-                <h2 className="section-title font-display text-3xl md:text-5xl font-bold leading-tight tracking-tight">
-                  Built for the buyer, not the broker
-                </h2>
-                <p className="section-sub text-[1rem] text-text-secondary leading-relaxed max-w-[500px]">
-                  Every recommendation is backed by conflict-free, customer-first assessments.
-                </p>
-              </div>
-
-              <div className="pillar-list border-y border-border-custom divide-y divide-border-custom">
-                {[
-                  {
-                    icon: "🔬",
-                    title: "Data-First Reviews",
-                    desc: "Every policy clause evaluated. No marketing payouts or product prioritization.",
-                  },
-                  {
-                    icon: "⚖️",
-                    title: "Zero Conflicts of Interest",
-                    desc: "No commission markup on advisory. Transparency is our core value.",
-                  },
-                  {
-                    icon: "🆘",
-                    title: "Active Claims Advocacy",
-                    desc: "Dedicated claim desk coordinating cashless approvals at hospitals.",
-                  },
-                ].map((pillar) => (
-                  <div key={pillar.title} className="pillar flex gap-5 py-6 items-start">
-                    <div className="pillar-ico w-10 h-10 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center text-lg mt-0.5 shrink-0">
-                      {pillar.icon}
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-[0.95rem] text-text-primary mb-1">{pillar.title}</h4>
-                      <p className="text-[0.855rem] text-text-secondary leading-relaxed">{pillar.desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Right Comparison Table */}
-            <div className="compare-table bg-white border border-slate-200 rounded-[20px] overflow-hidden font-sans shadow-xl shadow-slate-200/40">
-              <div className="compare-head grid grid-cols-[1.4fr_1fr_1fr] bg-slate-50 border-b border-slate-200 text-[0.72rem] font-bold tracking-wider uppercase font-mono">
-                <div className="p-4 pl-5">Feature</div>
-                <div className="p-4 text-accent-custom transition-colors duration-500">InsurEdge</div>
-                <div className="p-4 text-text-secondary">Traditional Aggregators</div>
-              </div>
-
-              <div className="divide-y divide-border-custom">
-                {[
-                  { f: "Insurer alliances", a: "✓ None", b: "✗ Commission aligned", clean: true },
-                  { f: "Independent reviews", a: "✓ Always", b: "✗ Sponsored ratings", clean: true },
-                  { f: "Claim assistance", a: "✓ Active (24/7 Desk)", b: "✗ Relies on third-party helpline", clean: true },
-                  { f: "Expert consults", a: "✓ Free & Vetted", b: "✗ Sales agents calling", clean: true },
-                  { f: "Sorting criteria", a: "✓ Objective filters", b: "✗ Highest bidder gets top spot", clean: true },
-                ].map((row) => (
-                  <div
-                    key={row.f}
-                    className="compare-r grid grid-cols-[1.4fr_1fr_1fr] text-[0.85rem] hover:bg-background/25 transition-colors"
-                  >
-                    <div className="p-4 pl-5 text-text-primary font-sans font-medium">{row.f}</div>
-                    <div className="p-4 text-accent-custom font-semibold transition-colors duration-500">{row.a}</div>
-                    <div className="p-4 text-text-secondary font-medium">{row.b}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Reviews/Testimonials Section */}
-      <section className="testi-section py-24 px-[5vw] relative z-10 bg-surface/50">
-        <div className="max-w-7xl mx-auto space-y-16">
-          <div className="space-y-4 text-center">
-            <div className="eyebrow font-mono text-[0.7rem] tracking-[0.15em] text-accent-custom uppercase flex items-center justify-center gap-1">
-              Customer Stories
-            </div>
-            <h2 className="section-title font-display text-3xl md:text-5xl font-bold leading-tight tracking-tight max-w-xl mx-auto">
-              10,000+ people connected with the right advisor
-            </h2>
-            <p className="section-sub text-[1rem] text-text-secondary leading-relaxed max-w-[500px] mx-auto">
-              Read what they say about their free advisor matchmaking experience.
-            </p>
-          </div>
-
-          <div className="testi-grid grid grid-cols-1 md:grid-cols-3 gap-6 font-sans">
-            {[
-              {
-                name: "Riya Sharma",
-                role: "Software Engineer, Bangalore",
-                avatar: "RS",
-                text: `"I filled the form and got a call within 90 minutes. The advisor I was connected with helped me start a ₹5,000/month SIP. Really smooth experience and zero pressure."`,
-                product: "Mutual Fund",
-                color: "bg-emerald-500/10 text-[#00d4aa]",
-              },
-              {
-                name: "Arjun Kulkarni",
-                role: "Business Owner, Pune",
-                avatar: "AK",
-                text: `"Got connected to a term insurance advisor same day. They compared 8 plans transparently and explained the claim ratios. Ended up buying HDFC Life — great experience overall."`,
-                product: "Term Insurance",
-                color: "bg-violet-500/10 text-[#7c6ff7]",
-              },
-              {
-                name: "Priya Menon",
-                role: "Teacher, Chennai",
-                avatar: "PM",
-                text: `"Found the right family health plan through InsurEdge in under an hour. The advisor they connected me with was knowledgeable and helped us pick a cashless plan at a hospital nearby."`,
-                product: "Health Insurance",
-                color: "bg-rose-500/10 text-[#ff5e7d]",
-              },
-            ].map((rev, idx) => (
-              <div
-                key={idx}
-                className="testi-card p-7 bg-white border border-slate-200/80 rounded-2xl flex flex-col justify-between hover:border-slate-300 transition-all hover:-translate-y-1 duration-200 shadow-sm hover:shadow-md"
-              >
-                <div className="space-y-4">
-                  <div className="text-yellow-500 text-sm tracking-wide">★★★★★</div>
-                  <p className="text-text-primary text-[0.875rem] leading-relaxed italic">{rev.text}</p>
-                </div>
-                <div className="flex items-center gap-3 pt-6 mt-6 border-t border-border-custom/50">
-                  <div
-                    className="w-9 h-9 rounded-full font-bold text-xs flex items-center justify-center text-white bg-gradient-to-br from-primary-custom to-[#8B5CF6]"
-                  >
-                    {rev.avatar}
-                  </div>
-                  <div>
-                    <h4 className="text-sm font-bold text-text-primary leading-tight">{rev.name}</h4>
-                    <span className="text-[0.68rem] text-text-secondary">{rev.role}</span>
-                  </div>
-                  <span
-                    className={`ml-auto text-[0.62rem] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider font-mono ${rev.color}`}
-                  >
-                    {rev.product}
-                  </span>
+                  <h3 className="text-base font-bold font-display text-slate-900 mb-2">
+                    {item.title}
+                  </h3>
+                  <p className="text-xs text-slate-600 leading-relaxed">
+                    {item.desc}
+                  </p>
                 </div>
               </div>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* Second Lead CTA Section */}
-      <section className="cta2-section py-24 px-[5vw] relative z-10 text-center">
-        <div className="max-w-5xl mx-auto bg-white border border-slate-200/90 rounded-[28px] p-10 md:p-16 relative overflow-hidden shadow-xl shadow-slate-200/50">
-          <div
-            className="absolute inset-0 pointer-events-none opacity-20"
-            style={{
-              background: "radial-gradient(ellipse 60% 70% at 50% 50%, var(--accent-glow) 0%, transparent 65%)",
-            }}
-          ></div>
-
-          <div className="relative z-10 space-y-6 max-w-2xl mx-auto">
-            <span className="text-xs font-bold tracking-[0.2em] uppercase text-accent-custom transition-colors duration-500">
-              Still thinking?
-            </span>
-            <h2 className="font-display text-3xl sm:text-5xl font-extrabold leading-[1.1] tracking-tight text-text-primary">
-              Talk to an expert. <br />
-              <span className="text-accent-custom transition-colors duration-500">It's completely free.</span>
-            </h2>
-            <p className="text-sm sm:text-base text-text-secondary leading-relaxed">
-              No commitment. No spam. Just share your mobile number and we'll connect you with the right licensed advisor
-              for your financial goals — within 2 hours.
-            </p>
-
-            {/* Inline Mini Callback Form */}
-            <div className="pt-4 max-w-lg mx-auto">
-              <form onSubmit={handleCtaSubmit} className="flex flex-col sm:flex-row gap-3 w-full">
-                <input
-                  suppressHydrationWarning
-                  type="tel"
-                  placeholder={ctaSubmitted ? "✓ We'll call you shortly!" : "Enter your mobile number"}
-                  value={ctaPhone}
-                  disabled={ctaSubmitted}
-                  onChange={(e) => setCtaPhone(e.target.value)}
-                  className={`flex-grow bg-slate-50 border rounded-full px-6 py-3.5 text-sm text-slate-900 outline-none transition-all placeholder:text-slate-400 font-sans shadow-sm ${
-                    ctaSubmitted
-                      ? "border-emerald-500/30 text-emerald-600 placeholder:text-emerald-600 bg-emerald-50"
-                      : "border-slate-200 focus:border-accent-custom focus:bg-white focus:ring-4 focus:ring-accent-custom/10"
-                  }`}
-                />
-                <button
-                  suppressHydrationWarning
-                  type="submit"
-                  disabled={ctaSubmitted}
-                  className="bg-accent-custom hover:opacity-90 disabled:opacity-80 disabled:cursor-not-allowed text-white font-display font-extrabold text-sm px-8 py-3.5 rounded-full shadow-[0_8px_24px_var(--accent-glow)] transition-all cursor-pointer flex items-center justify-center gap-1.5 whitespace-nowrap border-none"
-                >
-                  {ctaSubmitted ? "Success" : "Get Callback"} &rarr;
-                </button>
-              </form>
-            </div>
-
-            {/* Badges */}
-            <div className="flex flex-wrap items-center justify-center gap-5 pt-8 text-[0.76rem] text-text-secondary font-sans font-medium">
-              <span className="flex items-center gap-1"><span className="text-sm">🔒</span> SSL Encrypted</span>
-              <span className="flex items-center gap-1"><span className="text-sm">🆓</span> 100% Free Service</span>
-              <span className="flex items-center gap-1"><span className="text-sm">🚫</span> No Spam Calls</span>
-              <span className="flex items-center gap-1"><span className="text-sm">⭐</span> 4.8/5 Satisfaction</span>
-              <span className="flex items-center gap-1"><span className="text-sm">📞</span> Callback in 2 Hours</span>
-            </div>
+          <div className="mt-12 text-center">
+            <button
+              onClick={() => scrollToEnquiry()}
+              className="px-8 py-3.5 bg-slate-900 hover:bg-slate-800 text-white font-display font-bold text-sm rounded-xl cursor-pointer shadow-md hover:shadow-lg transition-all inline-flex items-center gap-2"
+            >
+              <span>Submit Your Enquiry</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Partners Section */}
-      <section className="partners-section py-12 border-t border-border-custom bg-background/20 relative z-10 text-center px-6">
-        <div className="max-w-6xl mx-auto space-y-8 font-sans">
-          <p className="text-[0.68rem] font-bold text-text-secondary/60 uppercase tracking-[0.18em]">
-            Advisors on our platform work with leading insurers &amp; fund houses including
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-6 text-sm font-bold text-text-secondary/40 select-none">
-            {["HDFC Life", "ICICI Prudential", "Mirae Asset", "SBI Mutual Fund", "Star Health", "Niva Bupa", "Max Life", "Axis Bluechip"].map((p) => (
-              <span key={p} className="hover:text-text-secondary/80 transition-colors cursor-default">
-                {p}
+        {/* ========================================================================= */}
+        {/* WHY CHOOSE INSUREDGE? */}
+        {/* ========================================================================= */}
+        <section className="py-16 sm:py-24 bg-white border-y border-slate-200/80">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6">
+            <div className="text-center max-w-3xl mx-auto mb-14 space-y-4">
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600 font-mono block">
+                Platform Advantages
               </span>
+              <h2 className="text-2xl sm:text-4xl font-display font-extrabold text-slate-900 tracking-tight">
+                Why Choose InsurEdge?
+              </h2>
+              <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+                One place to start for insurance and investment enquiries
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[
+                {
+                  title: "Relevant Professional Connections",
+                  desc: "We aim to connect your enquiry with a professional whose area of work is relevant to your requirement.",
+                  icon: <Users className="w-5 h-5 text-indigo-600" />,
+                },
+                {
+                  title: "Simple Process",
+                  desc: "You don't need to understand complicated financial terminology before getting started. Tell us what you're looking for and take the first step.",
+                  icon: <CheckCircle2 className="w-5 h-5 text-emerald-600" />,
+                },
+                {
+                  title: "Multiple Financial Categories",
+                  desc: "Get started with enquiries related to Term Insurance, Health Insurance, and Mutual Funds all under one unified platform.",
+                  icon: <Coins className="w-5 h-5 text-amber-600" />,
+                },
+                {
+                  title: "India-Wide Network",
+                  desc: "InsurEdge is designed to connect customers with professionals across India, subject to partner availability in the customer's location.",
+                  icon: <MapPin className="w-5 h-5 text-rose-600" />,
+                },
+                {
+                  title: "Transparent Role",
+                  desc: "InsurEdge is a lead-generation and professional-connect platform. We help facilitate the connection between customers and relevant professionals.",
+                  icon: <Scale className="w-5 h-5 text-blue-600" />,
+                },
+                {
+                  title: "No Charge to Submit an Enquiry",
+                  desc: "There is no charge to submit an enquiry through InsurEdge. InsurEdge may receive a lead-generation or referral fee from participating advisors, distributors, or other partners.",
+                  icon: <ShieldCheck className="w-5 h-5 text-emerald-600" />,
+                },
+              ].map((item) => (
+                <div
+                  key={item.title}
+                  className="bg-[#F8FAFC] border border-slate-200 rounded-2xl p-6 text-left space-y-3 shadow-xs hover:border-slate-300 transition-all"
+                >
+                  <div className="w-10 h-10 rounded-xl bg-white border border-slate-200/80 flex items-center justify-center shrink-0">
+                    {item.icon}
+                  </div>
+                  <h3 className="text-base font-bold font-display text-slate-900">
+                    {item.title}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    {item.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ========================================================================= */}
+        {/* INSURANCE & INVESTMENT HELP BASED ON YOUR REQUIREMENT */}
+        {/* ========================================================================= */}
+        <section className="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="text-center max-w-3xl mx-auto mb-14 space-y-4">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600 font-mono block">
+              Requirement-Based Guidance
+            </span>
+            <h2 className="text-2xl sm:text-4xl font-display font-extrabold text-slate-900 tracking-tight">
+              Insurance &amp; Investment Help Based on Your Requirement
+            </h2>
+            <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+              Different stages in life demand specialized conversations. Here is what an experienced professional can walk you through.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Term Insurance Checklist */}
+            <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-xs hover:shadow-lg transition-all">
+              <div className="space-y-5">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold">
+                    <Shield className="w-5 h-5" />
+                  </div>
+                  <h3 className="text-xl font-bold font-display text-slate-900">
+                    Looking for Term Insurance?
+                  </h3>
+                </div>
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                  Your financial responsibilities can change as your career, family, income, and financial commitments change. A term insurance professional can help you understand factors such as:
+                </p>
+                <ul className="space-y-2.5 text-xs sm:text-sm text-slate-700">
+                  {[
+                    "Life cover requirements",
+                    "Policy duration",
+                    "Premiums & payment terms",
+                    "Eligibility criteria",
+                    "Policy exclusions",
+                    "Riders and additional benefits",
+                    "Claim-related terms",
+                    "Existing insurance coverage evaluation",
+                  ].map((pt) => (
+                    <li key={pt} className="flex items-start gap-2">
+                      <Check className="w-4 h-4 text-indigo-600 shrink-0 mt-0.5" />
+                      <span>{pt}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="pt-6 mt-6 border-t border-slate-100">
+                <Link
+                  href="/term-insurance"
+                  className="text-xs sm:text-sm font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5"
+                >
+                  <span>Learn More About Term Insurance</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
+            </div>
+
+            {/* Health Insurance Checklist */}
+            <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-xs hover:shadow-lg transition-all">
+              <div className="space-y-5">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center font-bold">
+                    <HeartPulse className="w-5 h-5" />
+                  </div>
+                  <h3 className="text-xl font-bold font-display text-slate-900">
+                    Looking for Health Insurance?
+                  </h3>
+                </div>
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                  Healthcare expenses can be unpredictable, which is why understanding health insurance coverage before you need it can be important. Depending on your requirements, you may want to understand:
+                </p>
+                <ul className="space-y-2.5 text-xs sm:text-sm text-slate-700">
+                  {[
+                    "Individual health insurance",
+                    "Family floater health insurance",
+                    "Senior citizen health insurance",
+                    "Sum insured adequacy",
+                    "Waiting periods for pre-existing conditions",
+                    "Network hospitals near you",
+                    "Cashless treatment procedure",
+                    "Room-rent limits & co-payment clauses",
+                    "Policy exclusions & restorative benefits",
+                  ].map((pt) => (
+                    <li key={pt} className="flex items-start gap-2">
+                      <Check className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
+                      <span>{pt}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="pt-6 mt-6 border-t border-slate-100">
+                <Link
+                  href="/health-insurance"
+                  className="text-xs sm:text-sm font-bold text-rose-600 hover:text-rose-800 flex items-center gap-1.5"
+                >
+                  <span>Learn More About Health Insurance</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
+            </div>
+
+            {/* Mutual Funds Checklist */}
+            <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-xs hover:shadow-lg transition-all">
+              <div className="space-y-5">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold">
+                    <TrendingUp className="w-5 h-5" />
+                  </div>
+                  <h3 className="text-xl font-bold font-display text-slate-900">
+                    Looking to Invest in Mutual Funds?
+                  </h3>
+                </div>
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                  Before investing, it's important to understand your financial goals, investment horizon, risk tolerance, and the characteristics of the investment product. A relevant investment professional can discuss:
+                </p>
+                <ul className="space-y-2.5 text-xs sm:text-sm text-slate-700">
+                  {[
+                    "SIP (Systematic Investment Plan) structure",
+                    "Lump-sum investment options",
+                    "Mutual fund categories (Equity, Debt, Hybrid)",
+                    "Investment horizon alignment",
+                    "Market risk management",
+                    "Asset diversification",
+                    "Expense ratio and investment costs",
+                    "Long-term financial milestones",
+                  ].map((pt) => (
+                    <li key={pt} className="flex items-start gap-2">
+                      <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                      <span>{pt}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="pt-6 mt-6 border-t border-slate-100">
+                <Link
+                  href="/mutual-funds"
+                  className="text-xs sm:text-sm font-bold text-emerald-700 hover:text-emerald-900 flex items-center gap-1.5"
+                >
+                  <span>Learn More About Mutual Funds</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ========================================================================= */}
+        {/* WHAT CAN YOU ASK A FINANCIAL PROFESSIONAL? */}
+        {/* ========================================================================= */}
+        <section className="py-16 sm:py-24 bg-white border-y border-slate-200/80">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6">
+            <div className="text-center max-w-3xl mx-auto mb-14 space-y-4">
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600 font-mono block">
+                Sample Conversations
+              </span>
+              <h2 className="text-2xl sm:text-4xl font-display font-extrabold text-slate-900 tracking-tight">
+                What Can You Ask a Financial Professional?
+              </h2>
+              <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+                You don't need to know exactly which product you want before submitting an enquiry. You can start with a question.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {/* For Term Insurance */}
+              <div className="bg-[#F8FAFC] border border-slate-200 rounded-2xl p-6 text-left space-y-4">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 text-indigo-700 font-mono text-xs font-bold">
+                  For Term Insurance
+                </div>
+                <div className="space-y-3">
+                  <div className="p-3.5 bg-white rounded-xl border border-slate-200/80 text-xs sm:text-sm text-slate-800 font-medium italic shadow-2xs">
+                    "How much term insurance cover might I need?"
+                  </div>
+                  <div className="p-3.5 bg-white rounded-xl border border-slate-200/80 text-xs sm:text-sm text-slate-800 font-medium italic shadow-2xs">
+                    "What should I compare before buying a term plan?"
+                  </div>
+                  <div className="p-3.5 bg-white rounded-xl border border-slate-200/80 text-xs sm:text-sm text-slate-800 font-medium italic shadow-2xs">
+                    "How does my age and income affect my insurance requirement?"
+                  </div>
+                </div>
+              </div>
+
+              {/* For Health Insurance */}
+              <div className="bg-[#F8FAFC] border border-slate-200 rounded-2xl p-6 text-left space-y-4">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-50 text-rose-700 font-mono text-xs font-bold">
+                  For Health Insurance
+                </div>
+                <div className="space-y-3">
+                  <div className="p-3.5 bg-white rounded-xl border border-slate-200/80 text-xs sm:text-sm text-slate-800 font-medium italic shadow-2xs">
+                    "How much health insurance cover should I consider?"
+                  </div>
+                  <div className="p-3.5 bg-white rounded-xl border border-slate-200/80 text-xs sm:text-sm text-slate-800 font-medium italic shadow-2xs">
+                    "Should I consider individual or family health insurance?"
+                  </div>
+                  <div className="p-3.5 bg-white rounded-xl border border-slate-200/80 text-xs sm:text-sm text-slate-800 font-medium italic shadow-2xs">
+                    "What should I check before choosing a health insurance policy?"
+                  </div>
+                </div>
+              </div>
+
+              {/* For Mutual Funds */}
+              <div className="bg-[#F8FAFC] border border-slate-200 rounded-2xl p-6 text-left space-y-4">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 font-mono text-xs font-bold">
+                  For Mutual Funds
+                </div>
+                <div className="space-y-3">
+                  <div className="p-3.5 bg-white rounded-xl border border-slate-200/80 text-xs sm:text-sm text-slate-800 font-medium italic shadow-2xs">
+                    "How do I start investing through mutual funds?"
+                  </div>
+                  <div className="p-3.5 bg-white rounded-xl border border-slate-200/80 text-xs sm:text-sm text-slate-800 font-medium italic shadow-2xs">
+                    "What is a SIP and how does it work?"
+                  </div>
+                  <div className="p-3.5 bg-white rounded-xl border border-slate-200/80 text-xs sm:text-sm text-slate-800 font-medium italic shadow-2xs">
+                    "How should I think about investment risk and time horizon?"
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <p className="mt-8 text-center text-xs sm:text-sm text-slate-500 font-medium">
+              The professional you are connected with can explain the relevant information applicable to your situation.
+            </p>
+          </div>
+        </section>
+
+        {/* ========================================================================= */}
+        {/* WHO IS INSUREDGE FOR? */}
+        {/* ========================================================================= */}
+        <section className="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="text-center max-w-3xl mx-auto mb-14 space-y-4">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600 font-mono block">
+              Audience Profiles
+            </span>
+            <h2 className="text-2xl sm:text-4xl font-display font-extrabold text-slate-900 tracking-tight">
+              Who Is InsurEdge For?
+            </h2>
+            <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+              InsurEdge is designed for people who are looking for a simpler way to start conversations about insurance and investments.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+            {[
+              {
+                title: "Young Professionals",
+                desc: "Understand life insurance and health insurance options as your financial responsibilities grow.",
+                icon: "💼",
+              },
+              {
+                title: "Families",
+                desc: "Explore life and health insurance options designed around family protection and financial responsibilities.",
+                icon: "👨‍👩‍👧‍👦",
+              },
+              {
+                title: "Parents & Senior Citizens",
+                desc: "Explore health insurance requirements and understand available options for healthcare-related financial protection.",
+                icon: "👵",
+              },
+              {
+                title: "First-Time Investors",
+                desc: "Learn about mutual funds and investment options by speaking with a relevant investment professional.",
+                icon: "🌱",
+              },
+              {
+                title: "Existing Policyholders",
+                desc: "If you already have insurance or investments, you can use InsurEdge to start a conversation about your existing requirements and available options.",
+                icon: "📑",
+              },
+            ].map((p) => (
+              <div
+                key={p.title}
+                className="bg-white border border-slate-200 rounded-2xl p-6 text-left space-y-3 shadow-xs hover:border-emerald-300 hover:shadow-md transition-all"
+              >
+                <div className="text-3xl mb-2">{p.icon}</div>
+                <h3 className="text-base font-bold font-display text-slate-900">
+                  {p.title}
+                </h3>
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  {p.desc}
+                </p>
+              </div>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Onboarding Quiz Overlay */}
-      <AnimatePresence>
-        {showQuiz && <OnboardingQuiz onClose={() => setShowQuiz(false)} />}
-      </AnimatePresence>
+        {/* ========================================================================= */}
+        {/* WHY START WITH YOUR REQUIREMENT? */}
+        {/* ========================================================================= */}
+        <section className="py-16 sm:py-24 bg-white border-y border-slate-200/80">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center space-y-8">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600 font-mono block">
+              A Simpler Starting Point
+            </span>
+            <h2 className="text-2xl sm:text-4xl font-display font-extrabold text-slate-900 tracking-tight">
+              Why Start With Your Requirement?
+            </h2>
+            <p className="text-lg font-semibold text-emerald-800 font-display">
+              Because the right conversation starts with the right question.
+            </p>
+            <p className="text-slate-600 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
+              You don't always need to know the name of a specific insurance policy or mutual fund before asking for help. You might simply know that:
+            </p>
+
+            <div className="flex flex-wrap justify-center gap-3 max-w-3xl mx-auto pt-2">
+              {[
+                "“I need to protect my family.”",
+                "“I want health insurance for my parents.”",
+                "“I want to start investing.”",
+                "“I don't know whether my existing insurance is enough.”",
+                "“I want to understand my options before making a decision.”",
+              ].map((q) => (
+                <div
+                  key={q}
+                  className="px-4 py-2.5 rounded-full bg-slate-50 border border-slate-200 text-xs sm:text-sm font-semibold text-slate-800 shadow-2xs italic"
+                >
+                  {q}
+                </div>
+              ))}
+            </div>
+
+            <p className="text-slate-600 text-sm sm:text-base leading-relaxed pt-2">
+              That's enough to get started. Tell us what you're looking for and we'll help connect you with a relevant professional.
+            </p>
+
+            <button
+              onClick={() => scrollToEnquiry()}
+              className="px-8 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-display font-bold text-sm rounded-xl cursor-pointer shadow-md hover:shadow-lg transition-all inline-flex items-center gap-2"
+            >
+              <span>Get Connected</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
+        </section>
+
+        {/* ========================================================================= */}
+        {/* START YOUR ENQUIRY (THE MAIN FORM) */}
+        {/* ========================================================================= */}
+        <section
+          ref={enquiryFormRef}
+          id="start-enquiry"
+          className="py-16 sm:py-24 max-w-4xl mx-auto px-4 sm:px-6"
+        >
+          <div className="bg-white border border-slate-200 rounded-[28px] p-6 sm:p-10 md:p-12 shadow-xl shadow-slate-200/50 relative overflow-hidden">
+            <div className="text-center max-w-2xl mx-auto mb-10 space-y-3">
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600 font-mono block">
+                Free Consultation Request
+              </span>
+              <h2 className="text-2xl sm:text-4xl font-display font-extrabold text-slate-900 tracking-tight">
+                Start Your Enquiry
+              </h2>
+              <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+                Tell us what you're looking for. Complete this short form and a relevant professional from our partner network may contact you regarding your requirement.
+              </p>
+            </div>
+
+            <AnimatePresence mode="wait">
+              {!isSubmitted ? (
+                <motion.form
+                  key="form"
+                  onSubmit={handleEnquirySubmit}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="space-y-6"
+                >
+                  {/* Category Selector */}
+                  <div className="space-y-2">
+                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 font-mono">
+                      What do you need help with?
+                    </label>
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                      {[
+                        "Term Insurance",
+                        "Health Insurance",
+                        "Mutual Funds",
+                        "I'm not sure",
+                      ].map((cat) => {
+                        const isSelected = selectedCategory === cat;
+                        return (
+                          <button
+                            type="button"
+                            key={cat}
+                            onClick={() => setSelectedCategory(cat)}
+                            className={`p-3 rounded-xl border text-xs sm:text-sm font-semibold transition-all cursor-pointer flex items-center justify-center text-center ${
+                              isSelected
+                                ? "bg-emerald-600 border-emerald-600 text-white shadow-sm"
+                                : "bg-slate-50 border-slate-200 text-slate-700 hover:border-slate-300"
+                            }`}
+                          >
+                            {cat}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  {/* Form Inputs Grid */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                    <div className="space-y-1.5">
+                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 font-mono">
+                        Full Name <span className="text-rose-500">*</span>
+                      </label>
+                      <div className="relative">
+                        <User className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                        <input
+                          type="text"
+                          required
+                          value={fullName}
+                          onChange={(e) => setFullName(e.target.value)}
+                          placeholder="Enter your full name"
+                          className={`w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 hover:bg-slate-50/80 focus:bg-white border text-sm text-slate-900 placeholder:text-slate-400 outline-none transition-all ${
+                            validationErrors.name
+                              ? "border-rose-500 focus:ring-2 focus:ring-rose-500/20"
+                              : "border-slate-200 focus:border-emerald-600 focus:ring-2 focus:ring-emerald-600/20"
+                          }`}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="space-y-1.5">
+                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 font-mono">
+                        Mobile Number <span className="text-rose-500">*</span>
+                      </label>
+                      <div className="relative flex">
+                        <span className="inline-flex items-center px-3 rounded-l-xl border border-r-0 border-slate-200 bg-slate-100 text-slate-600 text-sm font-mono">
+                          +91
+                        </span>
+                        <input
+                          type="tel"
+                          required
+                          maxLength={10}
+                          value={mobileNumber}
+                          onChange={(e) => setMobileNumber(e.target.value.replace(/\D/g, ""))}
+                          placeholder="Enter 10-digit mobile number"
+                          className={`w-full px-4 py-3 rounded-r-xl bg-slate-50 hover:bg-slate-50/80 focus:bg-white border text-sm text-slate-900 placeholder:text-slate-400 outline-none transition-all font-mono ${
+                            validationErrors.phone
+                              ? "border-rose-500 focus:ring-2 focus:ring-rose-500/20"
+                              : "border-slate-200 focus:border-emerald-600 focus:ring-2 focus:ring-emerald-600/20"
+                          }`}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="space-y-1.5">
+                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 font-mono">
+                        Email Address
+                      </label>
+                      <div className="relative">
+                        <Mail className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                        <input
+                          type="email"
+                          value={emailAddress}
+                          onChange={(e) => setEmailAddress(e.target.value)}
+                          placeholder="Enter your email address"
+                          className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 hover:bg-slate-50/80 focus:bg-white border border-slate-200 text-sm text-slate-900 placeholder:text-slate-400 outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-600/20 transition-all"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="space-y-1.5">
+                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 font-mono">
+                        City
+                      </label>
+                      <div className="relative">
+                        <MapPin className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                        <select
+                          value={city}
+                          onChange={(e) => setCity(e.target.value)}
+                          className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 hover:bg-slate-50/80 focus:bg-white border border-slate-200 text-sm text-slate-900 outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-600/20 transition-all cursor-pointer"
+                        >
+                          {cityOptions.map((c) => (
+                            <option key={c} value={c}>
+                              {c}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Requirement Details */}
+                  <div className="space-y-1.5">
+                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 font-mono">
+                      Tell us about your requirement
+                    </label>
+                    <textarea
+                      rows={3}
+                      value={requirementText}
+                      onChange={(e) => setRequirementText(e.target.value)}
+                      placeholder="Briefly describe what you're looking for (e.g. ₹1 Crore term life cover, family floater health plan for 4 members, or starting a monthly SIP for wealth creation)"
+                      className="w-full px-4 py-3 rounded-xl bg-slate-50 hover:bg-slate-50/80 focus:bg-white border border-slate-200 text-sm text-slate-900 placeholder:text-slate-400 outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-600/20 transition-all"
+                    />
+                  </div>
+
+                  {/* Submit Button */}
+                  <button
+                    type="submit"
+                    className="w-full py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-display font-extrabold text-base rounded-xl cursor-pointer shadow-lg shadow-emerald-600/20 hover:shadow-xl hover:shadow-emerald-600/30 transition-all flex items-center justify-center gap-2 group"
+                  >
+                    <span>Connect Me With a Professional</span>
+                    <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+                  </button>
+
+                  {/* Disclaimers below form */}
+                  <div className="space-y-2 pt-2 text-center text-xs text-slate-500 leading-relaxed font-sans">
+                    <p>
+                      By submitting this form, you agree that InsurEdge and relevant partner professionals may contact you regarding your enquiry.
+                    </p>
+                    <p className="font-semibold text-slate-600">
+                      Submitting an enquiry is free. You are not required to purchase a product or service after submitting your enquiry.
+                    </p>
+                  </div>
+                </motion.form>
+              ) : (
+                <motion.div
+                  key="success"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="py-12 text-center space-y-4 font-sans"
+                >
+                  <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto text-2xl font-bold shadow-inner">
+                    ✓
+                  </div>
+                  <h3 className="text-2xl font-bold font-display text-slate-900">
+                    Enquiry Received Successfully!
+                  </h3>
+                  <p className="text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
+                    Thank you, <strong className="text-slate-900">{fullName}</strong>. Your enquiry regarding <strong className="text-emerald-700">{selectedCategory}</strong> has been received. A relevant professional from our partner network may contact you shortly on <strong className="text-slate-900">+91 {mobileNumber}</strong>.
+                  </p>
+                  <p className="text-xs text-slate-500">
+                    Zero spam guaranteed. There is no charge or obligation to purchase.
+                  </p>
+                  <button
+                    onClick={() => {
+                      setIsSubmitted(false);
+                      setFullName("");
+                      setMobileNumber("");
+                      setEmailAddress("");
+                      setRequirementText("");
+                    }}
+                    className="mt-6 px-6 py-2.5 rounded-full border border-slate-300 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition-all"
+                  >
+                    Submit Another Enquiry
+                  </button>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        </section>
+
+        {/* ========================================================================= */}
+        {/* WHAT HAPPENS AFTER YOU SUBMIT YOUR ENQUIRY? */}
+        {/* ========================================================================= */}
+        <section className="py-16 sm:py-24 bg-white border-y border-slate-200/80">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6">
+            <div className="text-center max-w-3xl mx-auto mb-14 space-y-4">
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600 font-mono block">
+                Transparency Guarantee
+              </span>
+              <h2 className="text-2xl sm:text-4xl font-display font-extrabold text-slate-900 tracking-tight">
+                What Happens After You Submit Your Enquiry?
+              </h2>
+              <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+                Clear expectations from the moment you hit submit to making your independent financial decision.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
+              {[
+                {
+                  step: "Step 1",
+                  title: "Your enquiry is received",
+                  desc: "We receive the information you provide through the enquiry form.",
+                },
+                {
+                  step: "Step 2",
+                  title: "Your requirement is understood",
+                  desc: "Your enquiry is reviewed based on the category and information you've provided.",
+                },
+                {
+                  step: "Step 3",
+                  title: "A relevant professional may contact you",
+                  desc: "Your enquiry may be shared with a suitable professional from our partner network.",
+                },
+                {
+                  step: "Step 4",
+                  title: "Discuss your requirement",
+                  desc: "You can ask questions and understand the products or options relevant to your requirement.",
+                },
+                {
+                  step: "Step 5",
+                  title: "Decide for yourself",
+                  desc: "You can evaluate the information and decide whether you want to proceed.",
+                },
+              ].map((item) => (
+                <div
+                  key={item.step}
+                  className="bg-[#F8FAFC] border border-slate-200 rounded-2xl p-6 text-left space-y-2 relative"
+                >
+                  <span className="text-xs font-bold text-emerald-700 font-mono uppercase tracking-wider block">
+                    {item.step}
+                  </span>
+                  <h3 className="text-base font-bold font-display text-slate-900">
+                    {item.title}
+                  </h3>
+                  <p className="text-xs text-slate-600 leading-relaxed">
+                    {item.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ========================================================================= */}
+        {/* FREQUENTLY ASKED QUESTIONS ABOUT INSUREDGE */}
+        {/* ========================================================================= */}
+        <section className="py-16 sm:py-24 max-w-4xl mx-auto px-4 sm:px-6">
+          <div className="text-center max-w-3xl mx-auto mb-14 space-y-4">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600 font-mono block">
+              Clear Answers
+            </span>
+            <h2 className="text-2xl sm:text-4xl font-display font-extrabold text-slate-900 tracking-tight">
+              Frequently Asked Questions About InsurEdge
+            </h2>
+            <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+              Everything you need to know about how our platform operates, our role, and our commitment to transparency.
+            </p>
+          </div>
+
+          <div className="space-y-3.5">
+            {faqData.map((faq, idx) => {
+              const isOpen = openFaqIndex === idx;
+              return (
+                <div
+                  key={faq.q}
+                  className="bg-white border border-slate-200 rounded-2xl overflow-hidden transition-all shadow-xs"
+                >
+                  <button
+                    onClick={() => setOpenFaqIndex(isOpen ? null : idx)}
+                    className="w-full p-5 text-left flex items-center justify-between gap-4 cursor-pointer hover:bg-slate-50/50 transition-colors"
+                  >
+                    <span className="font-display font-bold text-base text-slate-900">
+                      {faq.q}
+                    </span>
+                    <span className="w-8 h-8 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center shrink-0">
+                      {isOpen ? (
+                        <ChevronUp className="w-4 h-4 text-emerald-700" />
+                      ) : (
+                        <ChevronDown className="w-4 h-4" />
+                      )}
+                    </span>
+                  </button>
+
+                  {isOpen && (
+                    <div className="px-5 pb-5 pt-1 text-sm text-slate-600 leading-relaxed border-t border-slate-100">
+                      {faq.a}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* ========================================================================= */}
+        {/* FINAL CTA BANNER */}
+        {/* ========================================================================= */}
+        <section className="py-16 sm:py-24 bg-white border-y border-slate-200/80">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center space-y-6">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600 font-mono block">
+              Take the First Step
+            </span>
+            <h2 className="text-3xl sm:text-5xl font-display font-extrabold text-slate-900 tracking-tight leading-tight">
+              Financial Decisions Should Start With Good Information
+            </h2>
+            <p className="text-slate-600 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
+              Insurance and investments are important financial decisions. You deserve the opportunity to understand your options, ask questions, and make an informed decision.
+            </p>
+            <p className="text-slate-700 font-semibold text-base">
+              Tell us what you're looking for. We'll help you start the conversation.
+            </p>
+            <div className="pt-2">
+              <button
+                onClick={() => scrollToEnquiry()}
+                className="px-9 py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-display font-bold text-base rounded-xl cursor-pointer shadow-lg shadow-emerald-600/25 hover:shadow-xl hover:shadow-emerald-600/35 hover:-translate-y-0.5 transition-all inline-flex items-center gap-2"
+              >
+                <span>Get a Free Consultation</span>
+                <ArrowRight className="w-5 h-5" />
+              </button>
+            </div>
+          </div>
+        </section>
+
+        {/* ========================================================================= */}
+        {/* IMPORTANT INFORMATION (REGULATORY & COMPLIANCE FOOTNOTE) */}
+        {/* ========================================================================= */}
+        <section className="py-12 bg-[#F1F5F9] border-t border-slate-200">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6">
+            <div className="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 space-y-4 text-xs text-slate-500 leading-relaxed text-left">
+              <div className="flex items-center gap-2 font-display font-bold text-sm text-slate-900">
+                <Info className="w-4 h-4 text-emerald-700 shrink-0" />
+                <span>Important Information &amp; Regulatory Disclaimers</span>
+              </div>
+              <p>
+                InsurEdge is a professional-connect platform. InsurEdge is not itself an insurer and does not itself provide personalised investment advice.
+              </p>
+              <p>
+                Enquiries submitted through this website may be shared with relevant partner professionals for the purpose of responding to the customer's enquiry. InsurEdge may receive lead-generation, referral, or other applicable fees from participating advisors, distributors, or partners.
+              </p>
+              <p>
+                Any insurance product, investment product, advice, recommendation, or service is subject to the applicable provider's terms and conditions, eligibility requirements, risks, exclusions, charges, and applicable laws and regulations.
+              </p>
+              <p>
+                Customers should independently verify the credentials, registration status, and authority of any professional before purchasing an insurance product or making an investment.
+              </p>
+              <p className="font-semibold text-slate-700">
+                Mutual fund investments are subject to market risks. Read all scheme-related documents carefully before investing.
+              </p>
+              <p>
+                Product-specific terms, conditions, exclusions, risks, charges, and eligibility requirements apply.
+              </p>
+            </div>
+          </div>
+        </section>
+      </div>
     </div>
   );
 }
