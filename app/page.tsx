@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import {
   Shield,
@@ -120,6 +120,40 @@ export default function Home() {
       badgeColor: "bg-blue-50 text-blue-800 border-blue-200/60",
     },
   ];
+
+  const [displayedArticles, setDisplayedArticles] = useState(homeBlogArticles);
+
+  useEffect(() => {
+    const saved = localStorage.getItem("ie_blog_articles");
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          setDisplayedArticles(
+            parsed.map((a: { id: string; title: string; excerpt: string; category: string; author: string; date: string; readTime: string }) => ({
+              id: a.id,
+              title: a.title,
+              excerpt: a.excerpt,
+              category: a.category,
+              author: a.author,
+              date: a.date,
+              readTime: a.readTime,
+              badgeColor:
+                a.category === "Health Insurance"
+                  ? "bg-rose-50 text-rose-800 border-rose-200/60"
+                  : a.category === "Mutual Funds"
+                  ? "bg-blue-50 text-blue-800 border-blue-200/60"
+                  : a.category === "Tax Planning"
+                  ? "bg-amber-50 text-amber-800 border-amber-200/60"
+                  : "bg-emerald-50 text-emerald-800 border-emerald-200/60",
+            }))
+          );
+        }
+      } catch (e) {
+        // Fallback
+      }
+    }
+  }, []);
 
   const enquiryFormRef = useRef<HTMLDivElement>(null);
 
@@ -1266,7 +1300,7 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {homeBlogArticles
+            {displayedArticles
               .filter((art) => selectedBlogTab === "All" || art.category === selectedBlogTab)
               .map((article) => (
                 <article

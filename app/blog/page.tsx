@@ -19,6 +19,16 @@ import {
   Share2,
   CheckCircle2,
   Info,
+  Plus,
+  Edit3,
+  Trash2,
+  Lock,
+  Unlock,
+  KeyRound,
+  FileText,
+  Tag,
+  Check,
+  RotateCcw,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -166,12 +176,12 @@ While 0.8% sounds small in year one, compounding turns it into an enormous diffe
   },
 ];
 
-const CATEGORIES = [
-  "All",
+const PREDEFINED_CATEGORIES = [
   "Term Insurance",
   "Health Insurance",
   "Mutual Funds",
   "Tax Planning",
+  "Financial Planning",
 ];
 
 export default function BlogPage() {
@@ -181,8 +191,31 @@ export default function BlogPage() {
   const [activeArticle, setActiveArticle] = useState<Article | null>(null);
   const [copiedLink, setCopiedLink] = useState(false);
 
+  // =========================================================================
+  // OWNER / ADMIN STATE
+  // =========================================================================
+  const [isOwnerMode, setIsOwnerMode] = useState(false);
+  const [showPinModal, setShowPinModal] = useState(false);
+  const [pinInput, setPinInput] = useState("");
+  const [pinError, setPinError] = useState("");
+
+  // Editor Modal State
+  const [showEditorModal, setShowEditorModal] = useState(false);
+  const [editingArticleId, setEditingArticleId] = useState<string | null>(null);
+  const [formTitle, setFormTitle] = useState("");
+  const [formCategory, setFormCategory] = useState("Term Insurance");
+  const [formCustomCategory, setFormCustomCategory] = useState("");
+  const [formAuthor, setFormAuthor] = useState("InsurEdge Editorial");
+  const [formAuthorRole, setFormAuthorRole] = useState("Financial Specialist");
+  const [formReadTime, setFormReadTime] = useState("5 min read");
+  const [formExcerpt, setFormExcerpt] = useState("");
+  const [formTakeaways, setFormTakeaways] = useState<string>("");
+  const [formContent, setFormContent] = useState("");
+  const [formFeatured, setFormFeatured] = useState(false);
+  const [formSuccessMessage, setFormSuccessMessage] = useState("");
+
+  // Load from localStorage on mount
   useEffect(() => {
-    // Check localStorage first
     const saved = localStorage.getItem("ie_blog_articles");
     if (saved) {
       try {
@@ -199,13 +232,166 @@ export default function BlogPage() {
     localStorage.setItem("ie_blog_articles", JSON.stringify(DEFAULT_BLOG_ARTICLES));
   }, []);
 
+  // Save helper
+  const persistArticles = (updated: Article[]) => {
+    setArticles(updated);
+    localStorage.setItem("ie_blog_articles", JSON.stringify(updated));
+  };
+
+  // Open Editor for New Article
+  const handleOpenNewArticle = () => {
+    setEditingArticleId(null);
+    setFormTitle("");
+    setFormCategory("Term Insurance");
+    setFormCustomCategory("");
+    setFormAuthor("InsurEdge Editorial");
+    setFormAuthorRole("Financial Specialist");
+    setFormReadTime("5 min read");
+    setFormExcerpt("");
+    setFormTakeaways("");
+    setFormContent("");
+    setFormFeatured(false);
+    setShowEditorModal(true);
+  };
+
+  // Open Editor for Editing existing Article
+  const handleOpenEditArticle = (art: Article) => {
+    setEditingArticleId(art.id);
+    setFormTitle(art.title);
+    if (PREDEFINED_CATEGORIES.includes(art.category)) {
+      setFormCategory(art.category);
+      setFormCustomCategory("");
+    } else {
+      setFormCategory("Custom");
+      setFormCustomCategory(art.category);
+    }
+    setFormAuthor(art.author);
+    setFormAuthorRole(art.authorRole);
+    setFormReadTime(art.readTime);
+    setFormExcerpt(art.excerpt);
+    setFormTakeaways(art.takeaways ? art.takeaways.join("\n") : "");
+    setFormContent(art.content);
+    setFormFeatured(!!art.featured);
+    setShowEditorModal(true);
+  };
+
+  // Handle Save / Publish
+  const handleSaveArticle = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formTitle.trim() || !formContent.trim()) {
+      alert("Please provide at least a title and content for your article.");
+      return;
+    }
+
+    const finalCategory =
+      formCategory === "Custom" && formCustomCategory.trim()
+        ? formCustomCategory.trim()
+        : formCategory;
+
+    const parsedTakeaways = formTakeaways
+      .split("\n")
+      .map((t) => t.trim())
+      .filter((t) => t.length > 0);
+
+    const nowFormatted = new Date().toLocaleDateString("en-US", {
+      month: "short",
+      day: "2-digit",
+      year: "numeric",
+    });
+
+    if (editingArticleId) {
+      // Edit existing article
+      const updated = articles.map((a) =>
+        a.id === editingArticleId
+          ? {
+              ...a,
+              title: formTitle.trim(),
+              category: finalCategory,
+              author: formAuthor.trim() || "InsurEdge Editorial",
+              authorRole: formAuthorRole.trim() || "Financial Specialist",
+              readTime: formReadTime.trim() || "5 min read",
+              excerpt:
+                formExcerpt.trim() ||
+                formContent.slice(0, 160).replace(/\n/g, " ") + "...",
+              takeaways: parsedTakeaways,
+              content: formContent.trim(),
+              featured: formFeatured,
+            }
+          : a
+      );
+      persistArticles(updated);
+      setFormSuccessMessage("Article updated successfully!");
+    } else {
+      // Create new article
+      const newArticle: Article = {
+        id: "art_" + Date.now(),
+        title: formTitle.trim(),
+        category: finalCategory,
+        author: formAuthor.trim() || "InsurEdge Editorial",
+        authorRole: formAuthorRole.trim() || "Financial Specialist",
+        date: nowFormatted,
+        readTime: formReadTime.trim() || "5 min read",
+        excerpt:
+          formExcerpt.trim() ||
+          formContent.slice(0, 160).replace(/\n/g, " ") + "...",
+        takeaways: parsedTakeaways,
+        content: formContent.trim(),
+        featured: formFeatured,
+      };
+      // Prepend to article list
+      const updated = [newArticle, ...articles];
+      persistArticles(updated);
+      setFormSuccessMessage("New article published successfully!");
+    }
+
+    setTimeout(() => {
+      setShowEditorModal(false);
+      setFormSuccessMessage("");
+    }, 1200);
+  };
+
+  // Delete article
+  const handleDeleteArticle = (id: string, title: string) => {
+    if (confirm(`Are you sure you want to delete "${title}"?`)) {
+      const updated = articles.filter((a) => a.id !== id);
+      persistArticles(updated);
+    }
+  };
+
+  // Reset to default sample articles
+  const handleResetDefaults = () => {
+    if (confirm("Reset articles to the default set? Any custom articles will be refreshed.")) {
+      persistArticles(DEFAULT_BLOG_ARTICLES);
+    }
+  };
+
+  // PIN authentication (default simple PIN 1234 or instant entry)
+  const handlePinSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (pinInput.trim() === "1234" || pinInput.trim() === "admin") {
+      setIsOwnerMode(true);
+      setShowPinModal(false);
+      setPinInput("");
+      setPinError("");
+    } else {
+      setPinError("Invalid PIN. (Hint: default owner PIN is 1234)");
+    }
+  };
+
+  // Filter Categories list dynamically including any custom categories
+  const dynamicCategories = [
+    "All",
+    ...Array.from(new Set(articles.map((a) => a.category))),
+  ];
+
   const filteredArticles = articles.filter((a) => {
     const matchesCat =
       selectedCategory === "All" || a.category === selectedCategory;
     const matchesSearch =
       a.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       a.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      a.category.toLowerCase().includes(searchQuery.toLowerCase());
+      a.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      a.content.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesCat && matchesSearch;
   });
 
@@ -236,9 +422,93 @@ export default function BlogPage() {
 
       <div className="relative z-10">
         {/* ========================================================================= */}
+        {/* TOP OWNER / ADMIN ACCESS BAR */}
+        {/* ========================================================================= */}
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-6 flex justify-between items-center">
+          <div className="flex items-center space-x-2 text-xs font-semibold uppercase tracking-wider text-slate-400 font-mono">
+            <Link href="/" className="hover:text-emerald-700 transition-colors">
+              Home
+            </Link>
+            <ChevronRight className="h-3 w-3" />
+            <span className="text-slate-700">Blog &amp; Knowledge Hub</span>
+          </div>
+
+          <div className="flex items-center gap-3">
+            {isOwnerMode ? (
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={handleOpenNewArticle}
+                  className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl inline-flex items-center gap-1.5 shadow-sm transition-all cursor-pointer"
+                >
+                  <Plus className="w-3.5 h-3.5" />
+                  <span>+ Write New Blog</span>
+                </button>
+                <button
+                  onClick={() => setIsOwnerMode(false)}
+                  className="px-3 py-2 bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 text-xs font-bold rounded-xl inline-flex items-center gap-1.5 transition-colors cursor-pointer"
+                >
+                  <Lock className="w-3 h-3" />
+                  <span>Exit Owner Mode</span>
+                </button>
+              </div>
+            ) : (
+              <button
+                onClick={() => setShowPinModal(true)}
+                className="px-3.5 py-1.5 bg-white border border-slate-200 hover:border-emerald-300 hover:bg-emerald-50/40 text-slate-600 hover:text-emerald-800 text-xs font-semibold rounded-xl inline-flex items-center gap-1.5 transition-all shadow-xs cursor-pointer"
+                title="Publish or manage blogs as owner"
+              >
+                <KeyRound className="w-3.5 h-3.5 text-emerald-600" />
+                <span>Owner Portal</span>
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* OWNER BANNER (Visible when owner mode is active) */}
+        <AnimatePresence>
+          {isOwnerMode && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              className="max-w-6xl mx-auto px-4 sm:px-6 pt-4"
+            >
+              <div className="bg-emerald-950 text-white rounded-2xl p-5 border border-emerald-800/60 shadow-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <div className="space-y-1">
+                  <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-emerald-400 font-mono">
+                    <Sparkles className="w-4 h-4" />
+                    <span>Owner Publishing Panel Active</span>
+                  </div>
+                  <p className="text-xs sm:text-sm text-slate-200">
+                    You can publish new articles, edit existing content, or remove posts. Changes are saved automatically.
+                  </p>
+                </div>
+                <div className="flex items-center gap-3">
+                  <button
+                    onClick={handleOpenNewArticle}
+                    className="px-4 py-2 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs rounded-xl inline-flex items-center gap-1.5 cursor-pointer shadow-sm transition-all"
+                  >
+                    <Plus className="w-4 h-4" />
+                    <span>Write Article</span>
+                  </button>
+                  <button
+                    onClick={handleResetDefaults}
+                    className="px-3 py-2 bg-emerald-900/60 hover:bg-emerald-900 text-slate-300 text-xs font-medium rounded-xl inline-flex items-center gap-1 transition-colors cursor-pointer"
+                    title="Restore default articles"
+                  >
+                    <RotateCcw className="w-3.5 h-3.5" />
+                    <span>Reset</span>
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* ========================================================================= */}
         {/* HERO / HEADER SECTION */}
         {/* ========================================================================= */}
-        <section className="pt-14 sm:pt-20 pb-12 sm:pb-16 px-4 sm:px-6 max-w-6xl mx-auto text-center space-y-5">
+        <section className="pt-10 sm:pt-14 pb-10 sm:pb-14 px-4 sm:px-6 max-w-6xl mx-auto text-center space-y-4">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200/80 text-emerald-800 text-xs sm:text-sm font-semibold shadow-xs">
             <BookOpen className="w-4 h-4 text-emerald-600" />
             <span>InsurEdge Knowledge Hub</span>
@@ -248,12 +518,12 @@ export default function BlogPage() {
             Financial Guides &amp; Insights
           </h1>
 
-          <p className="text-base sm:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
             Practical, jargon-free guides to help you make informed decisions across Term Insurance, Health Insurance, and Mutual Funds.
           </p>
 
           {/* Search & Categories Bar */}
-          <div className="pt-6 max-w-3xl mx-auto space-y-4">
+          <div className="pt-4 max-w-3xl mx-auto space-y-4">
             {/* Search Input */}
             <div className="relative">
               <Search className="w-5 h-5 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2" />
@@ -261,7 +531,7 @@ export default function BlogPage() {
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search articles, guides, topics (e.g. 80D, riders, SIP)..."
+                placeholder="Search articles, guides, topics (e.g. 80D, riders, SIP, exclusions)..."
                 className="w-full bg-white border border-slate-200 rounded-2xl py-3.5 pl-12 pr-4 text-slate-900 placeholder:text-slate-400 text-sm shadow-xs focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500 transition-all"
               />
               {searchQuery && (
@@ -275,8 +545,8 @@ export default function BlogPage() {
             </div>
 
             {/* Filter Pills */}
-            <div className="flex flex-wrap items-center justify-center gap-2 pt-2">
-              {CATEGORIES.map((cat) => (
+            <div className="flex flex-wrap items-center justify-center gap-2 pt-1">
+              {dynamicCategories.map((cat) => (
                 <button
                   key={cat}
                   onClick={() => setSelectedCategory(cat)}
@@ -297,8 +567,8 @@ export default function BlogPage() {
         {/* FEATURED ARTICLE (Shown when no active search/category filter) */}
         {/* ========================================================================= */}
         {selectedCategory === "All" && !searchQuery && featuredArticle && (
-          <section className="py-6 px-4 sm:px-6 max-w-6xl mx-auto">
-            <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-10 shadow-xs hover:border-emerald-300 transition-all text-left">
+          <section className="py-4 px-4 sm:px-6 max-w-6xl mx-auto">
+            <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-10 shadow-xs hover:border-emerald-300 transition-all text-left relative">
               <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold uppercase tracking-wider font-mono">
                   <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
@@ -339,13 +609,24 @@ export default function BlogPage() {
                   </div>
                 </div>
 
-                <button
-                  onClick={() => setActiveArticle(featuredArticle)}
-                  className="px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold rounded-xl inline-flex items-center justify-center gap-2 cursor-pointer shadow-sm hover:shadow transition-all"
-                >
-                  <span>Read Full Guide</span>
-                  <ArrowRight className="w-4 h-4" />
-                </button>
+                <div className="flex items-center gap-3">
+                  {isOwnerMode && (
+                    <button
+                      onClick={() => handleOpenEditArticle(featuredArticle)}
+                      className="px-4 py-2 border border-slate-200 hover:border-slate-300 text-slate-700 text-xs font-bold rounded-xl inline-flex items-center gap-1 cursor-pointer"
+                    >
+                      <Edit3 className="w-3.5 h-3.5" />
+                      <span>Edit</span>
+                    </button>
+                  )}
+                  <button
+                    onClick={() => setActiveArticle(featuredArticle)}
+                    className="px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold rounded-xl inline-flex items-center justify-center gap-2 cursor-pointer shadow-sm hover:shadow transition-all"
+                  >
+                    <span>Read Full Guide</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                </div>
               </div>
             </div>
           </section>
@@ -354,7 +635,7 @@ export default function BlogPage() {
         {/* ========================================================================= */}
         {/* ARTICLE GRID */}
         {/* ========================================================================= */}
-        <section className="py-12 sm:py-16 px-4 sm:px-6 max-w-6xl mx-auto">
+        <section className="py-10 sm:py-14 px-4 sm:px-6 max-w-6xl mx-auto">
           <div className="flex items-center justify-between mb-8">
             <h2 className="text-xl sm:text-2xl font-display font-extrabold text-slate-900">
               {selectedCategory === "All" ? "All Articles" : `${selectedCategory} Articles`}
@@ -362,6 +643,16 @@ export default function BlogPage() {
                 ({filteredArticles.length})
               </span>
             </h2>
+
+            {isOwnerMode && (
+              <button
+                onClick={handleOpenNewArticle}
+                className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl inline-flex items-center gap-1.5 cursor-pointer shadow-xs"
+              >
+                <Plus className="w-3.5 h-3.5" />
+                <span>+ Add Blog</span>
+              </button>
+            )}
           </div>
 
           {filteredArticles.length === 0 ? (
@@ -386,7 +677,7 @@ export default function BlogPage() {
               {filteredArticles.map((article) => (
                 <article
                   key={article.id}
-                  className="bg-white border border-slate-200 rounded-3xl p-6 flex flex-col justify-between shadow-xs hover:border-emerald-300 hover:shadow-md transition-all text-left group"
+                  className="bg-white border border-slate-200 rounded-3xl p-6 flex flex-col justify-between shadow-xs hover:border-emerald-300 hover:shadow-md transition-all text-left group relative"
                 >
                   <div className="space-y-3.5">
                     <div className="flex items-center justify-between text-xs">
@@ -418,13 +709,33 @@ export default function BlogPage() {
                       </p>
                     </div>
 
-                    <button
-                      onClick={() => setActiveArticle(article)}
-                      className="text-xs font-bold text-emerald-700 hover:text-emerald-800 inline-flex items-center gap-1 cursor-pointer"
-                    >
-                      <span>Read</span>
-                      <ChevronRight className="w-4 h-4" />
-                    </button>
+                    <div className="flex items-center gap-2">
+                      {isOwnerMode && (
+                        <>
+                          <button
+                            onClick={() => handleOpenEditArticle(article)}
+                            className="p-1.5 rounded-lg text-slate-500 hover:text-emerald-700 hover:bg-emerald-50 transition-colors cursor-pointer"
+                            title="Edit this post"
+                          >
+                            <Edit3 className="w-3.5 h-3.5" />
+                          </button>
+                          <button
+                            onClick={() => handleDeleteArticle(article.id, article.title)}
+                            className="p-1.5 rounded-lg text-slate-500 hover:text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer"
+                            title="Delete this post"
+                          >
+                            <Trash2 className="w-3.5 h-3.5" />
+                          </button>
+                        </>
+                      )}
+                      <button
+                        onClick={() => setActiveArticle(article)}
+                        className="text-xs font-bold text-emerald-700 hover:text-emerald-800 inline-flex items-center gap-1 cursor-pointer pl-1"
+                      >
+                        <span>Read</span>
+                        <ChevronRight className="w-4 h-4" />
+                      </button>
+                    </div>
                   </div>
                 </article>
               ))}
@@ -550,6 +861,319 @@ export default function BlogPage() {
                     <ArrowRight className="w-4 h-4" />
                   </Link>
                 </div>
+              </motion.div>
+            </div>
+          )}
+        </AnimatePresence>
+
+        {/* ========================================================================= */}
+        {/* OWNER PIN AUTH MODAL */}
+        {/* ========================================================================= */}
+        <AnimatePresence>
+          {showPinModal && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setShowPinModal(false)}
+                className="fixed inset-0 bg-slate-950/60 backdrop-blur-xs"
+              />
+
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                className="relative bg-white border border-slate-200 rounded-3xl max-w-md w-full p-6 sm:p-8 z-10 shadow-2xl text-left space-y-5"
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center">
+                      <KeyRound className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <h3 className="font-display font-bold text-lg text-slate-900">
+                        Owner Authentication
+                      </h3>
+                      <p className="text-xs text-slate-500">
+                        Enter owner PIN to publish &amp; edit blogs
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => setShowPinModal(false)}
+                    className="p-1.5 rounded-full hover:bg-slate-100 text-slate-400 hover:text-slate-700"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                </div>
+
+                <form onSubmit={handlePinSubmit} className="space-y-4">
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                      Owner PIN / Password
+                    </label>
+                    <input
+                      type="password"
+                      autoFocus
+                      value={pinInput}
+                      onChange={(e) => {
+                        setPinInput(e.target.value);
+                        setPinError("");
+                      }}
+                      placeholder="Enter 1234 or admin"
+                      className="w-full bg-[#F8FAFC] border border-slate-200 rounded-xl py-3 px-4 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500"
+                    />
+                    {pinError && (
+                      <p className="text-xs text-rose-600 font-semibold mt-1.5">
+                        {pinError}
+                      </p>
+                    )}
+                    <p className="text-[11px] text-slate-400 mt-1">
+                      Default owner PIN is <code className="text-emerald-700 font-bold bg-emerald-50 px-1 py-0.5 rounded">1234</code>
+                    </p>
+                  </div>
+
+                  <div className="flex items-center justify-end gap-3 pt-2">
+                    <button
+                      type="button"
+                      onClick={() => setShowPinModal(false)}
+                      className="px-4 py-2.5 rounded-xl border border-slate-200 text-slate-600 text-xs font-semibold hover:bg-slate-50 cursor-pointer"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="submit"
+                      className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold cursor-pointer shadow-sm"
+                    >
+                      Unlock Owner Mode
+                    </button>
+                  </div>
+                </form>
+              </motion.div>
+            </div>
+          )}
+        </AnimatePresence>
+
+        {/* ========================================================================= */}
+        {/* OWNER BLOG EDITOR MODAL (WRITE / EDIT BLOG) */}
+        {/* ========================================================================= */}
+        <AnimatePresence>
+          {showEditorModal && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto">
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setShowEditorModal(false)}
+                className="fixed inset-0 bg-slate-950/60 backdrop-blur-xs"
+              />
+
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                className="relative bg-white border border-slate-200 rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 sm:p-8 z-10 text-left space-y-6"
+              >
+                {/* Modal Header */}
+                <div className="flex items-center justify-between pb-4 border-b border-slate-100">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center font-bold">
+                      <FileText className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <h3 className="font-display font-extrabold text-xl text-slate-900">
+                        {editingArticleId ? "Edit Article" : "Write New Blog Post"}
+                      </h3>
+                      <p className="text-xs text-slate-500">
+                        Publish your own financial guide or insurance post to InsurEdge
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => setShowEditorModal(false)}
+                    className="p-2 rounded-full hover:bg-slate-100 text-slate-400 hover:text-slate-700 cursor-pointer"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+
+                {/* Success alert */}
+                {formSuccessMessage && (
+                  <div className="p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold flex items-center gap-2">
+                    <Check className="w-4 h-4 text-emerald-600" />
+                    <span>{formSuccessMessage}</span>
+                  </div>
+                )}
+
+                {/* Editor Form */}
+                <form onSubmit={handleSaveArticle} className="space-y-4">
+                  {/* Article Title */}
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                      Article Title *
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={formTitle}
+                      onChange={(e) => setFormTitle(e.target.value)}
+                      placeholder="e.g. 5 Hidden Exclusions in Health Insurance You Must Know"
+                      className="w-full bg-[#F8FAFC] border border-slate-200 rounded-xl py-3 px-4 text-slate-900 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500"
+                    />
+                  </div>
+
+                  {/* Category & Read Time Grid */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                        Category *
+                      </label>
+                      <select
+                        value={formCategory}
+                        onChange={(e) => setFormCategory(e.target.value)}
+                        className="w-full bg-[#F8FAFC] border border-slate-200 rounded-xl py-3 px-4 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500"
+                      >
+                        {PREDEFINED_CATEGORIES.map((cat) => (
+                          <option key={cat} value={cat}>
+                            {cat}
+                          </option>
+                        ))}
+                        <option value="Custom">+ Custom Category...</option>
+                      </select>
+                      {formCategory === "Custom" && (
+                        <input
+                          type="text"
+                          required
+                          value={formCustomCategory}
+                          onChange={(e) => setFormCustomCategory(e.target.value)}
+                          placeholder="Type custom category name"
+                          className="mt-2 w-full bg-[#F8FAFC] border border-slate-200 rounded-xl py-2 px-3 text-xs"
+                        />
+                      )}
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                        Estimated Read Time
+                      </label>
+                      <input
+                        type="text"
+                        value={formReadTime}
+                        onChange={(e) => setFormReadTime(e.target.value)}
+                        placeholder="e.g. 5 min read"
+                        className="w-full bg-[#F8FAFC] border border-slate-200 rounded-xl py-3 px-4 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Author Details Grid */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                        Author Name
+                      </label>
+                      <input
+                        type="text"
+                        value={formAuthor}
+                        onChange={(e) => setFormAuthor(e.target.value)}
+                        placeholder="e.g. Harsh (Founder) or Amit Sharma"
+                        className="w-full bg-[#F8FAFC] border border-slate-200 rounded-xl py-3 px-4 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                        Author Role / Bio
+                      </label>
+                      <input
+                        type="text"
+                        value={formAuthorRole}
+                        onChange={(e) => setFormAuthorRole(e.target.value)}
+                        placeholder="e.g. Founder &amp; Advisory Specialist"
+                        className="w-full bg-[#F8FAFC] border border-slate-200 rounded-xl py-3 px-4 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Excerpt / Summary */}
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                      Short Excerpt (Displayed on Cards)
+                    </label>
+                    <textarea
+                      rows={2}
+                      value={formExcerpt}
+                      onChange={(e) => setFormExcerpt(e.target.value)}
+                      placeholder="Brief 1-2 sentence teaser to hook readers on the cards..."
+                      className="w-full bg-[#F8FAFC] border border-slate-200 rounded-xl py-2.5 px-4 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500"
+                    />
+                  </div>
+
+                  {/* Key Takeaways (One per line) */}
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                      Key Takeaways (1 bullet per line)
+                    </label>
+                    <textarea
+                      rows={3}
+                      value={formTakeaways}
+                      onChange={(e) => setFormTakeaways(e.target.value)}
+                      placeholder="Point 1: Always check room rent sublimits&#10;Point 2: Never hide pre-existing medical conditions&#10;Point 3: Compare settlement ratios"
+                      className="w-full bg-[#F8FAFC] border border-slate-200 rounded-xl py-2.5 px-4 text-slate-900 text-sm font-mono text-xs focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500"
+                    />
+                  </div>
+
+                  {/* Main Article Content */}
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                      Full Article Body Content *
+                    </label>
+                    <textarea
+                      rows={8}
+                      required
+                      value={formContent}
+                      onChange={(e) => setFormContent(e.target.value)}
+                      placeholder="Write your article here. Separate paragraphs with an empty line..."
+                      className="w-full bg-[#F8FAFC] border border-slate-200 rounded-xl py-3 px-4 text-slate-900 text-sm leading-relaxed focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500"
+                    />
+                  </div>
+
+                  {/* Featured Checkbox */}
+                  <div className="flex items-center gap-2.5 pt-1">
+                    <input
+                      type="checkbox"
+                      id="formFeatured"
+                      checked={formFeatured}
+                      onChange={(e) => setFormFeatured(e.target.checked)}
+                      className="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500"
+                    />
+                    <label
+                      htmlFor="formFeatured"
+                      className="text-xs font-semibold text-slate-700 cursor-pointer select-none"
+                    >
+                      Feature this article as the Hero / Top Spotlight Guide
+                    </label>
+                  </div>
+
+                  {/* Form Actions */}
+                  <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-100">
+                    <button
+                      type="button"
+                      onClick={() => setShowEditorModal(false)}
+                      className="px-5 py-2.5 rounded-xl border border-slate-200 text-slate-600 text-xs font-semibold hover:bg-slate-50 cursor-pointer"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="submit"
+                      className="px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold cursor-pointer shadow-sm inline-flex items-center gap-2"
+                    >
+                      <Check className="w-4 h-4" />
+                      <span>{editingArticleId ? "Save Changes" : "Publish Article"}</span>
+                    </button>
+                  </div>
+                </form>
               </motion.div>
             </div>
           )}
