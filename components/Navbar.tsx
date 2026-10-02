@@ -128,17 +128,27 @@ export default function Navbar() {
     setIsLoggedIn(!!token);
   }, [pathname]);
 
-  // Lock body scroll when mobile menu is open
+  // Lock body scroll and listen for Escape key when mobile menu is open
   useEffect(() => {
     if (mobileMenuOpen) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
     }
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && mobileMenuOpen) {
+        setMobileMenuOpen(false);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+
     return () => {
       document.body.style.overflow = "";
+      window.removeEventListener("keydown", handleKeyDown);
     };
   }, [mobileMenuOpen]);
+
 
   return (
     <>
@@ -164,10 +174,10 @@ export default function Navbar() {
                   <li key={link.name}>
                     <Link
                       href={link.href}
-                      className={`text-[0.825rem] font-medium transition-colors hover:text-primary-custom font-sans whitespace-nowrap py-1 px-1.5 rounded-lg ${
+                      className={`text-[0.825rem] font-medium transition-all duration-200 font-sans whitespace-nowrap py-1.5 px-3 rounded-xl focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:outline-none ${
                         isActive
-                          ? "text-primary-custom font-bold bg-primary-custom/10"
-                          : "text-text-secondary"
+                          ? "text-emerald-700 dark:text-emerald-400 font-bold bg-emerald-500/10 dark:bg-emerald-500/15 border border-emerald-500/25 shadow-xs"
+                          : "text-text-secondary hover:text-text-primary hover:bg-surface/80"
                       }`}
                     >
                       {link.name}
@@ -184,7 +194,7 @@ export default function Navbar() {
               <button
                 suppressHydrationWarning
                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className="p-2 rounded-full bg-surface border border-border-custom text-text-primary hover:bg-background transition-all cursor-pointer flex items-center justify-center shadow-sm"
+                className="p-2.5 rounded-full bg-surface border border-border-custom text-text-primary hover:bg-background transition-all duration-200 cursor-pointer flex items-center justify-center shadow-xs active:scale-95 focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:outline-none min-w-[40px] min-h-[40px]"
                 aria-label="Toggle theme"
               >
                 {theme === "dark" ? (
@@ -197,7 +207,7 @@ export default function Navbar() {
 
             <Link
               href="/contact"
-              className="bg-gradient-to-r from-primary-custom to-purple-600 text-white border-none cursor-pointer px-4 py-2 rounded-full text-xs font-semibold hover:opacity-90 transition-opacity font-sans shadow-md shadow-primary-custom/15 whitespace-nowrap flex items-center gap-1.5"
+              className="bg-gradient-to-r from-primary-custom to-purple-600 text-white border-none cursor-pointer px-4.5 py-2.5 rounded-full text-xs font-semibold hover:opacity-90 active:scale-[0.98] transition-all font-sans shadow-md shadow-primary-custom/15 whitespace-nowrap flex items-center gap-1.5 focus-visible:ring-2 focus-visible:ring-primary-custom focus-visible:outline-none"
             >
               <Calendar size={13} />
               <span>Book Free Call</span>
@@ -251,13 +261,13 @@ export default function Navbar() {
               <button
                 suppressHydrationWarning
                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className="p-2 rounded-full bg-surface border border-border-custom text-text-primary flex items-center justify-center cursor-pointer"
+                className="p-2.5 rounded-full bg-surface border border-border-custom text-text-primary flex items-center justify-center cursor-pointer min-w-[44px] min-h-[44px] active:scale-95 focus-visible:ring-2 focus-visible:ring-primary-custom focus-visible:outline-none transition-transform"
                 aria-label="Toggle theme"
               >
                 {theme === "dark" ? (
-                  <Sun size={16} className="text-accent-custom" />
+                  <Sun size={17} className="text-accent-custom" />
                 ) : (
-                  <Moon size={16} className="text-primary-custom" />
+                  <Moon size={17} className="text-primary-custom" />
                 )}
               </button>
             )}
@@ -266,7 +276,9 @@ export default function Navbar() {
             <button
               suppressHydrationWarning
               onClick={() => setMobileMenuOpen(true)}
-              className="p-2 rounded-xl bg-surface border border-border-custom text-text-primary hover:bg-background transition-colors flex items-center gap-1.5 cursor-pointer"
+              aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-navigation-drawer"
+              className="p-2.5 rounded-xl bg-surface border border-border-custom text-text-primary hover:bg-background transition-all flex items-center justify-center gap-1.5 cursor-pointer min-w-[44px] min-h-[44px] active:scale-95 focus-visible:ring-2 focus-visible:ring-primary-custom focus-visible:outline-none"
               aria-label="Open full menu"
             >
               <Menu size={20} />
@@ -290,8 +302,12 @@ export default function Navbar() {
                 className="fixed inset-0 bg-black/60 z-[210] backdrop-blur-sm xl:hidden"
               />
 
-              {/* Slide-out Menu Panel */}
+              {/* Slide-out Menu Panel with Dialog Semantics */}
               <motion.div
+                id="mobile-navigation-drawer"
+                role="dialog"
+                aria-modal="true"
+                aria-label="InsurEdge Navigation Menu"
                 initial={{ x: "100%" }}
                 animate={{ x: 0 }}
                 exit={{ x: "100%" }}
@@ -311,7 +327,7 @@ export default function Navbar() {
                   <button
                     suppressHydrationWarning
                     onClick={() => setMobileMenuOpen(false)}
-                    className="p-2 rounded-xl bg-surface border border-border-custom text-text-secondary hover:text-text-primary transition-colors cursor-pointer"
+                    className="p-2 rounded-xl bg-surface border border-border-custom text-text-secondary hover:text-text-primary transition-colors cursor-pointer min-w-[44px] min-h-[44px] flex items-center justify-center active:scale-95 focus-visible:ring-2 focus-visible:ring-primary-custom focus-visible:outline-none"
                     aria-label="Close menu"
                   >
                     <X size={20} />
@@ -531,22 +547,24 @@ export default function Navbar() {
                 </div>
 
                 {/* Drawer Footer Actions */}
-                <div className="p-4 border-t border-border-custom bg-background/60 shrink-0 space-y-2.5">
+                <div className="p-4 border-t border-border-custom bg-background/80 shrink-0 space-y-2.5">
                   <div className="grid grid-cols-2 gap-2">
                     {/* Theme Switcher Button */}
                     <button
                       suppressHydrationWarning
+                      type="button"
                       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                      className="p-2.5 rounded-xl bg-surface border border-border-custom text-text-primary flex items-center justify-center gap-2 text-xs font-semibold cursor-pointer hover:bg-background transition-colors"
+                      className="min-h-[44px] p-2.5 rounded-xl bg-surface border border-border-custom text-text-primary flex items-center justify-center gap-2 text-xs font-semibold cursor-pointer hover:bg-background/80 active:scale-[0.98] transition-all duration-200 focus-visible:ring-2 focus-visible:ring-primary-custom"
+                      aria-label={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
                     >
                       {theme === "dark" ? (
                         <>
-                          <Sun size={15} className="text-accent-custom" />
+                          <Sun size={16} className="text-accent-custom" />
                           <span>Light Mode</span>
                         </>
                       ) : (
                         <>
-                          <Moon size={15} className="text-primary-custom" />
+                          <Moon size={16} className="text-primary-custom" />
                           <span>Dark Mode</span>
                         </>
                       )}
@@ -556,6 +574,7 @@ export default function Navbar() {
                     {isLoggedIn ? (
                       <button
                         suppressHydrationWarning
+                        type="button"
                         onClick={() => {
                           localStorage.removeItem("user_token");
                           localStorage.removeItem("user_name");
@@ -564,7 +583,7 @@ export default function Navbar() {
                           setMobileMenuOpen(false);
                           window.location.href = "/";
                         }}
-                        className="p-2.5 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-500 text-xs font-semibold cursor-pointer text-center"
+                        className="min-h-[44px] p-2.5 rounded-xl bg-rose-500/10 hover:bg-rose-500/15 border border-rose-500/20 text-rose-500 text-xs font-semibold cursor-pointer flex items-center justify-center active:scale-[0.98] transition-all duration-200 focus-visible:ring-2 focus-visible:ring-rose-500"
                       >
                         Sign Out
                       </button>
@@ -572,7 +591,7 @@ export default function Navbar() {
                       <Link
                         href="/login"
                         onClick={() => setMobileMenuOpen(false)}
-                        className="p-2.5 rounded-xl bg-surface border border-border-custom text-text-primary hover:text-primary-custom text-xs font-semibold cursor-pointer text-center block"
+                        className="min-h-[44px] p-2.5 rounded-xl bg-surface border border-border-custom text-text-primary hover:text-primary-custom text-xs font-semibold cursor-pointer flex items-center justify-center active:scale-[0.98] transition-all duration-200 focus-visible:ring-2 focus-visible:ring-primary-custom"
                       >
                         Sign In
                       </Link>
@@ -582,7 +601,7 @@ export default function Navbar() {
                   <Link
                     href="/contact"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-primary-custom to-purple-600 text-white font-bold text-xs shadow-md shadow-primary-custom/20 text-center block"
+                    className="min-h-[44px] w-full py-3 px-4 rounded-xl bg-gradient-to-r from-primary-custom to-purple-600 hover:from-primary-custom/95 hover:to-purple-500 text-white font-bold text-xs shadow-md shadow-primary-custom/20 hover:shadow-lg hover:shadow-primary-custom/30 text-center flex items-center justify-center active:scale-[0.98] transition-all duration-200 focus-visible:ring-2 focus-visible:ring-primary-custom"
                   >
                     Schedule Free Advisory Call
                   </Link>
@@ -602,7 +621,7 @@ export default function Navbar() {
       {/* ========================================================================= */}
       <nav
         aria-label="Mobile Bottom Navigation"
-        className="fixed bottom-0 left-0 right-0 z-[190] xl:hidden bg-surface/95 backdrop-blur-xl border-t border-border-custom h-[60px] pb-safe flex items-center justify-around px-2 shadow-lg"
+        className="fixed bottom-0 left-0 right-0 z-[190] xl:hidden bg-surface/95 backdrop-blur-xl border-t border-border-custom h-[calc(60px+env(safe-area-inset-bottom,0px))] pb-[env(safe-area-inset-bottom,0px)] flex items-center justify-around px-2 shadow-lg"
       >
         {bottomBarLinks.map((item) => {
           const Icon = item.icon;
@@ -611,7 +630,8 @@ export default function Navbar() {
             <Link
               key={item.name}
               href={item.href}
-              className={`flex flex-col items-center justify-center py-1 px-2.5 rounded-xl transition-all cursor-pointer ${
+              aria-current={isActive ? "page" : undefined}
+              className={`min-w-[48px] min-h-[48px] flex flex-col items-center justify-center py-1 px-2 rounded-xl transition-all cursor-pointer active:scale-95 duration-150 focus-visible:ring-2 focus-visible:ring-primary-custom ${
                 isActive
                   ? "text-primary-custom font-bold"
                   : "text-text-secondary hover:text-text-primary"
@@ -624,7 +644,7 @@ export default function Navbar() {
               >
                 <Icon size={18} />
               </div>
-              <span className="text-[0.65rem] tracking-tight mt-0.5">{item.name}</span>
+              <span className="text-[0.65rem] tracking-tight mt-0.5 leading-none">{item.name}</span>
             </Link>
           );
         })}
@@ -632,13 +652,15 @@ export default function Navbar() {
         {/* 5th Tab: All Options / Menu Trigger */}
         <button
           suppressHydrationWarning
+          type="button"
           onClick={() => setMobileMenuOpen(true)}
-          className={`flex flex-col items-center justify-center py-1 px-2.5 rounded-xl transition-all cursor-pointer ${
+          className={`min-w-[48px] min-h-[48px] flex flex-col items-center justify-center py-1 px-2 rounded-xl transition-all cursor-pointer active:scale-95 duration-150 focus-visible:ring-2 focus-visible:ring-primary-custom ${
             mobileMenuOpen
               ? "text-primary-custom font-bold"
               : "text-text-secondary hover:text-text-primary"
           }`}
-          aria-label="Open all options menu"
+          aria-label="Open all navigation options"
+          aria-expanded={mobileMenuOpen}
         >
           <div
             className={`p-1 rounded-lg transition-transform ${
@@ -647,7 +669,7 @@ export default function Navbar() {
           >
             <Grid size={18} />
           </div>
-          <span className="text-[0.65rem] tracking-tight mt-0.5">All Menu</span>
+          <span className="text-[0.65rem] tracking-tight mt-0.5 leading-none">All Menu</span>
         </button>
       </nav>
     </>

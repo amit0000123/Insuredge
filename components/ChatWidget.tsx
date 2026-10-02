@@ -205,18 +205,18 @@ export default function ChatWidget() {
   return (
     <>
       {/* Floating Action Buttons Group */}
-      <div className="fixed bottom-20 right-4 sm:bottom-6 sm:right-6 xl:bottom-6 xl:right-6 flex flex-col items-center space-y-3 z-40 font-sans">
+      <div className="fixed bottom-[calc(4.75rem+env(safe-area-inset-bottom,0px))] right-3 sm:bottom-6 sm:right-6 xl:bottom-6 xl:right-6 flex flex-col items-center space-y-3 z-40 font-sans">
         {/* WhatsApp Redirection Button */}
         <motion.a
           href="https://wa.me/9118004195920?text=Hi%20InsurEdge%2C%20I%20would%20like%20to%20get%20unbiased%20advice%20on%20my%20insurance."
           target="_blank"
           rel="noopener noreferrer"
-          whileHover={{ scale: 1.1, y: -2 }}
-          whileTap={{ scale: 0.95 }}
-          className="bg-emerald-500 hover:bg-emerald-600 text-white p-3.5 rounded-full shadow-lg shadow-emerald-500/20 flex items-center justify-center cursor-pointer transition-colors"
-          aria-label="Chat on WhatsApp"
+          whileHover={{ scale: 1.08, y: -2 }}
+          whileTap={{ scale: 0.94 }}
+          className="bg-emerald-500 hover:bg-emerald-600 active:scale-95 text-white p-3.5 rounded-full shadow-lg shadow-emerald-500/25 flex items-center justify-center cursor-pointer transition-all focus-visible:ring-2 focus-visible:ring-emerald-400 min-w-[48px] min-h-[48px]"
+          aria-label="Chat with advisor on WhatsApp"
         >
-          <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24">
+          <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.731-1.456L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.965C16.528 2.01 14.069.993 11.453.993 6.01.993 1.587 5.363 1.584 10.793c-.001 1.693.447 3.344 1.3 4.8l-.996 3.633 3.759-.979zm12.308-5.328c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
           </svg>
         </motion.a>
@@ -224,11 +224,13 @@ export default function ChatWidget() {
         {/* AI Chat Widget Toggle */}
         <motion.button
           suppressHydrationWarning
+          type="button"
           onClick={() => setIsOpen(!isOpen)}
-          whileHover={{ scale: 1.1, y: -2 }}
-          whileTap={{ scale: 0.95 }}
-          className="bg-primary-custom hover:opacity-90 text-white p-3.5 rounded-full shadow-lg shadow-primary-custom/20 flex items-center justify-center cursor-pointer transition-all"
-          aria-label="Toggle AI assistant"
+          whileHover={{ scale: 1.08, y: -2 }}
+          whileTap={{ scale: 0.94 }}
+          className="bg-primary-custom hover:opacity-95 active:scale-95 text-white p-3.5 rounded-full shadow-lg shadow-primary-custom/25 flex items-center justify-center cursor-pointer transition-all focus-visible:ring-2 focus-visible:ring-primary-custom min-w-[48px] min-h-[48px]"
+          aria-label={isOpen ? "Close AI assistant" : "Open AI assistant"}
+          aria-expanded={isOpen}
         >
           {isOpen ? <X className="w-6 h-6" /> : <MessageSquare className="w-6 h-6" />}
         </motion.button>
@@ -241,7 +243,9 @@ export default function ChatWidget() {
             initial={{ opacity: 0, scale: 0.95, y: 30 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 30 }}
-            className="fixed bottom-24 right-4 sm:bottom-28 sm:right-6 w-[calc(100vw-2rem)] sm:w-96 max-w-full bg-surface border border-border-custom rounded-3xl shadow-2xl overflow-hidden z-40 flex flex-col h-[480px] max-h-[calc(100dvh-120px)] transition-colors duration-300"
+            role="dialog"
+            aria-label="InsurEdge Virtual Advisor"
+            className="fixed bottom-[calc(5rem+env(safe-area-inset-bottom,0px))] right-2 sm:right-6 sm:bottom-24 w-[calc(100vw-1rem)] sm:w-96 max-w-full bg-surface border border-border-custom rounded-3xl shadow-2xl overflow-hidden z-40 flex flex-col h-[500px] max-h-[calc(100dvh-120px)] transition-colors duration-300"
           >
             {/* Header */}
             <div className="bg-background/80 px-6 py-4 flex items-center justify-between border-b border-border-custom backdrop-blur-md">
@@ -353,8 +357,9 @@ export default function ChatWidget() {
                   <button
                     suppressHydrationWarning
                     key={prompt}
+                    type="button"
                     onClick={() => handleSendMessage(prompt)}
-                    className="bg-background hover:bg-background/80 text-text-primary text-[10px] font-bold py-1.5 px-3 rounded-full border border-border-custom cursor-pointer transition-colors"
+                    className="min-h-[32px] bg-background hover:bg-background/80 active:scale-95 text-text-primary text-[10px] font-semibold py-1.5 px-3 rounded-full border border-border-custom cursor-pointer transition-all focus-visible:ring-2 focus-visible:ring-primary-custom"
                   >
                     {prompt}
                   </button>
@@ -376,12 +381,13 @@ export default function ChatWidget() {
                 value={inputText}
                 onChange={(e) => setInputText(e.target.value)}
                 placeholder={isHandoff ? "Type phone number or email..." : "Ask about 80D limits, term covers..."}
-                className="flex-1 bg-background text-xs py-2.5 px-4 rounded-xl border border-border-custom focus:outline-none focus:border-primary-custom text-text-primary"
+                className="flex-1 bg-background text-xs min-h-[44px] py-2 px-4 rounded-xl border border-border-custom focus:outline-none focus:ring-2 focus:ring-primary-custom text-text-primary"
               />
               <button
                 suppressHydrationWarning
                 type="submit"
-                className="bg-primary-custom text-white p-2.5 rounded-xl cursor-pointer hover:opacity-90 transition-opacity"
+                aria-label="Send message"
+                className="min-w-[44px] min-h-[44px] bg-primary-custom text-white rounded-xl cursor-pointer hover:opacity-95 active:scale-95 flex items-center justify-center transition-all focus-visible:ring-2 focus-visible:ring-primary-custom shadow-sm"
               >
                 <Send className="h-4 w-4" />
               </button>

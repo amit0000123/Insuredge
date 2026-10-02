@@ -277,8 +277,9 @@ export default function Home() {
               {/* CTA and Highlights */}
               <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
                 <button
+                  type="button"
                   onClick={() => scrollToEnquiry()}
-                  className="px-8 py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-display font-bold text-base rounded-xl cursor-pointer shadow-lg shadow-emerald-600/20 hover:shadow-xl hover:shadow-emerald-600/30 hover:-translate-y-0.5 active:translate-y-0 transition-all flex items-center justify-center gap-2 group"
+                  className="min-h-[48px] px-8 py-4 bg-emerald-600 hover:bg-emerald-700 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 text-white font-display font-bold text-base rounded-xl cursor-pointer shadow-lg shadow-emerald-600/20 hover:shadow-xl hover:shadow-emerald-600/30 hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2 group"
                 >
                   <span>Get a Free Consultation</span>
                   <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
@@ -347,11 +348,12 @@ export default function Home() {
                   ].map((item) => (
                     <button
                       key={item.name}
+                      type="button"
                       onClick={() => scrollToEnquiry(item.name)}
-                      className={`w-full p-3.5 rounded-2xl border bg-white dark:bg-[#111827] flex items-center justify-between text-left transition-all cursor-pointer group shadow-xs ${item.color}`}
+                      className={`min-h-[48px] w-full p-3.5 rounded-2xl border bg-white dark:bg-[#111827] flex items-center justify-between text-left transition-all duration-200 cursor-pointer group shadow-xs hover:-translate-y-0.5 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-emerald-500 ${item.color}`}
                     >
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-100 dark:border-slate-700 flex items-center justify-center shrink-0">
+                        <div className="w-10 h-10 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-100 dark:border-slate-700 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
                           {item.icon}
                         </div>
                         <div>
@@ -363,7 +365,7 @@ export default function Home() {
                           </p>
                         </div>
                       </div>
-                      <ArrowRight className="w-4 h-4 text-slate-400 dark:text-slate-500 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 group-hover:translate-x-0.5 transition-all shrink-0" />
+                      <ArrowRight className="w-4 h-4 text-slate-400 dark:text-slate-500 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 group-hover:translate-x-1 transition-all shrink-0" />
                     </button>
                   ))}
                 </div>
@@ -519,7 +521,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 sm:gap-6">
             {[
               {
                 step: "1",
@@ -549,7 +551,7 @@ export default function Home() {
             ].map((item) => (
               <div
                 key={item.step}
-                className="bg-white dark:bg-[#0B1120] border border-slate-200 dark:border-slate-800 rounded-2xl p-6 text-left relative flex flex-col justify-between shadow-xs hover:border-emerald-300 dark:hover:border-emerald-700/60 hover:shadow-md transition-all"
+                className="bg-white dark:bg-[#0B1120] border border-slate-200 dark:border-slate-800 rounded-2xl p-6 text-left relative flex flex-col justify-between shadow-xs hover:border-emerald-300 dark:hover:border-emerald-700/60 hover:shadow-lg hover:-translate-y-1 transition-all duration-200"
               >
                 <div>
                   <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800/60 text-emerald-700 dark:text-emerald-400 font-display font-extrabold flex items-center justify-center text-sm mb-4">
@@ -568,8 +570,9 @@ export default function Home() {
 
           <div className="mt-12 text-center">
             <button
+              type="button"
               onClick={() => scrollToEnquiry()}
-              className="px-8 py-3.5 bg-slate-900 hover:bg-slate-800 dark:bg-emerald-600 dark:hover:bg-emerald-700 text-white font-display font-bold text-sm rounded-xl cursor-pointer shadow-md hover:shadow-lg transition-all inline-flex items-center gap-2"
+              className="min-h-[48px] px-8 py-3.5 bg-slate-900 hover:bg-slate-800 dark:bg-emerald-600 dark:hover:bg-emerald-700 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500 text-white font-display font-bold text-sm rounded-xl cursor-pointer shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all inline-flex items-center gap-2"
             >
               <span>Submit Your Enquiry</span>
               <ArrowRight className="w-4 h-4" />
@@ -662,9 +665,9 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {/* Term Insurance Checklist */}
-            <div className="bg-white dark:bg-[#0B1120] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-xs hover:shadow-lg transition-all">
+            <div className="bg-white dark:bg-[#0B1120] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-xs hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
               <div className="space-y-5">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-bold">
@@ -699,16 +702,16 @@ export default function Home() {
               <div className="pt-6 mt-6 border-t border-slate-100 dark:border-slate-800">
                 <Link
                   href="/term-insurance"
-                  className="text-xs sm:text-sm font-bold text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 flex items-center gap-1.5"
+                  className="min-h-[44px] text-xs sm:text-sm font-bold text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 inline-flex items-center gap-1.5 group focus-visible:ring-2 focus-visible:ring-indigo-500 rounded-md"
                 >
                   <span>Learn More About Term Insurance</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>
             </div>
 
             {/* Health Insurance Checklist */}
-            <div className="bg-white dark:bg-[#0B1120] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-xs hover:shadow-lg transition-all">
+            <div className="bg-white dark:bg-[#0B1120] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-xs hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
               <div className="space-y-5">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-xl bg-rose-50 dark:bg-rose-950/50 text-rose-600 dark:text-rose-400 flex items-center justify-center font-bold">
@@ -744,16 +747,16 @@ export default function Home() {
               <div className="pt-6 mt-6 border-t border-slate-100 dark:border-slate-800">
                 <Link
                   href="/health-insurance"
-                  className="text-xs sm:text-sm font-bold text-rose-600 dark:text-rose-400 hover:text-rose-800 dark:hover:text-rose-300 flex items-center gap-1.5"
+                  className="min-h-[44px] text-xs sm:text-sm font-bold text-rose-600 dark:text-rose-400 hover:text-rose-800 dark:hover:text-rose-300 inline-flex items-center gap-1.5 group focus-visible:ring-2 focus-visible:ring-rose-500 rounded-md"
                 >
                   <span>Learn More About Health Insurance</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>
             </div>
 
             {/* Mutual Funds Checklist */}
-            <div className="bg-white dark:bg-[#0B1120] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-xs hover:shadow-lg transition-all">
+            <div className="bg-white dark:bg-[#0B1120] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-xs hover:shadow-xl hover:-translate-y-1 transition-all duration-300 sm:col-span-2 lg:col-span-1">
               <div className="space-y-5">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold">
@@ -788,10 +791,10 @@ export default function Home() {
               <div className="pt-6 mt-6 border-t border-slate-100 dark:border-slate-800">
                 <Link
                   href="/mutual-funds"
-                  className="text-xs sm:text-sm font-bold text-emerald-700 dark:text-emerald-400 hover:text-emerald-900 dark:hover:text-emerald-300 flex items-center gap-1.5"
+                  className="min-h-[44px] text-xs sm:text-sm font-bold text-emerald-700 dark:text-emerald-400 hover:text-emerald-900 dark:hover:text-emerald-300 inline-flex items-center gap-1.5 group focus-visible:ring-2 focus-visible:ring-emerald-500 rounded-md"
                 >
                   <span>Learn More About Mutual Funds</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>
             </div>
@@ -1035,10 +1038,10 @@ export default function Home() {
                             type="button"
                             key={cat}
                             onClick={() => setSelectedCategory(cat)}
-                            className={`p-3 rounded-xl border text-xs sm:text-sm font-semibold transition-all cursor-pointer flex items-center justify-center text-center ${
+                            className={`min-h-[44px] p-3 rounded-xl border text-xs sm:text-sm font-semibold transition-all duration-150 cursor-pointer flex items-center justify-center text-center active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500 ${
                               isSelected
                                 ? "bg-emerald-600 border-emerald-600 text-white shadow-sm"
-                                : "bg-slate-50 dark:bg-[#111827] border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:border-slate-300 dark:hover:border-slate-600"
+                                : "bg-slate-50 dark:bg-[#111827] border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:border-slate-300 dark:hover:border-slate-600 hover:bg-slate-100/60 dark:hover:bg-[#111827]/80"
                             }`}
                           >
                             {cat}
@@ -1055,14 +1058,14 @@ export default function Home() {
                         Full Name <span className="text-rose-500">*</span>
                       </label>
                       <div className="relative">
-                        <User className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                        <User className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
                         <input
                           type="text"
                           required
                           value={fullName}
                           onChange={(e) => setFullName(e.target.value)}
                           placeholder="Enter your full name"
-                          className={`w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 dark:bg-[#111827] hover:bg-slate-50/80 dark:hover:bg-[#111827]/80 focus:bg-white dark:focus:bg-[#050816] border text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 outline-none transition-all ${
+                          className={`w-full min-h-[48px] pl-10 pr-4 py-3 rounded-xl bg-slate-50 dark:bg-[#111827] hover:bg-slate-50/80 dark:hover:bg-[#111827]/80 focus:bg-white dark:focus:bg-[#050816] border text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 outline-none transition-all ${
                             validationErrors.name
                               ? "border-rose-500 focus:ring-2 focus:ring-rose-500/20"
                               : "border-slate-200 dark:border-slate-700 focus:border-emerald-600 focus:ring-2 focus:ring-emerald-600/20"
@@ -1076,7 +1079,7 @@ export default function Home() {
                         Mobile Number <span className="text-rose-500">*</span>
                       </label>
                       <div className="relative flex">
-                        <span className="inline-flex items-center px-3 rounded-l-xl border border-r-0 border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-sm font-mono">
+                        <span className="inline-flex items-center px-3.5 rounded-l-xl border border-r-0 border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-sm font-mono shrink-0">
                           +91
                         </span>
                         <input
@@ -1086,7 +1089,7 @@ export default function Home() {
                           value={mobileNumber}
                           onChange={(e) => setMobileNumber(e.target.value.replace(/\D/g, ""))}
                           placeholder="Enter 10-digit mobile number"
-                          className={`w-full px-4 py-3 rounded-r-xl bg-slate-50 dark:bg-[#111827] hover:bg-slate-50/80 dark:hover:bg-[#111827]/80 focus:bg-white dark:focus:bg-[#050816] border text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 outline-none transition-all font-mono ${
+                          className={`w-full min-h-[48px] px-4 py-3 rounded-r-xl bg-slate-50 dark:bg-[#111827] hover:bg-slate-50/80 dark:hover:bg-[#111827]/80 focus:bg-white dark:focus:bg-[#050816] border text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 outline-none transition-all font-mono ${
                             validationErrors.phone
                               ? "border-rose-500 focus:ring-2 focus:ring-rose-500/20"
                               : "border-slate-200 dark:border-slate-700 focus:border-emerald-600 focus:ring-2 focus:ring-emerald-600/20"
@@ -1100,13 +1103,13 @@ export default function Home() {
                         Email Address
                       </label>
                       <div className="relative">
-                        <Mail className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                        <Mail className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
                         <input
                           type="email"
                           value={emailAddress}
                           onChange={(e) => setEmailAddress(e.target.value)}
                           placeholder="Enter your email address"
-                          className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 dark:bg-[#111827] hover:bg-slate-50/80 dark:hover:bg-[#111827]/80 focus:bg-white dark:focus:bg-[#050816] border border-slate-200 dark:border-slate-700 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-600/20 transition-all"
+                          className="w-full min-h-[48px] pl-10 pr-4 py-3 rounded-xl bg-slate-50 dark:bg-[#111827] hover:bg-slate-50/80 dark:hover:bg-[#111827]/80 focus:bg-white dark:focus:bg-[#050816] border border-slate-200 dark:border-slate-700 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-600/20 transition-all"
                         />
                       </div>
                     </div>
@@ -1120,7 +1123,7 @@ export default function Home() {
                         <select
                           value={city}
                           onChange={(e) => setCity(e.target.value)}
-                          className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 dark:bg-[#111827] hover:bg-slate-50/80 dark:hover:bg-[#111827]/80 focus:bg-white dark:focus:bg-[#050816] border border-slate-200 dark:border-slate-700 text-sm text-slate-900 dark:text-white outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-600/20 transition-all cursor-pointer"
+                          className="w-full min-h-[48px] pl-10 pr-4 py-3 rounded-xl bg-slate-50 dark:bg-[#111827] hover:bg-slate-50/80 dark:hover:bg-[#111827]/80 focus:bg-white dark:focus:bg-[#050816] border border-slate-200 dark:border-slate-700 text-sm text-slate-900 dark:text-white outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-600/20 transition-all cursor-pointer"
                         >
                           {cityOptions.map((c) => (
                             <option key={c} value={c} className="bg-white dark:bg-[#111827] text-slate-900 dark:text-white">
@@ -1149,7 +1152,7 @@ export default function Home() {
                   {/* Submit Button */}
                   <button
                     type="submit"
-                    className="w-full py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-display font-extrabold text-base rounded-xl cursor-pointer shadow-lg shadow-emerald-600/20 hover:shadow-xl hover:shadow-emerald-600/30 transition-all flex items-center justify-center gap-2 group"
+                    className="min-h-[48px] w-full py-4 bg-emerald-600 hover:bg-emerald-700 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500 text-white font-display font-extrabold text-base rounded-xl cursor-pointer shadow-lg shadow-emerald-600/20 hover:shadow-xl hover:shadow-emerald-600/30 hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2 group"
                   >
                     <span>Connect Me With a Professional</span>
                     <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
@@ -1219,7 +1222,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 sm:gap-6">
               {[
                 {
                   step: "Step 1",
@@ -1249,7 +1252,7 @@ export default function Home() {
               ].map((item) => (
                 <div
                   key={item.step}
-                  className="bg-[#F8FAFC] dark:bg-[#050816] border border-slate-200 dark:border-slate-800 rounded-2xl p-6 text-left space-y-2 relative"
+                  className="bg-[#F8FAFC] dark:bg-[#050816] border border-slate-200 dark:border-slate-800 rounded-2xl p-6 text-left space-y-2 relative shadow-xs hover:border-emerald-300 dark:hover:border-emerald-700/60 hover:shadow-md hover:-translate-y-1 transition-all duration-200"
                 >
                   <span className="text-xs font-bold text-emerald-700 dark:text-emerald-400 font-mono uppercase tracking-wider block">
                     {item.step}
@@ -1285,9 +1288,10 @@ export default function Home() {
             <div className="flex flex-wrap items-center justify-center gap-2 pt-4">
               {["All", "Term Insurance", "Health Insurance", "Mutual Funds", "Tax Planning"].map((cat) => (
                 <button
+                  type="button"
                   key={cat}
                   onClick={() => setSelectedBlogTab(cat)}
-                  className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
+                  className={`min-h-[38px] px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-150 cursor-pointer active:scale-95 focus-visible:ring-2 focus-visible:ring-emerald-500 ${
                     selectedBlogTab === cat
                       ? "bg-emerald-600 text-white shadow-sm"
                       : "bg-white dark:bg-[#0B1120] border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:border-slate-300 dark:hover:border-slate-700"
@@ -1305,7 +1309,7 @@ export default function Home() {
               .map((article) => (
                 <article
                   key={article.id}
-                  className="bg-white dark:bg-[#0B1120] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-7 flex flex-col justify-between shadow-xs hover:border-emerald-300 dark:hover:border-emerald-700/60 hover:shadow-md transition-all text-left group"
+                  className="bg-white dark:bg-[#0B1120] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-7 flex flex-col justify-between shadow-xs hover:border-emerald-300 dark:hover:border-emerald-700/60 hover:shadow-lg hover:-translate-y-1 transition-all duration-200 text-left group"
                 >
                   <div className="space-y-3.5">
                     <div className="flex items-center justify-between text-xs">
@@ -1339,7 +1343,7 @@ export default function Home() {
 
                     <Link
                       href="/blog"
-                      className="text-xs font-bold text-emerald-700 dark:text-emerald-400 hover:text-emerald-800 dark:hover:text-emerald-300 inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform"
+                      className="min-h-[44px] text-xs font-bold text-emerald-700 dark:text-emerald-400 hover:text-emerald-800 dark:hover:text-emerald-300 inline-flex items-center gap-1 group-hover:translate-x-1 transition-transform focus-visible:ring-2 focus-visible:ring-emerald-500 rounded-md"
                     >
                       <span>Read Guide</span>
                       <ChevronRight className="w-4 h-4" />
@@ -1353,7 +1357,7 @@ export default function Home() {
           <div className="mt-12 text-center">
             <Link
               href="/blog"
-              className="inline-flex items-center gap-2 px-7 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold rounded-xl transition-all shadow-sm hover:shadow"
+              className="min-h-[48px] inline-flex items-center gap-2 px-7 py-3.5 bg-emerald-600 hover:bg-emerald-700 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500 text-white text-sm font-semibold rounded-xl transition-all shadow-sm hover:shadow-lg"
             >
               <BookOpen className="w-4 h-4" />
               <span>Explore All Guides in Knowledge Hub</span>
@@ -1387,8 +1391,10 @@ export default function Home() {
                   className="bg-white dark:bg-[#0B1120] border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden transition-all shadow-xs"
                 >
                   <button
+                    type="button"
                     onClick={() => setOpenFaqIndex(isOpen ? null : idx)}
-                    className="w-full p-5 text-left flex items-center justify-between gap-4 cursor-pointer hover:bg-slate-50/50 dark:hover:bg-slate-800/40 transition-colors"
+                    className="min-h-[48px] w-full p-5 text-left flex items-center justify-between gap-4 cursor-pointer hover:bg-slate-50/50 dark:hover:bg-slate-800/40 active:bg-slate-100/60 dark:active:bg-slate-800/60 transition-colors focus-visible:ring-2 focus-visible:ring-emerald-500"
+                    aria-expanded={isOpen}
                   >
                     <span className="font-display font-bold text-base text-slate-900 dark:text-white">
                       {faq.q}
@@ -1432,8 +1438,9 @@ export default function Home() {
             </p>
             <div className="pt-2">
               <button
+                type="button"
                 onClick={() => scrollToEnquiry()}
-                className="px-9 py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-display font-bold text-base rounded-xl cursor-pointer shadow-lg shadow-emerald-600/25 hover:shadow-xl hover:shadow-emerald-600/35 hover:-translate-y-0.5 transition-all inline-flex items-center gap-2"
+                className="min-h-[48px] px-9 py-4 bg-emerald-600 hover:bg-emerald-700 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500 text-white font-display font-bold text-base rounded-xl cursor-pointer shadow-lg shadow-emerald-600/25 hover:shadow-xl hover:shadow-emerald-600/35 hover:-translate-y-0.5 transition-all inline-flex items-center gap-2"
               >
                 <span>Get a Free Consultation</span>
                 <ArrowRight className="w-5 h-5" />
